@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIQ World — The Digital Layer for Manufacturing Quality</title>
+  <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            copper: { 300:'#fac08a', 400:'#f5a66b', 500:'#f09247', 600:'#e07838', 700:'#c86528' },
+            teal:   { 300:'#6ee7e7', 400:'#38d4d4', 500:'#20c9c9', 600:'#14aeae', 700:'#0d9090' },
+          },
+          fontFamily: {
+            sans: ['Space Grotesk','system-ui','sans-serif'],
+            mono: ['JetBrains Mono','monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --c600:#e07838; --c500:#f09247; --c400:#f5a66b; --c700:#c86528;
+      --t600:#14aeae; --t500:#20c9c9; --t400:#38d4d4;
+      /* Light-mode palette */
+      --bg:#fbfbfd; --bg2:#f5f5f7; --bg3:#ffffff;
+      --dark:#0a0c12; --dark2:#141922; --dark3:#1c2230;
+      --tx:#1d1d1f; --tx2:#6e6e73; --tx3:#86868b; --tx4:#aeaeb2;
+      --border:#d2d2d7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--tx);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 52px;
+      background: rgba(251,251,253,.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    nav a { text-decoration: none; }
+
+    /* ── SECTIONS ── */
+    .fs {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem clamp(1.5rem, 5vw, 4rem);
+      position: relative;
+    }
+    .dark-section {
+      background: var(--dark);
+      color: #e9eaec;
+    }
+
+    /* ── GRADIENT TEXT ── */
+    .grad-copper {
+      background: linear-gradient(135deg, #c86528, #e07838, #f5a66b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-teal {
+      background: linear-gradient(135deg, #0d9090, #14aeae, #38d4d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .mega {
+      font-size: clamp(2.75rem, 6vw + 1rem, 6rem);
+      font-weight: 700; letter-spacing: -.045em; line-height: .93;
+      text-transform: uppercase;
+    }
+    .large {
+      font-size: clamp(2rem, 4vw + .5rem, 4rem);
+      font-weight: 700; letter-spacing: -.04em; line-height: 1.0;
+      text-transform: uppercase;
+    }
+    .medium {
+      font-size: clamp(1.5rem, 2.5vw + .5rem, 2.5rem);
+      font-weight: 700; letter-spacing: -.03em; line-height: 1.1;
+    }
+    .body-lg {
+      font-size: clamp(1rem, 1.2vw + .3rem, 1.25rem);
+      line-height: 1.7; color: var(--tx2); max-width: 38rem;
+    }
+    .mono-sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    }
+
+    /* ── REVEAL (slower Apple-feel) ── */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+    .d4{transition-delay:.4s} .d5{transition-delay:.5s} .d6{transition-delay:.6s}
+
+    /* ── PILL ── */
+    .pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .4rem 1rem; border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      border: 1px solid rgba(224,120,56,.35);
+      color: var(--c600); background: rgba(224,120,56,.06);
+    }
+    .pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c600); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--c600); color: #fff;
+      font-weight: 600; font-size: 1rem;
+      padding: 1rem 2.25rem; border-radius: 9999px;
+      text-decoration: none;
+      transition: background .25s, transform .25s, box-shadow .25s;
+    }
+    .btn-primary:hover {
+      background: var(--c700);
+      transform: scale(1.03);
+      box-shadow: 0 8px 32px rgba(224,120,56,.18);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--tx); color: #fff;
+      font-weight: 600; font-size: 1rem;
+      padding: 1rem 2.25rem; border-radius: 9999px;
+      text-decoration: none;
+      transition: background .25s, transform .25s;
+    }
+    .btn-secondary:hover { background: #333; transform: scale(1.03); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: var(--c600); font-weight: 500; font-size: 1rem;
+      padding: 1rem 2.25rem; border-radius: 9999px;
+      text-decoration: none; transition: color .25s;
+    }
+    .btn-ghost:hover { color: var(--c700); }
+    .btn-ghost-light {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: var(--c400); font-weight: 500; font-size: 1rem;
+      padding: 1rem 2.25rem; border-radius: 9999px;
+      text-decoration: none; transition: color .25s;
+    }
+    .btn-ghost-light:hover { color: var(--c300); }
+
+    /* ── AUDIENCE CARDS (light-mode) ── */
+    .aud-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem; max-width: 960px; width: 100%;
+    }
+    .aud-card {
+      text-align: left;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.04);
+      transition: box-shadow .4s, transform .4s;
+    }
+    .aud-card:hover {
+      box-shadow: 0 8px 40px rgba(0,0,0,.08);
+      transform: translateY(-4px);
+    }
+    .aud-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--c600); opacity: .6; margin-bottom: 1rem;
+    }
+    .aud-card.teal-accent .aud-num { color: var(--t600); }
+    .aud-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; color: var(--tx); margin-bottom: .5rem; }
+    .aud-desc { font-size: .9375rem; color: var(--tx2); line-height: 1.65; margin-bottom: 1.5rem; }
+    .aud-features { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.5rem; }
+    .aud-feat { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--tx3); }
+    .aud-feat::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--c600); flex-shrink:0; }
+    .aud-card.teal-accent .aud-feat::before { background: var(--t600); }
+    .aud-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--c600); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .375rem;
+      transition: gap .2s;
+    }
+    .aud-card.teal-accent .aud-cta { color: var(--t600); }
+    .aud-cta:hover { gap: .75rem; }
+
+    /* ── STAT GRID ── */
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 3rem; max-width: 880px; width: 100%;
+    }
+    .stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-weight: 700; letter-spacing: -.03em; line-height: 1;
+    }
+    .stat-lbl { font-size: .875rem; color: rgba(255,255,255,.45); margin-top: .5rem; line-height: 1.4; }
+
+    /* ── AI CARDS (dark-section) ── */
+    .ai-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; max-width: 960px; width: 100%;
+    }
+    .ai-card {
+      text-align: left;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 1.25rem;
+      padding: 2.25rem;
+      transition: border-color .4s, transform .4s, background .4s;
+    }
+    .ai-card:hover { border-color: rgba(224,120,56,.25); background: rgba(255,255,255,.06); transform: translateY(-3px); }
+    .ai-icon {
+      width: 44px; height: 44px; border-radius: .75rem;
+      background: rgba(224,120,56,.1); border: 1px solid rgba(224,120,56,.15);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .ai-title { font-size: 1.125rem; font-weight: 600; color: #e9eaec; margin-bottom: .5rem; }
+    .ai-desc { font-size: .875rem; color: rgba(255,255,255,.5); line-height: 1.65; }
+
+    /* ── LOGO BOXES ── */
+    .logo-box {
+      background: #fff; border-radius: .75rem;
+      padding: .75rem 1.25rem;
+      display: flex; align-items: center; justify-content: center;
+      height: 64px; border: 1px solid rgba(0,0,0,.06);
+    }
+    .logo-box-dark {
+      background: rgba(255,255,255,.06); border-radius: .75rem;
+      padding: .75rem 1.25rem; border: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      height: 64px;
+    }
+
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    }
+    .scroll-hint span { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--tx4); }
+    .scroll-chevron { animation: bounce 2.5s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* ── DIVIDER ── */
+    .section-divider { height: 1px; background: var(--border); max-width: 960px; margin: 0 auto; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .aud-grid { grid-template-columns: 1fr; }
+      .ai-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+      .fs { padding: 5rem 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;gap:.5rem;">
+    <div style="width:30px;height:30px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;">
+      <img src="logos/custom-favicon.png" alt="TIQ" style="width:100%;height:100%;object-fit:contain;" />
+    </div>
+    <span style="font-weight:700;font-size:.875rem;color:var(--tx);letter-spacing:-.02em;">TIQ World</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <a href="#audience" style="font-size:.8125rem;color:var(--tx3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#1d1d1f'" onmouseout="this.style.color='#86868b'">Features</a>
+    <a href="#ai" style="font-size:.8125rem;color:var(--tx3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#1d1d1f'" onmouseout="this.style.color='#86868b'">AI</a>
+    <a href="#cta" class="btn-primary" style="padding:.5rem 1.25rem;font-size:.8125rem;">Get Early Access</a>
+  </div>
+</nav>
+
+
+<!-- ═══ HERO (Light) ═══ -->
+<section class="fs" style="padding-top:8rem;">
+  <div class="pill reveal">
+    <span class="pill-dot"></span>
+    IITM Incubated · Now in Early Access
+  </div>
+
+  <h1 class="mega reveal d1" style="margin-top:2rem;color:var(--tx);">
+    The Digital Layer<br/>
+    for Manufacturing<br/>
+    <span class="grad-copper">Quality</span>
+  </h1>
+
+  <p class="body-lg reveal d2" style="margin-top:1.75rem;text-align:center;">
+    One platform connecting NDT professionals, training providers, manufacturers, and recruiters — built to raise the standard of industrial quality assurance.
+  </p>
+
+  <div style="display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;" class="reveal d3">
+    <a href="#cta" class="btn-primary">
+      Get Early Access
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#audience" class="btn-ghost">
+      Learn More
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </div>
+
+  <!-- Backed-by -->
+  <div style="margin-top:3.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center;" class="reveal d4">
+    <span class="mono-sm" style="color:var(--tx4);flex-shrink:0;">Backed by</span>
+    <div class="logo-box" style="height:48px;padding:.5rem 1rem;">
+      <img src="logos/iitm-logo.png" alt="IIT Madras" style="height:30px;width:auto;object-fit:contain;" />
+    </div>
+    <div class="logo-box" style="height:48px;padding:.5rem 1rem;">
+      <img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:30px;width:auto;object-fit:contain;" />
+    </div>
+    <div class="logo-box" style="height:48px;padding:.5rem 1rem;">
+      <img src="logos/incubation-logo.png" alt="IITM Incubation" style="height:30px;width:auto;object-fit:contain;" />
+    </div>
+  </div>
+
+  <div class="scroll-hint reveal d5">
+    <span>Scroll</span>
+    <svg class="scroll-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aeaeb2" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+
+<!-- ═══ DIVIDER ═══ -->
+<div class="section-divider"></div>
+
+
+<!-- ═══ AUDIENCE CARDS (Light) ═══ -->
+<section id="audience" class="fs" style="min-height:auto;padding-top:8rem;padding-bottom:8rem;background:var(--bg2);">
+  <p class="mono-sm reveal" style="color:var(--tx3);margin-bottom:1rem;">Built for Every Stakeholder</p>
+  <h2 class="large reveal d1" style="margin-bottom:1rem;color:var(--tx);">
+    Four Ways to <span class="grad-copper">Join</span>
+  </h2>
+  <p class="body-lg reveal d2" style="margin-bottom:3.5rem;text-align:center;">Whether you inspect, train, hire, or manufacture — there's a place for you.</p>
+
+  <div class="aud-grid">
+    <!-- 01 -->
+    <div class="aud-card reveal d2">
+      <div class="aud-num">01 — Professionals</div>
+      <div class="aud-title">NDT &amp; Quality Inspectors</div>
+      <p class="aud-desc">Build a verified portfolio, earn recognised certifications, and find quality roles at top manufacturers.</p>
+      <div class="aud-features">
+        <div class="aud-feat">Skill-verified professional profile</div>
+        <div class="aud-feat">AI-powered career matching</div>
+        <div class="aud-feat">Internationally recognised certifications</div>
+        <div class="aud-feat">Proctored online assessments</div>
+      </div>
+      <a href="#cta" class="aud-cta">Start Your Profile →</a>
+    </div>
+
+    <!-- 02 -->
+    <div class="aud-card teal-accent reveal d3">
+      <div class="aud-num">02 — Recruiters</div>
+      <div class="aud-title">HR &amp; Talent Leads</div>
+      <p class="aud-desc">Find pre-screened, skill-verified NDT talent with transparent competency records.</p>
+      <div class="aud-features">
+        <div class="aud-feat">Verified competency search</div>
+        <div class="aud-feat">AI-matched shortlists</div>
+        <div class="aud-feat">Integrated contract workflows</div>
+        <div class="aud-feat">Compliance-ready documentation</div>
+      </div>
+      <a href="#cta" class="aud-cta">Post a Job →</a>
+    </div>
+
+    <!-- 03 -->
+    <div class="aud-card reveal d4">
+      <div class="aud-num">03 — Training</div>
+      <div class="aud-title">Training Institutes</div>
+      <p class="aud-desc">Publish courses on a platform purpose-built for NDT certification and training.</p>
+      <div class="aud-features">
+        <div class="aud-feat">Dedicated course catalogue</div>
+        <div class="aud-feat">Enrolment management</div>
+        <div class="aud-feat">Certificate issuance automation</div>
+        <div class="aud-feat">Student progress analytics</div>
+      </div>
+      <a href="#cta" class="aud-cta">List Your Courses →</a>
+    </div>
+
+    <!-- 04 -->
+    <div class="aud-card teal-accent reveal d5">
+      <div class="aud-num">04 — Manufacturers</div>
+      <div class="aud-title">OEMs &amp; EPC Firms</div>
+      <p class="aud-desc">Hire proven inspectors, mandate supplier quality standards, and run verifiable inspections.</p>
+      <div class="aud-features">
+        <div class="aud-feat">Supplier quality dashboards</div>
+        <div class="aud-feat">On-demand inspection workforce</div>
+        <div class="aud-feat">Audit-ready records</div>
+        <div class="aud-feat">Real-time compliance view</div>
+      </div>
+      <a href="#cta" class="aud-cta">Request a Demo →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DARK BAND — STATS + MANIFESTO ═══ -->
+<section class="dark-section fs" style="min-height:auto;padding:8rem clamp(1.5rem,5vw,4rem);">
+
+  <!-- Manifesto -->
+  <blockquote class="large reveal" style="max-width:760px;line-height:1.15;margin-bottom:4rem;">
+    Not just any website.<br/>
+    <span class="grad-copper">An institution —</span><br/>
+    founded on People,<br/>
+    assisted by <span class="grad-teal">Technology.</span>
+  </blockquote>
+
+  <!-- Stats -->
+  <div class="stat-grid reveal d2">
+    <div style="text-align:center;">
+      <div class="stat-val grad-copper">12K+</div>
+      <div class="stat-lbl">NDT Professionals</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="stat-val grad-teal">340+</div>
+      <div class="stat-lbl">Training Providers</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="stat-val grad-copper">90+</div>
+      <div class="stat-lbl">Industry Partners</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="stat-val grad-teal">8</div>
+      <div class="stat-lbl">NDT Methods</div>
+    </div>
+  </div>
+
+  <!-- Logos -->
+  <div style="margin-top:4rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;justify-content:center;" class="reveal d3">
+    <div class="logo-box-dark" style="height:56px;padding:.5rem 1rem;">
+      <img src="logos/iitm-logo.png" alt="IIT Madras" style="height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;" />
+    </div>
+    <div class="logo-box-dark" style="height:56px;padding:.5rem 1rem;">
+      <img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;" />
+    </div>
+    <div class="logo-box-dark" style="height:56px;padding:.5rem 1rem;">
+      <img src="logos/incubation-logo.png" alt="IITM Incubation" style="height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.6;" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ AI SECTION (Dark) ═══ -->
+<section id="ai" class="dark-section fs" style="min-height:auto;padding:8rem clamp(1.5rem,5vw,4rem);border-top:1px solid rgba(255,255,255,.06);">
+  <p class="mono-sm reveal" style="color:rgba(255,255,255,.3);margin-bottom:1rem;">AI Intelligence</p>
+  <h2 class="large reveal d1" style="margin-bottom:1.5rem;">
+    Precision Powered by<br/>
+    <span class="grad-copper">Machine Intelligence</span>
+  </h2>
+  <p class="reveal d2" style="font-size:clamp(1rem,1.2vw+.3rem,1.25rem);line-height:1.7;color:rgba(255,255,255,.45);max-width:38rem;text-align:center;margin-bottom:3.5rem;">
+    NDT needs infrastructure that understands quality — the skills, the standards, and the stakes.
+  </p>
+
+  <div class="ai-grid">
+    <div class="ai-card reveal d3">
+      <div class="ai-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f09247" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+      </div>
+      <div class="ai-title">AI Skill Verification</div>
+      <p class="ai-desc">Adaptive assessments map every candidate's competency against live industry standards — no human bias, no paper checklists.</p>
+    </div>
+    <div class="ai-card reveal d4">
+      <div class="ai-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f09247" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <div class="ai-title">Smart Matching Engine</div>
+      <p class="ai-desc">Role requirements parsed against verified competency profiles to surface the right candidate at the right moment.</p>
+    </div>
+    <div class="ai-card reveal d5">
+      <div class="ai-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f09247" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="ai-title">Question Bank Engine</div>
+      <p class="ai-desc">AI-generated, expert-reviewed question sets for every NDT discipline — keeping assessments current as standards evolve.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ TRUST (Light) ═══ -->
+<section style="padding:5rem clamp(1.5rem,5vw,4rem);background:var(--bg);">
+  <div style="max-width:740px;margin:0 auto;text-align:center;">
+    <p class="mono-sm reveal" style="color:var(--tx4);margin-bottom:1.75rem;">Institutional Backing</p>
+    <p class="reveal d1" style="font-size:.9375rem;color:var(--tx2);line-height:1.7;margin-bottom:2rem;">
+      Developed within IIT Madras's Centre for Non-Destructive Evaluation and incubated at IITM — bringing academic rigour to industrial quality assurance.
+    </p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap;" class="reveal d2">
+      <div class="logo-box">
+        <img src="logos/iitm-logo.png" alt="IIT Madras" style="height:44px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box">
+        <img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:44px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box">
+        <img src="logos/incubation-logo.png" alt="IITM Incubation" style="height:44px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box" style="width:64px;padding:.5rem;">
+        <img src="logos/tiq-logo.png" alt="TIQ World" style="height:100%;width:auto;object-fit:contain;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FINAL CTA (Copper gradient band) ═══ -->
+<section id="cta" class="fs" style="min-height:80vh;background:linear-gradient(180deg,var(--bg) 0%,rgba(224,120,56,.04) 40%,rgba(224,120,56,.08) 100%);">
+  <p class="mono-sm reveal" style="color:var(--c600);margin-bottom:1.5rem;">Early Access · Limited Seats</p>
+  <h2 class="mega reveal d1" style="color:var(--tx);">
+    Ready to Join the<br/>
+    <span class="grad-copper">Quality Revolution?</span>
+  </h2>
+  <p class="body-lg reveal d2" style="margin-top:1.5rem;text-align:center;">
+    Whether you inspect, train, hire, or manufacture — TIQ World is the digital foundation the industry has been missing.
+  </p>
+  <div style="display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;" class="reveal d3">
+    <a href="#" class="btn-primary" style="font-size:1.0625rem;padding:1.125rem 2.75rem;">
+      Get Early Access
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#" class="btn-secondary" style="font-size:1.0625rem;padding:1.125rem 2.75rem;">Request a Demo</a>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer style="padding:2rem clamp(1.5rem,5vw,4rem);border-top:1px solid var(--border);background:var(--bg);">
+  <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <span style="font-weight:600;font-size:.8125rem;color:var(--tx3);">TIQ World</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--tx4);">© 2025 TIQ World · IIT Madras Incubated</span>
+    <div style="display:flex;gap:1.25rem;">
+      <a href="#" style="font-size:.8125rem;color:var(--tx4);text-decoration:none;">Privacy</a>
+      <a href="#" style="font-size:.8125rem;color:var(--tx4);text-decoration:none;">Terms</a>
+      <a href="index.html" style="font-size:.8125rem;color:var(--tx4);text-decoration:none;">← All Revisions</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }),
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

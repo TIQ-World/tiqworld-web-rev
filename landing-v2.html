@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIQ World — Digital Layer for Manufacturing Quality</title>
+  <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: #0d1219; color: #e9eaec; font-size: 16px; line-height: 1.6; }
+
+    :root {
+      --c600:#e07838; --c500:#f09247; --c400:#f5a66b; --c700:#c86528;
+      --t600:#14aeae; --t500:#20c9c9; --t400:#38d4d4;
+      --s950:#0d1219; --s900:#141922; --s850:#1c2230; --s800:#252c38;
+      --s700:#3d4653; --s600:#5c6778; --s500:#6d7888; --s400:#9099a5;
+      --s300:#bdc2c7; --s100:#e9eaec; --s50:#f5f4f2;
+    }
+
+    /* ── Nav ── */
+    .nav { position:fixed; top:0; left:0; right:0; z-index:100; }
+    .nav-inner {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 2rem; height:68px; max-width:1280px; margin:0 auto;
+    }
+    .nav-bg { background:rgba(13,18,25,.92); backdrop-filter:blur(16px); border-bottom:1px solid rgba(61,70,83,.3); }
+    .logo-wrap { display:flex; align-items:center; gap:.625rem; text-decoration:none; }
+    .logo-icon { width:36px; height:36px; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:3px; flex-shrink:0; }
+    .logo-icon img { width:100%; height:100%; object-fit:contain; }
+    .logo-name { font-weight:700; font-size:1.125rem; color:var(--s50); letter-spacing:-.02em; }
+    .nav-links { display:flex; align-items:center; gap:2rem; }
+    .nav-links a { font-size:.9375rem; color:var(--s400); text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--s50); }
+    .nav-ctas { display:flex; align-items:center; gap:.75rem; }
+    .nav-signin { font-size:.9375rem; font-weight:500; color:var(--s300); text-decoration:none; padding:.5rem 1rem; transition:color .2s; }
+    .nav-signin:hover { color:var(--c500); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; text-decoration:none; border-radius:.5rem; font-weight:700; transition:all .2s; cursor:pointer; border:none; }
+    .btn-primary { background:linear-gradient(to right,var(--c600),var(--c500)); color:var(--s950); padding:.75rem 1.75rem; font-size:.9375rem; box-shadow:0 4px 20px rgba(224,120,56,.3); }
+    .btn-primary:hover { background:linear-gradient(to right,var(--c500),var(--c400)); transform:translateY(-2px); box-shadow:0 8px 28px rgba(224,120,56,.4); }
+    .btn-ghost { background:transparent; color:var(--s300); padding:.75rem 1.75rem; font-size:.9375rem; border:1.5px solid var(--s700); }
+    .btn-ghost:hover { border-color:var(--c500); color:var(--s50); transform:translateY(-2px); }
+    .btn-teal { background:linear-gradient(to right,var(--t600),var(--t500)); color:var(--s950); padding:.75rem 1.75rem; font-size:.9375rem; box-shadow:0 4px 20px rgba(20,174,174,.2); }
+    .btn-teal:hover { background:linear-gradient(to right,var(--t500),var(--t400)); transform:translateY(-2px); }
+    .btn-lg { padding:1rem 2.25rem; font-size:1.0625rem; }
+
+    /* ── Utilities ── */
+    .container { max-width:1200px; margin:0 auto; padding:0 2rem; }
+    .mono { font-family:'JetBrains Mono',monospace; }
+    .tag { display:inline-flex; align-items:center; gap:.375rem; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; border-radius:9999px; padding:.3rem .875rem; font-weight:500; }
+    .tag-copper { color:var(--c500); background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.25); }
+    .tag-teal { color:var(--t500); background:rgba(20,174,174,.1); border:1px solid rgba(20,174,174,.25); }
+    .tag-slate { color:var(--s400); background:rgba(61,70,83,.25); border:1px solid rgba(61,70,83,.4); }
+    .section-eye { display:flex; align-items:center; gap:.5rem; margin-bottom:1rem; }
+    .eye-dot { width:5px; height:5px; border-radius:50%; background:var(--c600); flex-shrink:0; }
+    .eye-text { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--c500); }
+    .divider { height:1px; background:linear-gradient(to right,transparent,rgba(61,70,83,.5),transparent); margin:0; border:none; }
+
+    /* ── Reveal animations ── */
+    .r { opacity:0; transform:translateY(20px); transition:opacity .65s ease,transform .65s ease; }
+    .r.in { opacity:1; transform:none; }
+    .r-l { opacity:0; transform:translateX(-24px); transition:opacity .65s ease,transform .65s ease; }
+    .r-l.in { opacity:1; transform:none; }
+    .r-r { opacity:0; transform:translateX(24px); transition:opacity .65s ease,transform .65s ease; }
+    .r-r.in { opacity:1; transform:none; }
+    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+    .d4{transition-delay:.32s} .d5{transition-delay:.40s} .d6{transition-delay:.48s}
+
+    /* ── Hero entrance ── */
+    @keyframes fu { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+    .he { opacity:0; animation:fu .65s ease forwards; }
+    .he:nth-child(1){animation-delay:.1s} .he:nth-child(2){animation-delay:.22s}
+    .he:nth-child(3){animation-delay:.34s} .he:nth-child(4){animation-delay:.46s}
+    .he:nth-child(5){animation-delay:.58s} .he:nth-child(6){animation-delay:.7s}
+
+    /* ── Big stat counter anim ── */
+    @keyframes count-in { from{opacity:0;transform:scale(.8)} to{opacity:1;transform:scale(1)} }
+    .stat-big { animation:count-in .5s ease forwards; opacity:0; }
+    .stat-big:nth-child(1){animation-delay:.5s} .stat-big:nth-child(2){animation-delay:.65s}
+    .stat-big:nth-child(3){animation-delay:.80s} .stat-big:nth-child(4){animation-delay:.95s}
+
+    /* ── Blueprint grid ── */
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(61,70,83,.1) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(61,70,83,.1) 1px,transparent 1px);
+      background-size:56px 56px;
+    }
+
+    /* ── Audience section shared ── */
+    .audience-section { padding:5rem 0; position:relative; overflow:hidden; }
+    .audience-number {
+      font-family:'JetBrains Mono',monospace;
+      font-size:clamp(5rem,12vw,10rem);
+      font-weight:700; line-height:1;
+      position:absolute; right:2rem; top:50%; transform:translateY(-50%);
+      pointer-events:none; user-select:none;
+      letter-spacing:-.04em;
+    }
+    .audience-tag { font-size:11px; }
+
+    /* ── Feature list ── */
+    .feat-list { display:flex; flex-direction:column; gap:.875rem; }
+    .feat-item { display:flex; align-items:flex-start; gap:.875rem; }
+    .feat-icon { width:28px; height:28px; border-radius:.375rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:.1rem; }
+    .feat-icon-copper { background:rgba(224,120,56,.12); border:1px solid rgba(224,120,56,.25); }
+    .feat-icon-teal { background:rgba(20,174,174,.12); border:1px solid rgba(20,174,174,.25); }
+    .feat-text { font-size:1.0625rem; color:var(--s300); line-height:1.6; }
+
+    /* ── Stat pill ── */
+    .stat-pill { display:inline-flex; align-items:center; gap:.625rem; padding:.6rem 1.25rem; background:rgba(20,25,34,.6); border-radius:.5rem; border:1px solid var(--s800); }
+    .stat-pill-val { font-family:'JetBrains Mono',monospace; font-size:1.375rem; font-weight:700; }
+    .stat-pill-lbl { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--s500); }
+
+    /* ── Logo row (placeholder boxes) ── */
+    .logo-row { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+    .logo-slot { height:48px; min-width:80px; background:rgba(37,44,56,.5); border:1.5px dashed rgba(61,70,83,.5); border-radius:.5rem; display:flex; align-items:center; justify-content:center; padding:.5rem 1rem; }
+    .logo-slot-real { height:48px; background:#fff; border-radius:.5rem; display:flex; align-items:center; justify-content:center; padding:.375rem .75rem; }
+    .logo-slot-real img { height:32px; width:auto; object-fit:contain; }
+    .logo-slot span { font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.1em; color:var(--s700); }
+
+    /* ── Hero two-col ── */
+    .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; min-height:100vh; padding:8rem 0 5rem; }
+    .hero-tagline { font-size:clamp(2.6rem,4.5vw,5rem); font-weight:700; line-height:1.05; letter-spacing:-.04em; text-transform:uppercase; color:var(--s50); }
+    .hero-tagline span { color:var(--c500); }
+    .hero-sub { font-size:1.125rem; color:var(--s300); line-height:1.75; max-width:30rem; }
+    .hero-positioned { font-size:1rem; color:var(--s500); font-style:italic; border-left:3px solid var(--c600); padding-left:1rem; line-height:1.7; }
+
+    /* ── Hero stats panel ── */
+    .hero-stats-panel {
+      background:var(--s900); border:1px solid var(--s800); border-radius:1rem;
+      padding:2rem; display:grid; grid-template-columns:1fr 1fr; gap:1px;
+      background:var(--s800);
+      overflow:hidden;
+    }
+    .hero-stat-cell {
+      background:var(--s900); padding:1.75rem;
+      display:flex; flex-direction:column; gap:.5rem;
+    }
+    .hero-stat-val { font-family:'JetBrains Mono',monospace; font-size:2.5rem; font-weight:700; line-height:1; }
+    .hero-stat-lbl { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--s500); }
+
+    /* ── Manifesto band ── */
+    .manifesto-band { padding:5rem 0; background:var(--s950); position:relative; overflow:hidden; }
+    .manifesto-big { font-size:clamp(2.25rem,4vw,4.5rem); font-weight:700; letter-spacing:-.04em; line-height:1.1; text-transform:uppercase; }
+
+    /* ── AI tools ── */
+    .tool-card { background:var(--s900); border:1px solid var(--s800); border-radius:.875rem; padding:1.75rem; display:flex; flex-direction:column; gap:1rem; transition:border-color .25s,transform .25s; }
+    .tool-card:hover { transform:translateY(-4px); }
+    .tool-card-copper:hover { border-color:rgba(224,120,56,.5); }
+    .tool-card-teal:hover { border-color:rgba(20,174,174,.5); }
+    .tool-title { font-size:1.1875rem; font-weight:700; color:var(--s50); }
+    .tool-body { font-size:1rem; color:var(--s400); line-height:1.65; }
+    .tool-link { font-family:'JetBrains Mono',monospace; font-size:.9375rem; text-decoration:none; transition:color .2s; }
+
+    /* ── Trust ── */
+    .trust-section { padding:5rem 0; background:var(--s900); }
+    .trust-logo-box { display:flex; flex-direction:column; align-items:center; gap:.875rem; text-decoration:none; }
+    .trust-logo-img { width:100px; height:100px; background:#fff; border:2px solid var(--s700); border-radius:.875rem; display:flex; align-items:center; justify-content:center; padding:.875rem; transition:border-color .3s,box-shadow .3s; }
+    .trust-logo-img img { max-width:100%; max-height:100%; object-fit:contain; }
+    .trust-logo-box:hover .trust-logo-img { border-color:var(--c600); box-shadow:0 0 0 4px rgba(224,120,56,.1); }
+    .trust-name { font-size:.9375rem; font-weight:600; color:var(--s400); transition:color .3s; text-align:center; }
+    .trust-sub { font-size:12px; color:var(--s600); text-align:center; }
+    .trust-logo-box:hover .trust-name { color:var(--c500); }
+
+    /* ── CTA band ── */
+    .cta-band { background:var(--s950); padding:5rem 0; }
+    .cta-box { background:linear-gradient(135deg,var(--s900),var(--s850)); border:1px solid var(--s800); border-radius:1.25rem; padding:4rem; text-align:center; position:relative; overflow:hidden; }
+    .cta-box::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:500px; height:200px; background:radial-gradient(ellipse,rgba(224,120,56,.07),transparent 70%); pointer-events:none; }
+
+    /* ── Footer ── */
+    .footer { background:var(--s950); padding:3rem 0; border-top:1px solid rgba(61,70,83,.3); }
+    .footer-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem; margin-bottom:2.5rem; }
+    .footer-col-title { font-size:1rem; font-weight:600; color:var(--s100); margin-bottom:1.25rem; }
+    .footer-links { display:flex; flex-direction:column; gap:.75rem; }
+    .footer-links a { font-size:1rem; color:var(--s500); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--c500); }
+    .footer-bottom { display:flex; align-items:center; justify-content:space-between; padding-top:2rem; border-top:1px solid rgba(61,70,83,.25); flex-wrap:wrap; gap:1rem; }
+    .footer-copy { font-size:.9375rem; color:var(--s600); }
+
+    /* ── Glow ── */
+    .glow-c { position:absolute; border-radius:50%; background:radial-gradient(circle,rgba(224,120,56,.1),transparent 70%); pointer-events:none; }
+    .glow-t { position:absolute; border-radius:50%; background:radial-gradient(circle,rgba(20,174,174,.08),transparent 70%); pointer-events:none; }
+
+    /* ── Cert badges ── */
+    .cert-row { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; }
+    .cert-badge { display:flex; align-items:center; gap:.625rem; padding:.75rem 1.25rem; background:rgba(20,25,34,.5); border:1px solid rgba(61,70,83,.4); border-radius:.625rem; }
+    .cert-badge-label { font-size:1rem; font-weight:600; color:var(--s50); }
+    .cert-badge-sub { font-size:12px; color:var(--s500); }
+
+    /* Responsive */
+    @media(max-width:900px) {
+      .hero-grid { grid-template-columns:1fr; gap:2.5rem; padding-top:7rem; }
+      .hero-stats-panel { grid-template-columns:1fr 1fr; }
+      .nav-links { display:none; }
+      .audience-number { font-size:5rem; opacity:.3; }
+      .footer-grid { grid-template-columns:1fr; gap:2rem; }
+    }
+    @media(max-width:600px) {
+      .hero-stats-panel { grid-template-columns:1fr; }
+      .audience-number { display:none; }
+      .cta-box { padding:2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="nav-bg">
+    <div class="nav-inner">
+      <a href="index.html" class="logo-wrap">
+        <div class="logo-icon"><img src="logos/custom-favicon.png" alt="TIQ World" /></div>
+        <span class="logo-name">TIQ World</span>
+      </a>
+      <div class="nav-links">
+        <a href="#professionals">For Professionals</a>
+        <a href="#recruiters">For Recruiters</a>
+        <a href="#manufacturers">For Manufacturers</a>
+        <a href="#ai-tools">AI Tools</a>
+      </div>
+      <div class="nav-ctas">
+        <a href="#" class="nav-signin">Sign In</a>
+        <a href="#" class="btn btn-primary" style="padding:.6rem 1.375rem;font-size:.875rem;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══ HERO ═══ -->
+<section style="background:var(--s950);position:relative;overflow:hidden;" class="bg-grid">
+  <div class="glow-c" style="width:700px;height:500px;top:-150px;left:-100px;"></div>
+
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Left: Copy -->
+      <div style="display:flex;flex-direction:column;gap:1.75rem;">
+        <div class="he section-eye">
+          <span class="eye-dot"></span>
+          <span class="eye-text">Manufacturing Quality Intelligence</span>
+        </div>
+
+        <h1 class="he hero-tagline">
+          Digital Layer<br />for <span>Manufacturing</span><br />Quality
+        </h1>
+
+        <p class="he hero-positioned">
+          "Not just another website. TIQ World is founded on People — assisted by Technology — to assure quality in manufacturing."
+        </p>
+
+        <p class="he hero-sub">
+          Professionals find verified jobs &amp; grow their careers. Enterprises source assessed talent, run training, and generate AI-assisted quality reports. One platform. One standard.
+        </p>
+
+        <div class="he" style="display:flex;flex-wrap:wrap;gap:1rem;">
+          <a href="#" class="btn btn-primary btn-lg">I'm a QA / NDT Professional</a>
+          <a href="#" class="btn btn-ghost btn-lg">I Represent an Organization</a>
+        </div>
+
+        <div class="he" style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);">Backed by</span>
+          <div style="display:flex;align-items:center;gap:.75rem;">
+            <div style="background:#fff;border-radius:.375rem;padding:.25rem .5rem;height:28px;display:flex;align-items:center;">
+              <img src="logos/iitm-logo.png" alt="IIT Madras" style="height:20px;object-fit:contain;" />
+            </div>
+            <div style="background:#fff;border-radius:.375rem;padding:.25rem .5rem;height:28px;display:flex;align-items:center;">
+              <img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:20px;object-fit:contain;" />
+            </div>
+            <div style="background:#fff;border-radius:.375rem;padding:.25rem .5rem;height:28px;display:flex;align-items:center;">
+              <img src="logos/incubation-logo.png" alt="IITM Incubation" style="height:20px;object-fit:contain;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Stats panel -->
+      <div class="hero-stats-panel" style="border-radius:1rem;overflow:hidden;">
+        <div class="hero-stat-cell stat-big" style="border-bottom:1px solid var(--s800);border-right:1px solid var(--s800);">
+          <div class="hero-stat-val" style="color:var(--c500);">500+</div>
+          <div class="hero-stat-lbl">Professionals</div>
+          <div style="font-size:.875rem;color:var(--s600);margin-top:.25rem;">registered &amp; growing</div>
+        </div>
+        <div class="hero-stat-cell stat-big" style="border-bottom:1px solid var(--s800);">
+          <div class="hero-stat-val" style="color:var(--t500);">50+</div>
+          <div class="hero-stat-lbl">Enterprises</div>
+          <div style="font-size:.875rem;color:var(--s600);margin-top:.25rem;">using the platform</div>
+        </div>
+        <div class="hero-stat-cell stat-big" style="border-right:1px solid var(--s800);">
+          <div class="hero-stat-val" style="color:var(--c500);">300+</div>
+          <div class="hero-stat-lbl">Skills Available</div>
+          <div style="font-size:.875rem;color:var(--s600);margin-top:.25rem;">across certifications</div>
+        </div>
+        <div class="hero-stat-cell stat-big">
+          <div class="hero-stat-val" style="color:var(--t500);">200+</div>
+          <div class="hero-stat-lbl">Reports Generated</div>
+          <div style="font-size:.875rem;color:var(--s600);margin-top:.25rem;">AI-assisted NDT reports</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ AUDIENCE 1 — PROFESSIONALS ═══ -->
+<section id="professionals" class="audience-section" style="background:var(--s950);">
+  <div class="audience-number" style="color:rgba(224,120,56,.06);">01</div>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+      <div class="r-l" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="section-eye">
+          <span class="eye-dot"></span>
+          <span class="eye-text">QA / NDT / Inspection Professionals</span>
+        </div>
+        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:700;letter-spacing:-.04em;text-transform:uppercase;color:var(--s50);line-height:1.1;">
+          Your Certifications.<br/><span style="color:var(--c500);">Your Opportunities.</span>
+        </h2>
+        <p style="font-size:1.0625rem;color:var(--s400);line-height:1.7;max-width:28rem;">
+          TIQ World is the job platform <em>built specifically for manufacturing quality professionals</em> — QA/QC, NDT, and Inspection engineers. We know your certifications and match you to jobs that need them.
+        </p>
+        <a href="#" class="btn btn-primary" style="width:fit-content;">Join as a Professional →</a>
+      </div>
+
+      <div class="r-r" style="display:flex;flex-direction:column;gap:1.75rem;">
+        <!-- Stat pills row -->
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--c500);">500+</span><span class="stat-pill-lbl">Registered Professionals</span></div>
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--c500);">300+</span><span class="stat-pill-lbl">Skills in Pool</span></div>
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--c500);">120+</span><span class="stat-pill-lbl">Positions Available</span></div>
+        </div>
+
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+            </div>
+            <p class="feat-text">Only see jobs matched to <strong style="color:var(--s100);">your verified certifications</strong> — no noise, no irrelevant listings</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <p class="feat-text">Access <strong style="color:var(--s100);">training programs</strong> aggregated for your career stage — Level 1 to Level 3</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="var(--c500)"/></svg>
+            </div>
+            <p class="feat-text">Level 3 expert? <strong style="color:var(--s100);">Earn from report reviews</strong> and consultancy assignments</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <p class="feat-text">AI + HI powered <strong style="color:var(--s100);">assessment system</strong> validates your competency — trusted by enterprises</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ AUDIENCE 2 — RECRUITERS ═══ -->
+<section id="recruiters" class="audience-section" style="background:var(--s900);">
+  <div class="audience-number" style="color:rgba(20,174,174,.05);">02</div>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+      <div class="r-l" style="display:flex;flex-direction:column;gap:1.75rem;">
+        <!-- Stat pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--t500);">500+</span><span class="stat-pill-lbl">Verified Professionals</span></div>
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--t500);">150+</span><span class="stat-pill-lbl">Certificates on File</span></div>
+        </div>
+
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+            </div>
+            <p class="feat-text">Receive <strong style="color:var(--s100);">only pre-assessed</strong> candidates — every applicant is competency-verified before they apply</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <p class="feat-text">Certification records linked to <strong style="color:var(--s100);">ASME, AWS, ASTM, SNT-TC-1A</strong> standards — no manual verification needed</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+            </div>
+            <p class="feat-text"><strong style="color:var(--s100);">HI + AI assessment system</strong> — human experts validate AI-generated assessments for maximum credibility</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.625rem;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);">Featured Recruiters</span>
+          <div class="logo-row">
+            <div class="logo-slot"><span>Logo</span></div>
+            <div class="logo-slot"><span>Logo</span></div>
+            <div class="logo-slot"><span>Logo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="r-r" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="section-eye">
+          <span class="eye-dot" style="background:var(--t600);"></span>
+          <span class="eye-text" style="color:var(--t500);">Enterprises &amp; Recruiters</span>
+        </div>
+        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:700;letter-spacing:-.04em;text-transform:uppercase;color:var(--s50);line-height:1.1;">
+          A Talent Pool Built<br/>for <span style="color:var(--t500);">Manufacturing</span><br/>Quality
+        </h2>
+        <p style="font-size:1.0625rem;color:var(--s400);line-height:1.7;max-width:28rem;">
+          Every professional on TIQ World has been assessed. You see verified skills, not self-reported claims. Filter by certification, level, and availability — instantly.
+        </p>
+        <a href="#" class="btn btn-teal" style="width:fit-content;">Post a Job Opening →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ AUDIENCE 3 — TRAINING COMPANIES ═══ -->
+<section id="training" class="audience-section" style="background:var(--s950);">
+  <div class="audience-number" style="color:rgba(224,120,56,.05);">03</div>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+      <div class="r-l" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="section-eye">
+          <span class="eye-dot"></span>
+          <span class="eye-text">Training Providers</span>
+        </div>
+        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:700;letter-spacing:-.04em;text-transform:uppercase;color:var(--s50);line-height:1.1;">
+          Reach Professionals<br/>Hungry to <span style="color:var(--c500);">Grow</span>
+        </h2>
+        <p style="font-size:1.0625rem;color:var(--s400);line-height:1.7;max-width:28rem;">
+          TIQ World is the aggregator of training courses for Manufacturing Quality. Professionals come here to upskill. Your programs are front-and-center when they're ready to learn.
+        </p>
+        <a href="#" class="btn btn-primary" style="width:fit-content;">List your Training Programs →</a>
+      </div>
+
+      <div class="r-r" style="display:flex;flex-direction:column;gap:1.75rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--c500);">500+</span><span class="stat-pill-lbl">Active Learners</span></div>
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--c500);">150+</span><span class="stat-pill-lbl">Certificates Issued</span></div>
+        </div>
+
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <p class="feat-text">Reach a <strong style="color:var(--s100);">targeted, motivated audience</strong> — professionals actively looking to advance their careers</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+            </div>
+            <p class="feat-text"><strong style="color:var(--s100);">Automate certification audit trails</strong> — digital records linked to learner profiles</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-copper">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            </div>
+            <p class="feat-text">Programs aligned to <strong style="color:var(--s100);">ASME, AWS, ASTM, SNT-TC-1A</strong> are prominently featured and trusted by enterprises</p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.625rem;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);">Training Partners</span>
+          <div class="logo-row">
+            <div class="logo-slot"><span>Logo</span></div>
+            <div class="logo-slot"><span>Logo</span></div>
+            <div class="logo-slot"><span>Logo</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ AUDIENCE 4 — MANUFACTURERS ═══ -->
+<section id="manufacturers" class="audience-section" style="background:var(--s900);">
+  <div class="audience-number" style="color:rgba(20,174,174,.05);">04</div>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+      <div class="r-l" style="display:flex;flex-direction:column;gap:1.75rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--t500);">200+</span><span class="stat-pill-lbl">Reports Generated</span></div>
+          <div class="stat-pill"><span class="stat-pill-val" style="color:var(--t500);">50+</span><span class="stat-pill-lbl">Enterprises</span></div>
+        </div>
+
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+            </div>
+            <p class="feat-text">Generate <strong style="color:var(--s100);">ISO-compliant NDT work reports</strong> from field data — AI structures, engineer signs, QR-verifiable</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <p class="feat-text">Digitalise <strong style="color:var(--s100);">quality evidence</strong> — reports as verifiable, traceable digital artifacts, not paper files</p>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon feat-icon-teal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+            </div>
+            <p class="feat-text">Included with your platform account or available as a <strong style="color:var(--s100);">standalone AI Reports subscription</strong></p>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.625rem;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);">Using AI Reports</span>
+          <div class="logo-row">
+            <div class="logo-slot"><span>Logo</span></div>
+            <div class="logo-slot"><span>Logo</span></div>
+            <div class="logo-slot"><span>Logo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="r-r" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="section-eye">
+          <span class="eye-dot" style="background:var(--t600);"></span>
+          <span class="eye-text" style="color:var(--t500);">Manufacturers &amp; Quality Teams</span>
+        </div>
+        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:700;letter-spacing:-.04em;text-transform:uppercase;color:var(--s50);line-height:1.1;">
+          Digitalise Your<br/><span style="color:var(--t500);">Quality Evidence</span>
+        </h2>
+        <p style="font-size:1.0625rem;color:var(--s400);line-height:1.7;max-width:28rem;">
+          TIQ World enables manufacturers to produce, manage, and verify quality reports digitally. AI assists the process — your certified engineers own the outcome.
+        </p>
+        <a href="#" class="btn btn-teal" style="width:fit-content;">Start Generating Reports →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ MANIFESTO BAND ═══ -->
+<section class="manifesto-band">
+  <div class="glow-c" style="width:600px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="r" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem;">
+      <div class="section-eye" style="justify-content:center;">
+        <span class="eye-dot"></span>
+        <span class="eye-text">AI + HI — The Principle</span>
+      </div>
+      <h2 class="manifesto-big" style="color:var(--s50);">
+        Human Intelligence.<br/><span style="color:var(--c500);">Amplified by AI.</span>
+      </h2>
+      <p style="font-size:1.125rem;color:var(--s400);max-width:42rem;line-height:1.75;">
+        A Certified NDT Level II inspector carries knowledge no algorithm can substitute. TIQ World augments that expertise — AI generates assessments, identifies patterns, and accelerates report creation. Humans judge the weld, read the film, and sign the report.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+        <span class="tag tag-copper">AI Generates Assessments</span>
+        <span class="tag tag-slate">Humans Verify Every Output</span>
+        <span class="tag tag-copper">ISO/IEC 17024 Aligned</span>
+        <span class="tag tag-slate">ASME · AWS · ASTM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ AI TOOLS ═══ -->
+<section id="ai-tools" style="background:var(--s900);padding:5rem 0;">
+  <div class="container">
+    <div class="r" style="text-align:center;margin-bottom:3rem;">
+      <div class="section-eye" style="justify-content:center;margin-bottom:1rem;">
+        <span class="eye-dot"></span>
+        <span class="eye-text">Purpose-Built AI Tools</span>
+      </div>
+      <h2 style="font-size:clamp(2rem,3vw,2.75rem);font-weight:700;letter-spacing:-.04em;text-transform:uppercase;color:var(--s50);">AI Tools for Manufacturing Quality</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;">
+      <div class="tool-card tool-card-teal r d1">
+        <div style="display:flex;align-items:center;gap:.75rem;">
+          <div style="padding:.5rem;background:rgba(20,174,174,.12);border:1px solid rgba(20,174,174,.25);border-radius:.5rem;display:flex;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <span class="tag tag-teal">AI Knowledge</span>
+        </div>
+        <div class="tool-title">TIQ Wiki</div>
+        <p class="tool-body">Ask anything about NDT codes, ASME procedures, welding standards, or material specs. AI-powered answers backed by verified technical literature.</p>
+        <a href="#" class="tool-link" style="color:var(--t500);">Explore TIQ Wiki →</a>
+      </div>
+
+      <div class="tool-card tool-card-copper r d2" style="border-color:rgba(224,120,56,.3);background:rgba(224,120,56,.03);">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:.75rem;">
+            <div style="padding:.5rem;background:rgba(224,120,56,.12);border:1px solid rgba(224,120,56,.25);border-radius:.5rem;display:flex;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+            </div>
+            <span class="tag tag-copper">NDT Reports</span>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:9999px;padding:.2rem .6rem;">FEATURED</span>
+        </div>
+        <div class="tool-title">AI Report Studio</div>
+        <p class="tool-body">Generate ISO-compliant NDT work reports from field data. AI structures and validates — the engineer reviews and signs. QR-verifiable on any device.</p>
+        <a href="#" class="tool-link" style="color:var(--c500);">Generate a Report →</a>
+      </div>
+
+      <div class="tool-card tool-card-copper r d3">
+        <div style="display:flex;align-items:center;gap:.75rem;">
+          <div style="padding:.5rem;background:rgba(224,120,56,.12);border:1px solid rgba(224,120,56,.25);border-radius:.5rem;display:flex;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          </div>
+          <span class="tag tag-copper">Skill Verification</span>
+        </div>
+        <div class="tool-title">AI Assessment Engine</div>
+        <p class="tool-body">Assessments calibrated to ASME, AWS, ASTM, SNT-TC-1A. AI generates — human experts validate. ISO/IEC 17024-aligned records.</p>
+        <a href="#" class="tool-link" style="color:var(--c500);">Take an Assessment →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+
+<!-- ═══ TRUST ═══ -->
+<section class="trust-section">
+  <div class="container">
+    <div class="r" style="text-align:center;margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.5rem;">
+        <div style="width:3rem;height:1px;background:rgba(224,120,56,.3);"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c500);">Institutional Backing</span>
+        <div style="width:3rem;height:1px;background:rgba(224,120,56,.3);"></div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:3.5rem;flex-wrap:wrap;margin-bottom:3rem;">
+        <a href="https://www.iitm.ac.in/" target="_blank" rel="noopener" class="trust-logo-box">
+          <div class="trust-logo-img"><img src="logos/iitm-logo.png" alt="IIT Madras" /></div>
+          <span class="trust-name">IIT Madras</span>
+          <span class="trust-sub">Incubation Centre</span>
+        </a>
+        <a href="https://cnde.in/" target="_blank" rel="noopener" class="trust-logo-box">
+          <div class="trust-logo-img"><img src="logos/cnde-logo.jpeg" alt="CNDE" /></div>
+          <span class="trust-name">CNDE</span>
+          <span class="trust-sub">Non-Destructive Evaluation</span>
+        </a>
+        <a href="https://incubation.iitm.ac.in/" target="_blank" rel="noopener" class="trust-logo-box">
+          <div class="trust-logo-img"><img src="logos/incubation-logo.png" alt="IITM Incubation" /></div>
+          <span class="trust-name">IITM Incubation Cell</span>
+          <span class="trust-sub">Innovation &amp; Entrepreneurship</span>
+        </a>
+      </div>
+      <div class="cert-row">
+        <div class="cert-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <div><div class="cert-badge-label">ISO/IEC 17024</div><div class="cert-badge-sub">Assessment Standard</div></div>
+        </div>
+        <div class="cert-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <div><div class="cert-badge-label">ASME · AWS · ASTM</div><div class="cert-badge-sub">Training Alignment</div></div>
+        </div>
+        <div class="cert-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          <div><div class="cert-badge-label">AI + HI</div><div class="cert-badge-sub">Methodology</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-box r">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c500);display:block;margin-bottom:1rem;">Join TIQ World</span>
+      <h2 style="font-size:clamp(2rem,3vw,2.75rem);font-weight:700;letter-spacing:-.04em;text-transform:uppercase;color:var(--s50);margin-bottom:1rem;">Start Your TIQ World Journey</h2>
+      <p style="font-size:1.0625rem;color:var(--s400);max-width:36rem;margin:0 auto 2rem;">Professionals, enterprises, training providers, and manufacturers — one platform, one standard for manufacturing quality.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+        <a href="#" class="btn btn-primary btn-lg">For Professionals</a>
+        <a href="#" class="btn btn-ghost btn-lg">For Organizations</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-col-title">For Engineers</div>
+        <div class="footer-links">
+          <a href="#">TIQ Wiki</a>
+          <a href="#">AI Report Studio</a>
+          <a href="#">Get Certified</a>
+          <a href="#">Find Jobs</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">For Organizations</div>
+        <div class="footer-links">
+          <a href="#">Subscribe to AI Reports</a>
+          <a href="#">Source Verified Talent</a>
+          <a href="#">Offer Training</a>
+          <a href="#">NDT Marketplace</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="#">About TIQ World</a>
+          <a href="mailto:info@tiqworld.com">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="display:flex;align-items:center;gap:.625rem;">
+        <div style="width:28px;height:28px;background:#fff;border-radius:.375rem;padding:2px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <img src="logos/custom-favicon.png" alt="TIQ World" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
+        <span style="font-size:1rem;font-weight:600;color:var(--s400);">TIQ World</span>
+      </div>
+      <span class="footer-copy">© 2026 TIQ World. All rights reserved.</span>
+      <div style="display:flex;gap:1rem;">
+        <a href="#" style="font-size:.9375rem;color:var(--s600);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s600)'">Privacy</a>
+        <a href="#" style="font-size:.9375rem;color:var(--s600);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s600)'">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(
+    es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),
+    { threshold:0.1, rootMargin:'0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.r,.r-l,.r-r').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

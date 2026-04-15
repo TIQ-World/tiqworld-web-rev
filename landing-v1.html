@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIQ World — Manufacturing Quality Intelligence</title>
+  <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            copper: { 400:'#f5a66b', 500:'#f09247', 600:'#e07838', 700:'#c86528' },
+            teal:   { 400:'#38d4d4', 500:'#20c9c9', 600:'#14aeae', 700:'#0d9090' },
+          },
+          fontFamily: {
+            sans: ['Space Grotesk','system-ui','sans-serif'],
+            mono: ['JetBrains Mono','monospace'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Space Grotesk',system-ui,sans-serif; background:#0d1219; color:#e9eaec; }
+
+    /* ── Brand palette ── */
+    :root {
+      --s50:#f5f4f2; --s100:#e9eaec; --s300:#bdc2c7; --s400:#9099a5;
+      --s500:#6d7888; --s600:#5c6778; --s700:#3d4653; --s800:#252c38;
+      --s850:#1c2230; --s900:#141922; --s950:#0d1219;
+      --c600:#e07838; --c500:#f09247; --c400:#f5a66b; --c700:#c86528;
+      --t600:#14aeae; --t500:#20c9c9; --t400:#38d4d4;
+    }
+
+    /* ── Typography ── */
+    h1 { font-size:clamp(2.6rem,4vw + 1rem,5.5rem); font-weight:700; line-height:1.05; letter-spacing:-0.04em; text-transform:uppercase; }
+    h2 { font-size:clamp(2rem,3vw,2.75rem); font-weight:700; line-height:1.1; letter-spacing:-0.03em; text-transform:uppercase; }
+    h3 { font-size:1.375rem; font-weight:600; line-height:1.3; letter-spacing:-0.01em; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width:8px; }
+    ::-webkit-scrollbar-track { background:var(--s900); }
+    ::-webkit-scrollbar-thumb { background:var(--s700); border-radius:4px; }
+
+    /* ── Nav ── */
+    .nav-glass {
+      background:rgba(13,18,25,0.88);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(61,70,83,0.35);
+    }
+
+    /* ── Buttons ── */
+    .btn-copper {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.8rem 2rem; font-size:.875rem; font-weight:700; color:var(--s950);
+      background:linear-gradient(to right,var(--c600),var(--c500));
+      border-radius:.5rem; text-decoration:none;
+      box-shadow:0 8px 24px rgba(224,120,56,.28);
+      transition:all .2s ease; white-space:nowrap;
+    }
+    .btn-copper:hover { background:linear-gradient(to right,var(--c500),var(--c400)); transform:translateY(-2px); box-shadow:0 12px 32px rgba(224,120,56,.4); }
+    .btn-slate {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.8rem 2rem; font-size:.875rem; font-weight:600; color:var(--s300);
+      background:var(--s900); border:1px solid var(--s700);
+      border-radius:.5rem; text-decoration:none; transition:all .2s ease; white-space:nowrap;
+    }
+    .btn-slate:hover { border-color:var(--t600); transform:translateY(-2px); }
+    .btn-teal {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.8rem 2rem; font-size:.875rem; font-weight:700; color:var(--s950);
+      background:linear-gradient(to right,var(--t600),var(--t500));
+      border-radius:.5rem; text-decoration:none;
+      box-shadow:0 8px 24px rgba(20,174,174,.2);
+      transition:all .2s ease; white-space:nowrap;
+    }
+    .btn-teal:hover { background:linear-gradient(to right,var(--t500),var(--t400)); transform:translateY(-2px); }
+
+    /* ── Badge pills ── */
+    .badge-copper { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--c500); background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.22); border-radius:9999px; padding:.3rem .9rem; }
+    .badge-teal   { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--t500); background:rgba(20,174,174,.1); border:1px solid rgba(20,174,174,.22); border-radius:9999px; padding:.3rem .9rem; }
+    .badge-slate  { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--s500); background:var(--s800); border:1px solid var(--s700); border-radius:9999px; padding:.3rem .9rem; }
+
+    /* ── Icon boxes ── */
+    .icon-copper { display:inline-flex; align-items:center; justify-content:center; padding:.5rem; background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.22); border-radius:.5rem; }
+    .icon-teal   { display:inline-flex; align-items:center; justify-content:center; padding:.5rem; background:rgba(20,174,174,.1); border:1px solid rgba(20,174,174,.22); border-radius:.5rem; }
+
+    /* ── Mono label ── */
+    .mono-label { font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+
+    /* ── Section eyebrow ── */
+    .eyebrow { display:flex; align-items:center; gap:.5rem; }
+    .eyebrow-dot { width:4px; height:4px; border-radius:50%; background:var(--c600); flex-shrink:0; }
+
+    /* ── Blueprint grid ── */
+    .blueprint-grid {
+      background-image:
+        linear-gradient(rgba(61,70,83,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,70,83,.12) 1px, transparent 1px);
+      background-size:60px 60px;
+    }
+
+    /* ── Glow blobs ── */
+    .glow-copper { position:absolute; border-radius:50%; background:rgba(224,120,56,.08); filter:blur(120px); pointer-events:none; }
+    .glow-teal   { position:absolute; border-radius:50%; background:rgba(20,174,174,.06); filter:blur(150px); pointer-events:none; }
+
+    /* ── Stat display ── */
+    .stat-val-copper { font-family:'JetBrains Mono',monospace; font-size:1.75rem; font-weight:700; color:var(--c500); }
+    .stat-val-teal   { font-family:'JetBrains Mono',monospace; font-size:1.75rem; font-weight:700; color:var(--t500); }
+    .stat-lbl { font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--s500); }
+
+    /* ── Card borders with accent ── */
+    .card-copper { border:2px solid rgba(224,120,56,.3); transition:border-color .3s,transform .3s; }
+    .card-copper:hover { border-color:var(--c600); transform:translateY(-4px); }
+    .card-teal   { border:2px solid rgba(20,174,174,.3); transition:border-color .3s,transform .3s; }
+    .card-teal:hover   { border-color:var(--t600); transform:translateY(-4px); }
+    .card-base   { border:1px solid var(--s800); transition:border-color .3s; }
+    .card-base:hover   { border-color:rgba(224,120,56,.4); }
+
+    /* ── Divider ── */
+    .hr-fade { height:1px; background:linear-gradient(to right,transparent,rgba(61,70,83,.45),transparent); border:none; }
+
+    /* ── Scroll reveal ── */
+    .reveal       { opacity:0; transform:translateY(24px); transition:opacity .7s ease-out,transform .7s ease-out; }
+    .reveal-left  { opacity:0; transform:translateX(-30px); transition:opacity .7s ease-out,transform .7s ease-out; }
+    .reveal-right { opacity:0; transform:translateX(30px); transition:opacity .7s ease-out,transform .7s ease-out; }
+    .reveal.in, .reveal-left.in, .reveal-right.in { opacity:1; transform:none; }
+    .d1 { transition-delay:.08s; } .d2 { transition-delay:.16s; } .d3 { transition-delay:.24s; }
+    .d4 { transition-delay:.32s; } .d5 { transition-delay:.40s; } .d6 { transition-delay:.48s; }
+
+    /* ── Hero entrance ── */
+    @keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .hero-child { opacity:0; animation:fade-up .6s ease-out forwards; }
+    .hero-child:nth-child(1){animation-delay:.10s} .hero-child:nth-child(2){animation-delay:.22s}
+    .hero-child:nth-child(3){animation-delay:.34s} .hero-child:nth-child(4){animation-delay:.46s}
+    .hero-child:nth-child(5){animation-delay:.58s} .hero-child:nth-child(6){animation-delay:.70s}
+    .hero-child:nth-child(7){animation-delay:.82s}
+
+    /* ── Star pulse ── */
+    @keyframes star-pulse { 0%,100%{opacity:.1;transform:scale(1)} 50%{opacity:.55;transform:scale(1.8)} }
+    .star { position:absolute; border-radius:50%; animation:star-pulse ease-in-out infinite; }
+
+    /* ── Trust logos ── */
+    .trust-box {
+      width:7rem; height:7rem;
+      background:#fff; border:2px solid var(--s700); border-radius:.75rem;
+      display:flex; align-items:center; justify-content:center; padding:.75rem;
+      transition:border-color .3s, box-shadow .3s;
+    }
+    .trust-logo-link:hover .trust-box { border-color:var(--c600); box-shadow:0 0 0 4px rgba(224,120,56,.1); }
+    .trust-logo-link:hover div { color:var(--c500) !important; }
+
+    /* ── Mobile ── */
+    #mobile-menu { display:none; }
+    #mobile-menu.open { display:block; }
+    @media(max-width:768px) {
+      h1{font-size:2.6rem;letter-spacing:-.03em}
+      h2{font-size:2rem}
+      .btn-copper,.btn-slate,.btn-teal{padding:.75rem 1.5rem;font-size:.9375rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════ -->
+<nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between" style="height:64px;">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2.5 no-underline">
+      <div style="width:34px;height:34px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;flex-shrink:0;">
+        <img src="logos/custom-favicon.png" alt="TIQ World" style="width:100%;height:100%;object-fit:contain;" />
+      </div>
+      <span style="font-weight:700;font-size:1.0625rem;color:var(--s50);letter-spacing:-.02em;">TIQ World</span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#dual-audience" style="font-size:.875rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s100)'" onmouseout="this.style.color='var(--s400)'">For Professionals</a>
+      <a href="#dual-audience" style="font-size:.875rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s100)'" onmouseout="this.style.color='var(--s400)'">For Enterprises</a>
+      <a href="#ai-tools" style="font-size:.875rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s100)'" onmouseout="this.style.color='var(--s400)'">AI Tools</a>
+      <a href="#ecosystem" style="font-size:.875rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s100)'" onmouseout="this.style.color='var(--s400)'">Ecosystem</a>
+    </div>
+
+    <!-- CTA group -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="#" style="font-size:.875rem;font-weight:500;color:var(--s300);text-decoration:none;padding:.5rem 1rem;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s300)'">Sign In</a>
+      <a href="#" class="btn-copper" style="padding:.55rem 1.25rem;font-size:.8125rem;">Get Started</a>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <span style="display:block;width:22px;height:2px;background:var(--s300);border-radius:1px;"></span>
+      <span style="display:block;width:22px;height:2px;background:var(--s300);border-radius:1px;"></span>
+      <span style="display:block;width:22px;height:2px;background:var(--s300);border-radius:1px;"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" style="background:var(--s950);border-top:1px solid rgba(61,70,83,.3);padding:1.25rem 1.5rem;">
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <a href="#dual-audience" style="font-size:.9375rem;color:var(--s300);text-decoration:none;" onclick="document.getElementById('mobile-menu').classList.remove('open')">For Professionals</a>
+      <a href="#dual-audience" style="font-size:.9375rem;color:var(--s300);text-decoration:none;" onclick="document.getElementById('mobile-menu').classList.remove('open')">For Enterprises</a>
+      <a href="#ai-tools" style="font-size:.9375rem;color:var(--s300);text-decoration:none;" onclick="document.getElementById('mobile-menu').classList.remove('open')">AI Tools</a>
+      <a href="#ecosystem" style="font-size:.9375rem;color:var(--s300);text-decoration:none;" onclick="document.getElementById('mobile-menu').classList.remove('open')">Ecosystem</a>
+      <hr class="hr-fade" />
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+        <a href="#" style="font-size:.875rem;color:var(--s400);text-decoration:none;">Sign In</a>
+        <a href="#" class="btn-copper" style="padding:.6rem 1.25rem;font-size:.8125rem;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 1 — HERO
+════════════════════════════════════════════ -->
+<section id="hero" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s950);overflow:hidden;padding:7rem 1rem 4rem;">
+
+  <!-- Blueprint grid -->
+  <div class="blueprint-grid" style="position:absolute;inset:0;pointer-events:none;"></div>
+
+  <!-- Copper glow, top-center -->
+  <div class="glow-copper" style="top:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;"></div>
+
+  <!-- Star particles (deterministic positions from source) -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
+    <div class="star" style="top:4%;left:7%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:2.5s;animation-delay:0s;"></div>
+    <div class="star" style="top:12%;left:15%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:3.2s;animation-delay:.18s;"></div>
+    <div class="star" style="top:23%;left:28%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:3.9s;animation-delay:.36s;"></div>
+    <div class="star" style="top:31%;left:42%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:4.6s;animation-delay:.54s;"></div>
+    <div class="star" style="top:38%;left:56%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:2.5s;animation-delay:.72s;"></div>
+    <div class="star" style="top:47%;left:67%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:3.2s;animation-delay:.9s;"></div>
+    <div class="star" style="top:55%;left:81%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:3.9s;animation-delay:1.08s;"></div>
+    <div class="star" style="top:62%;left:93%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:4.6s;animation-delay:1.26s;"></div>
+    <div class="star" style="top:71%;left:11%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:2.5s;animation-delay:1.44s;"></div>
+    <div class="star" style="top:78%;left:24%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:3.2s;animation-delay:1.62s;"></div>
+    <div class="star" style="top:85%;left:37%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:3.9s;animation-delay:1.8s;"></div>
+    <div class="star" style="top:92%;left:51%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:4.6s;animation-delay:1.98s;"></div>
+    <div class="star" style="top:8%;left:72%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:2.5s;animation-delay:2.16s;"></div>
+    <div class="star" style="top:19%;left:88%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:3.2s;animation-delay:2.34s;"></div>
+    <div class="star" style="top:35%;left:6%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:3.9s;animation-delay:2.52s;"></div>
+    <div class="star" style="top:44%;left:19%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:4.6s;animation-delay:2.7s;"></div>
+    <div class="star" style="top:58%;left:46%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:2.5s;animation-delay:2.88s;"></div>
+    <div class="star" style="top:67%;left:62%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:3.2s;animation-delay:3.06s;"></div>
+    <div class="star" style="top:3%;left:39%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:3.9s;animation-delay:3.24s;"></div>
+    <div class="star" style="top:17%;left:77%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:4.6s;animation-delay:3.42s;"></div>
+  </div>
+
+  <!-- Content -->
+  <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:64rem;margin:0 auto;width:100%;">
+
+    <!-- Eyebrow -->
+    <div class="hero-child eyebrow" style="margin-bottom:1rem;">
+      <span class="eyebrow-dot"></span>
+      <span class="mono-label" style="color:var(--c500);">Manufacturing Quality Intelligence</span>
+    </div>
+
+    <!-- Sub-label -->
+    <div class="hero-child mono-label" style="color:var(--t500);margin-bottom:1.5rem;">AI + Human Intelligence</div>
+
+    <!-- H1 -->
+    <h1 class="hero-child" style="color:var(--s50);margin-bottom:1.5rem;">
+      Where <span style="color:var(--c500);">Quality Professionals</span><br />and Organizations Meet
+    </h1>
+
+    <!-- Body copy -->
+    <p class="hero-child" style="color:var(--s300);font-size:1.1875rem;line-height:1.7;max-width:40rem;margin-bottom:2.5rem;">
+      Freelancers find verified jobs and upskill their careers.
+      Enterprises source assessed talent, run training, and generate AI-assisted reports.
+      One platform. One standard.
+    </p>
+
+    <!-- Dual CTAs -->
+    <div class="hero-child" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:2.5rem;">
+      <a href="#" class="btn-copper">I'm a QA / NDT Professional</a>
+      <a href="#" class="btn-slate">I Represent an Organization</a>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="hero-child" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2rem;padding:1.25rem 2rem;background:rgba(20,25,34,.4);border:1px solid var(--s800);border-radius:.75rem;margin-bottom:2.5rem;">
+      <div style="text-align:center;">
+        <div class="stat-val-copper">500+</div>
+        <div class="stat-lbl">Professionals</div>
+      </div>
+      <div style="width:1px;height:2rem;background:var(--s800);"></div>
+      <div style="text-align:center;">
+        <div class="stat-val-copper">50+</div>
+        <div class="stat-lbl">Enterprises</div>
+      </div>
+      <div style="width:1px;height:2rem;background:var(--s800);"></div>
+      <div style="text-align:center;">
+        <div class="stat-val-copper">200+</div>
+        <div class="stat-lbl">Reports Generated</div>
+      </div>
+    </div>
+
+    <!-- Backed by -->
+    <div class="hero-child mono-label" style="display:flex;align-items:center;gap:.75rem;color:var(--s600);">
+      <span>IIT Madras Incubation Centre</span>
+      <span style="color:var(--s700);">•</span>
+      <span>CNDE</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — DUAL AUDIENCE
+════════════════════════════════════════════ -->
+<section id="dual-audience" style="background:var(--s900);padding:6rem 1rem;overflow:hidden;">
+  <div style="max-width:72rem;margin:0 auto;">
+
+    <!-- Section header -->
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:1rem;">
+        <span class="eyebrow-dot"></span>
+        <span class="mono-label" style="color:var(--c500);">Built For Everyone in Manufacturing Quality</span>
+      </div>
+      <h2 style="color:var(--s50);">What's in it for you?</h2>
+    </div>
+
+    <!-- Two panels -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;" class="reveal">
+
+      <!-- Professionals panel -->
+      <div class="card-copper reveal-left" style="background:var(--s850);border-radius:1rem;padding:2rem;display:flex;flex-direction:column;gap:1.5rem;">
+        <div>
+          <span class="badge-copper">For QA / NDT Professionals</span>
+          <h3 style="color:var(--s50);margin-top:1.25rem;margin-bottom:.5rem;">Find jobs matched to your skills and certifications</h3>
+          <p style="font-size:1rem;color:var(--s400);line-height:1.65;">No more generic job boards. TIQ World knows your certifications and only shows you relevant openings.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <!-- Point 1 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-copper" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">Only see job openings matched to your verified certifications</p>
+          </div>
+          <!-- Point 2 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-copper" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">Access training programs to grow in your career</p>
+          </div>
+          <!-- Point 3 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-copper" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="var(--c500)" stroke="var(--c500)"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">Level 3 expert? Earn from report reviews and consultancy assignments</p>
+          </div>
+        </div>
+
+        <a href="#" class="btn-copper" style="margin-top:auto;width:100%;justify-content:center;">Join as a Professional</a>
+      </div>
+
+      <!-- Enterprises panel -->
+      <div class="card-teal reveal-right" style="background:var(--s850);border-radius:1rem;padding:2rem;display:flex;flex-direction:column;gap:1.5rem;">
+        <div>
+          <span class="badge-teal">For Enterprises &amp; Training Providers</span>
+          <h3 style="color:var(--s50);margin-top:1.25rem;margin-bottom:.5rem;">Source verified talent, run training, generate AI reports</h3>
+          <p style="font-size:1rem;color:var(--s400);line-height:1.65;">From hiring to training to AI-assisted report generation — one platform, backed by verified data.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <!-- Point 1 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-teal" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">Post jobs and receive only pre-assessed, competent candidates</p>
+          </div>
+          <!-- Point 2 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-teal" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">Reach more training participants and automate certification audit trails</p>
+          </div>
+          <!-- Point 3 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-teal" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="10" x2="8" y1="9" y2="9"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">AI-assisted NDT reports — included with your account or as a standalone subscription</p>
+          </div>
+          <!-- Point 4 -->
+          <div style="display:flex;align-items:flex-start;gap:.75rem;">
+            <div class="icon-teal" style="flex-shrink:0;margin-top:.1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            </div>
+            <p style="font-size:1rem;color:var(--s300);line-height:1.6;">Buy NDT equipment or sell to a verified industry audience</p>
+          </div>
+        </div>
+
+        <a href="#" class="btn-teal" style="margin-top:auto;width:100%;justify-content:center;">Register your Organization</a>
+      </div>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — SOCIAL PROOF DASHBOARD
+════════════════════════════════════════════ -->
+<section id="social-proof" style="background:var(--s950);padding:6rem 1rem;overflow:hidden;">
+  <div style="max-width:72rem;margin:0 auto;">
+
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:3.5rem;">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:1rem;">
+        <span class="eyebrow-dot"></span>
+        <span class="mono-label" style="color:var(--c500);">The TIQ World Ecosystem — By The Numbers</span>
+      </div>
+      <h2 style="color:var(--s50);margin-bottom:1rem;">A Growing Community of Quality Professionals</h2>
+      <p style="color:var(--s400);font-size:1.0625rem;max-width:36rem;margin:0 auto;">Both sides of the marketplace are here — enterprises and professionals grow together.</p>
+    </div>
+
+    <!-- 6 stat tiles -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;" class="reveal">
+
+      <div style="padding:1.25rem;border-radius:.75rem;background:rgba(224,120,56,.05);border:1px solid rgba(224,120,56,.2);text-align:center;" class="d1">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto .75rem;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="stat-val-copper">500+</div>
+        <div class="stat-lbl" style="margin-top:.25rem;">Professionals</div>
+      </div>
+
+      <div style="padding:1.25rem;border-radius:.75rem;background:rgba(20,174,174,.05);border:1px solid rgba(20,174,174,.2);text-align:center;" class="d2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto .75rem;"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+        <div class="stat-val-teal">50+</div>
+        <div class="stat-lbl" style="margin-top:.25rem;">Enterprises</div>
+      </div>
+
+      <div style="padding:1.25rem;border-radius:.75rem;background:rgba(224,120,56,.05);border:1px solid rgba(224,120,56,.2);text-align:center;" class="d3">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto .75rem;"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div class="stat-val-copper">300+</div>
+        <div class="stat-lbl" style="margin-top:.25rem;">Skills Available</div>
+      </div>
+
+      <div style="padding:1.25rem;border-radius:.75rem;background:rgba(20,174,174,.05);border:1px solid rgba(20,174,174,.2);text-align:center;" class="d4">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto .75rem;"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <div class="stat-val-teal">150+</div>
+        <div class="stat-lbl" style="margin-top:.25rem;">Certificates Issued</div>
+      </div>
+
+      <div style="padding:1.25rem;border-radius:.75rem;background:rgba(224,120,56,.05);border:1px solid rgba(224,120,56,.2);text-align:center;" class="d5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto .75rem;"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+        <div class="stat-val-copper">120+</div>
+        <div class="stat-lbl" style="margin-top:.25rem;">Positions Available</div>
+      </div>
+
+      <div style="padding:1.25rem;border-radius:.75rem;background:rgba(20,174,174,.05);border:1px solid rgba(20,174,174,.2);text-align:center;" class="d6">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto .75rem;"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        <div class="stat-val-teal">200+</div>
+        <div class="stat-lbl" style="margin-top:.25rem;">Reports Generated</div>
+      </div>
+
+    </div>
+
+    <!-- Context annotation strips -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:4rem;" class="reveal">
+      <div style="display:flex;align-items:flex-start;gap:.625rem;padding:.875rem 1rem;background:rgba(20,174,174,.05);border:1px solid rgba(20,174,174,.12);border-radius:.5rem;">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--t500);flex-shrink:0;margin-top:.3rem;"></div>
+        <p class="mono-label" style="color:rgba(32,201,201,.65);line-height:1.65;">Skills &amp; certificates in the talent pool — enterprises can be confident there's qualified talent ready to hire</p>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.625rem;padding:.875rem 1rem;background:rgba(224,120,56,.05);border:1px solid rgba(224,120,56,.12);border-radius:.5rem;">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--c500);flex-shrink:0;margin-top:.3rem;"></div>
+        <p class="mono-label" style="color:rgba(240,146,71,.65);line-height:1.65;">Positions &amp; training programs available — professionals know there are real opportunities waiting</p>
+      </div>
+    </div>
+
+    <!-- Featured partners -->
+    <div class="reveal" style="margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:2rem;">
+        <div style="width:3rem;height:1px;background:rgba(224,120,56,.2);"></div>
+        <span class="mono-label" style="color:rgba(224,120,56,.6);">Featured Partners</span>
+        <div style="width:3rem;height:1px;background:rgba(224,120,56,.2);"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+        <div>
+          <div class="mono-label" style="color:rgba(240,146,71,.6);margin-bottom:.75rem;">Featured Recruiters</div>
+          <div style="display:flex;gap:.75rem;">
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="mono-label" style="color:rgba(32,201,201,.6);margin-bottom:.75rem;">Training Partners</div>
+          <div style="display:flex;gap:.75rem;">
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="mono-label" style="color:rgba(240,146,71,.6);margin-bottom:.75rem;">NDT Equipment Sellers</div>
+          <div style="display:flex;gap:.75rem;">
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="mono-label" style="color:rgba(32,201,201,.6);margin-bottom:.75rem;">Featured Partners</div>
+          <div style="display:flex;gap:.75rem;">
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+            <div style="flex:1;height:3.5rem;border-radius:.5rem;border:2px dashed rgba(61,70,83,.5);display:flex;align-items:center;justify-content:center;background:rgba(20,25,34,.4);"><span class="mono-label" style="color:var(--s700);">Logo</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--s700);margin-top:1.25rem;font-style:italic;">Partner logos displayed with permission</p>
+    </div>
+
+    <!-- Google reviews placeholder -->
+    <div class="reveal" style="display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.25rem 2rem;background:rgba(20,25,34,.5);border:1px solid var(--s800);border-radius:.75rem;max-width:16rem;margin:0 auto;">
+      <div style="display:flex;gap:2px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div>
+        <div style="font-size:.9375rem;font-weight:600;color:var(--s300);">Google Reviews</div>
+        <div class="mono-label" style="color:var(--s600);">Coming Soon</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — AI TOOLS
+════════════════════════════════════════════ -->
+<section id="ai-tools" style="background:var(--s900);padding:5rem 1rem;overflow:hidden;">
+  <div style="max-width:60rem;margin:0 auto;">
+
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:1rem;">
+        <span class="eyebrow-dot"></span>
+        <span class="mono-label" style="color:var(--c500);">What We've Built</span>
+      </div>
+      <h2 style="color:var(--s50);margin-bottom:1rem;">AI Tools Built for Manufacturing Quality</h2>
+      <p style="color:var(--s400);font-size:1.0625rem;max-width:36rem;margin:0 auto;">Not productivity apps. Purpose-built AI for the most demanding quality standards on earth.</p>
+    </div>
+
+    <!-- 3 tool cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+
+      <!-- TIQ Wiki -->
+      <div class="card-teal reveal d1" style="background:var(--s850);border-radius:1rem;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;">
+        <div class="icon-teal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <span class="badge-teal">AI-Powered Knowledge</span>
+          <span class="badge-slate">Not Limited to NDT</span>
+        </div>
+        <h3 style="color:var(--s50);">TIQ Wiki</h3>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.65;">Ask anything about NDT codes, ASME procedures, welding standards, or material specs. Get AI-powered answers backed by verified technical literature — instantly.</p>
+        <a href="#" style="font-size:.9375rem;color:var(--t500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--t400)'" onmouseout="this.style.color='var(--t500)'">Explore TIQ Wiki →</a>
+      </div>
+
+      <!-- AI Report Studio (featured) -->
+      <div class="card-copper reveal d2" style="background:rgba(224,120,56,.05);border-radius:1rem;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;position:relative;">
+        <span class="mono-label" style="position:absolute;top:1rem;right:1rem;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:9999px;padding:.15rem .6rem;">FEATURED</span>
+        <div class="icon-copper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="10" x2="8" y1="9" y2="9"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <span class="badge-copper">NDT Report Generation</span>
+          <span class="badge-slate">Not Limited to NDT</span>
+        </div>
+        <h3 style="color:var(--s50);">AI Report Studio</h3>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.65;">Generate ISO-compliant NDT work reports from field data. AI structures, validates, and formats — the engineer reviews and signs. QR-verifiable on any device.</p>
+        <div style="display:flex;flex-direction:column;gap:.3rem;">
+          <span class="mono-label" style="color:var(--s500);">✓ For platform professionals — included</span>
+          <span class="mono-label" style="color:var(--s500);">✓ Available as standalone subscription</span>
+        </div>
+        <a href="#" style="font-size:.9375rem;color:var(--c500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--c400)'" onmouseout="this.style.color='var(--c500)'">Generate a Report →</a>
+      </div>
+
+      <!-- AI Assessment Engine -->
+      <div class="card-copper reveal d3" style="background:var(--s850);border-radius:1rem;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;">
+        <div class="icon-copper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        </div>
+        <span class="badge-copper">Skill Verification</span>
+        <h3 style="color:var(--s50);">AI Assessment Engine</h3>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.65;">Assessments calibrated to ASME, AWS, ASTM, SNT-TC-1A. AI generates, human experts validate. ISO/IEC 17024-aligned certification records.</p>
+        <a href="#" style="font-size:.9375rem;color:var(--c500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--c400)'" onmouseout="this.style.color='var(--c500)'">Take an Assessment →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — MANIFESTO
+════════════════════════════════════════════ -->
+<section id="manifesto" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s950);overflow:hidden;padding:6rem 1rem;">
+
+  <!-- Dual radial glows -->
+  <div class="glow-copper" style="top:25%;left:25%;width:500px;height:500px;"></div>
+  <div class="glow-teal" style="bottom:25%;right:25%;width:400px;height:400px;"></div>
+
+  <!-- Star particles -->
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
+    <div class="star" style="top:4%;left:7%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:2.5s;animation-delay:0s;"></div>
+    <div class="star" style="top:12%;left:15%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:3.2s;animation-delay:.18s;"></div>
+    <div class="star" style="top:27%;left:82%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:3.9s;animation-delay:.54s;"></div>
+    <div class="star" style="top:42%;left:92%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:4.6s;animation-delay:.72s;"></div>
+    <div class="star" style="top:55%;left:4%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:2.5s;animation-delay:.9s;"></div>
+    <div class="star" style="top:70%;left:19%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:3.2s;animation-delay:1.08s;"></div>
+    <div class="star" style="top:82%;left:73%;width:2px;height:2px;background:rgba(144,153,165,.2);animation-duration:3.9s;animation-delay:1.44s;"></div>
+    <div class="star" style="top:91%;left:88%;width:4px;height:4px;background:rgba(20,174,174,.3);animation-duration:4.6s;animation-delay:1.8s;"></div>
+    <div class="star" style="top:18%;left:63%;width:2px;height:2px;background:rgba(224,120,56,.4);animation-duration:2.5s;animation-delay:2.16s;"></div>
+    <div class="star" style="top:35%;left:33%;width:4px;height:4px;background:rgba(144,153,165,.2);animation-duration:3.2s;animation-delay:2.52s;"></div>
+    <div class="star" style="top:60%;left:51%;width:2px;height:2px;background:rgba(20,174,174,.3);animation-duration:3.9s;animation-delay:2.88s;"></div>
+    <div class="star" style="top:75%;left:44%;width:4px;height:4px;background:rgba(224,120,56,.4);animation-duration:4.6s;animation-delay:3.06s;"></div>
+  </div>
+
+  <!-- Text block -->
+  <div class="reveal" style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:44rem;margin:0 auto 3rem;">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:2rem;">
+      <span class="eyebrow-dot"></span>
+      <span class="mono-label" style="color:var(--c500);">AI + HI — The Principle</span>
+    </div>
+
+    <h2 style="color:var(--s50);font-size:clamp(2rem,4vw,4rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:2rem;">
+      The future is<br />
+      <span style="color:var(--c500);">Human Intelligence</span><br />
+      amplified by AI.
+    </h2>
+
+    <p style="color:var(--s400);font-size:1.0625rem;line-height:1.75;max-width:40rem;margin-bottom:2.5rem;">
+      In manufacturing quality, human expertise is irreplaceable. A Certified NDT Level II inspector carries knowledge no algorithm can substitute. TIQ World augments that expertise — AI generates questions, identifies patterns, and accelerates verification. Humans judge the weld, read the film, and sign the report.
+    </p>
+
+    <div style="width:5rem;height:1px;background:rgba(224,120,56,.22);"></div>
+  </div>
+
+  <!-- 3 principle cards -->
+  <div style="position:relative;z-index:10;width:100%;max-width:52rem;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 1rem;">
+
+    <div class="reveal d1" style="background:rgba(20,25,34,.6);border:1px solid var(--s700);border-radius:.75rem;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+        <div class="icon-copper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        </div>
+        <span style="font-size:1.0625rem;font-weight:600;color:var(--s100);">AI Generates</span>
+      </div>
+      <p style="font-size:1rem;color:var(--s400);line-height:1.6;">Assessments calibrated to ASME, AWS, ASTM</p>
+    </div>
+
+    <div class="reveal d2" style="background:rgba(20,25,34,.6);border:1px solid var(--s700);border-radius:.75rem;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+        <div class="icon-copper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Humans Verify</span>
+      </div>
+      <p style="font-size:1rem;color:var(--s400);line-height:1.6;">Certified professionals validate every output</p>
+    </div>
+
+    <div class="reveal d3" style="background:rgba(20,25,34,.6);border:1px solid var(--s700);border-radius:.75rem;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
+        <div class="icon-copper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        </div>
+        <span style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Platform Certifies</span>
+      </div>
+      <p style="font-size:1rem;color:var(--s400);line-height:1.6;">ISO/IEC 17024-aligned certification records</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — ECOSYSTEM
+════════════════════════════════════════════ -->
+<section id="ecosystem" style="background:var(--s900);padding:5rem 1rem;overflow:hidden;">
+  <div style="max-width:60rem;margin:0 auto;">
+
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:1rem;">
+        <span class="eyebrow-dot"></span>
+        <span class="mono-label" style="color:var(--c500);">The TIQ World Ecosystem</span>
+      </div>
+      <h2 style="color:var(--s50);margin-bottom:1rem;">When Intelligence Meets Verified Talent</h2>
+      <p style="color:var(--s400);font-size:1.0625rem;max-width:44rem;margin:0 auto;">Professionals who use TIQ World's AI tools are also part of a verified talent network. Training providers, recruiters, and procurement teams operate in the same ecosystem — built on verified data.</p>
+    </div>
+
+    <!-- 6 cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+
+      <!-- Card 1 -->
+      <div class="card-base reveal d1" style="background:var(--s950);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div class="icon-copper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Verified Professionals</div>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.6;">AI-assessed engineers with ISO/IEC 17024-aligned certifications</p>
+        <a href="#" style="font-size:.9375rem;color:var(--c500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--c400)'" onmouseout="this.style.color='var(--c500)'">Browse talent →</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card-base reveal d2" style="background:var(--s950);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div class="icon-teal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Certified Training</div>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.6;">NDT, welding, ASME programs run by qualified providers — with full audit trail</p>
+        <a href="#" style="font-size:.9375rem;color:var(--t500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--t400)'" onmouseout="this.style.color='var(--t500)'">Explore training →</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card-base reveal d3" style="background:var(--s950);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div class="icon-teal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+        </div>
+        <div style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Spec-Verified Marketplace</div>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.6;">NDT equipment and services verified against industry specs</p>
+        <a href="#" style="font-size:.9375rem;color:var(--t500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--t400)'" onmouseout="this.style.color='var(--t500)'">Browse marketplace →</a>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card-base reveal d4" style="background:var(--s950);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div class="icon-copper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+        </div>
+        <div style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Contract Opportunities</div>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.6;">Verified engineers connect with manufacturers for short and long-term projects</p>
+        <a href="#" style="font-size:.9375rem;color:var(--c500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--c400)'" onmouseout="this.style.color='var(--c500)'">Find work →</a>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card-base reveal d5" style="background:var(--s950);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div class="icon-copper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        </div>
+        <div style="font-size:1.0625rem;font-weight:600;color:var(--s100);">AI Report Studio</div>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.6;">Generate ISO-compliant NDT reports — included with your account or as a standalone subscription</p>
+        <a href="#" style="font-size:.9375rem;color:var(--c500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--c400)'" onmouseout="this.style.color='var(--c500)'">Generate reports →</a>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card-base reveal d6" style="background:var(--s950);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div class="icon-teal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+        </div>
+        <div style="font-size:1.0625rem;font-weight:600;color:var(--s100);">Career Ladder</div>
+        <p style="font-size:1rem;color:var(--s400);line-height:1.6;">Track your growth from Level 1 to Level 3 expert — consultancy opportunities unlock as you advance</p>
+        <a href="#" style="font-size:.9375rem;color:var(--t500);font-family:'JetBrains Mono',monospace;text-decoration:none;margin-top:auto;transition:color .2s;" onmouseover="this.style.color='var(--t400)'" onmouseout="this.style.color='var(--t500)'">View career path →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — TRUST + FOOTER
+════════════════════════════════════════════ -->
+<section id="trust" style="background:var(--s950);padding:5rem 1rem;">
+  <div style="max-width:72rem;margin:0 auto;">
+
+    <!-- Institutional backing -->
+    <div class="reveal" style="text-align:center;margin-bottom:4rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.5rem;">
+        <div style="width:3rem;height:1px;background:rgba(224,120,56,.3);"></div>
+        <span class="mono-label" style="color:var(--c500);">Institutional Backing</span>
+        <div style="width:3rem;height:1px;background:rgba(224,120,56,.3);"></div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;margin-bottom:3rem;">
+        <!-- IIT Madras -->
+        <a href="https://www.iitm.ac.in/" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:.75rem;text-decoration:none;" class="trust-logo-link">
+          <div class="trust-box">
+            <img src="logos/iitm-logo.png" alt="IIT Madras" style="max-width:100%;max-height:100%;object-fit:contain;" />
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:.9375rem;font-weight:600;color:var(--s400);transition:color .3s;">IIT Madras</div>
+            <div style="font-size:12px;color:var(--s600);">Incubation Centre</div>
+          </div>
+        </a>
+        <!-- CNDE -->
+        <a href="https://cnde.in/" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:.75rem;text-decoration:none;" class="trust-logo-link">
+          <div class="trust-box">
+            <img src="logos/cnde-logo.jpeg" alt="CNDE" style="max-width:100%;max-height:100%;object-fit:contain;" />
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:.9375rem;font-weight:600;color:var(--s400);transition:color .3s;">CNDE</div>
+            <div style="font-size:12px;color:var(--s600);">Centre for Non-Destructive Evaluation</div>
+          </div>
+        </a>
+        <!-- IITM Incubation Cell -->
+        <a href="https://incubation.iitm.ac.in/" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;gap:.75rem;text-decoration:none;" class="trust-logo-link">
+          <div class="trust-box">
+            <img src="logos/incubation-logo.png" alt="IITM Incubation Cell" style="max-width:100%;max-height:100%;object-fit:contain;" />
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:.9375rem;font-weight:600;color:var(--s400);transition:color .3s;">IITM Incubation Cell</div>
+            <div style="font-size:12px;color:var(--s600);">Innovation &amp; Entrepreneurship</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Cert badges -->
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:3rem;">
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1.25rem;background:rgba(28,34,48,.3);border:1px solid rgba(61,70,83,.5);border-radius:.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <div>
+            <div style="font-size:1rem;font-weight:600;color:var(--s50);">ISO/IEC 17024</div>
+            <div style="font-size:12px;color:var(--s500);">Assessment Standard</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1.25rem;background:rgba(28,34,48,.3);border:1px solid rgba(61,70,83,.5);border-radius:.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <div>
+            <div style="font-size:1rem;font-weight:600;color:var(--s50);">ASME • AWS • ASTM</div>
+            <div style="font-size:12px;color:var(--s500);">Training Alignment</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1.25rem;background:rgba(28,34,48,.3);border:1px solid rgba(61,70,83,.5);border-radius:.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <div>
+            <div style="font-size:1rem;font-weight:600;color:var(--s50);">AI + HI</div>
+            <div style="font-size:12px;color:var(--s500);">Methodology</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:32rem;margin:0 auto 4rem;">
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:1.125rem;font-weight:700;color:var(--c500);margin-bottom:.25rem;">Growing</div>
+          <div class="mono-label" style="color:var(--s500);">Talent Pool</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:1.125rem;font-weight:700;color:var(--c500);margin-bottom:.25rem;">ISO/IEC 17024</div>
+          <div class="mono-label" style="color:var(--s500);">Standard</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:1.125rem;font-weight:700;color:var(--c500);margin-bottom:.25rem;">AI + HI</div>
+          <div class="mono-label" style="color:var(--s500);">Methodology</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final CTA band -->
+    <div class="reveal" style="position:relative;border-radius:1rem;overflow:hidden;margin-bottom:5rem;padding:3rem;text-align:center;background:linear-gradient(135deg,var(--s900),var(--s850));border:1px solid var(--s800);">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:400px;height:200px;background:rgba(224,120,56,.05);border-radius:50%;filter:blur(80px);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <div class="mono-label" style="color:var(--c500);margin-bottom:1rem;">Join TIQ World</div>
+        <h2 style="color:var(--s50);margin-bottom:1rem;">Start your TIQ World journey</h2>
+        <p style="color:var(--s400);font-size:1.0625rem;margin-bottom:2rem;max-width:36rem;margin-left:auto;margin-right:auto;">Engineers, enterprises, training providers, and vendors — one platform, one standard.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+          <a href="#" class="btn-copper">For Professionals</a>
+          <a href="#" class="btn-slate" style="border-color:var(--s700);" onmouseover="this.style.borderColor='var(--c600)'" onmouseout="this.style.borderColor='var(--s700)'">For Organizations</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer nav -->
+    <div class="reveal">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding-bottom:3rem;border-bottom:1px solid rgba(61,70,83,.3);">
+        <div>
+          <h3 style="font-size:1.125rem;font-weight:600;color:var(--s100);margin-bottom:1.25rem;">For Engineers</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;padding:0;">
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">TIQ Wiki</a></li>
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">AI Report Studio</a></li>
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">Get Certified</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:1.125rem;font-weight:600;color:var(--s100);margin-bottom:1.25rem;">For Organizations</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;padding:0;">
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">Subscribe to AI Reports</a></li>
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">Source Verified Talent</a></li>
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">Offer Training</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:1.125rem;font-weight:600;color:var(--s100);margin-bottom:1.25rem;">Resources</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem;padding:0;">
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">About</a></li>
+            <li><a href="mailto:info@tiqworld.com" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">Contact</a></li>
+            <li><a href="#" style="font-size:1rem;color:var(--s400);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s400)'">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+        <div style="font-size:1rem;color:var(--s500);">© 2026 TIQ World. All rights reserved.</div>
+        <div style="display:flex;align-items:center;gap:1rem;font-size:.875rem;color:var(--s500);">
+          <a href="#" style="color:var(--s500);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s500)'">Privacy</a>
+          <span>•</span>
+          <a href="#" style="color:var(--s500);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--c500)'" onmouseout="this.style.color='var(--s500)'">Terms</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     RESPONSIVE — Two-col → single col on mobile
+════════════════════════════════════════════ -->
+<style>
+  @media (max-width: 768px) {
+    /* Dual audience panels */
+    #dual-audience > div > div:last-child { grid-template-columns: 1fr !important; }
+    /* Stat tiles */
+    #social-proof .reveal > div { grid-template-columns: repeat(2,1fr) !important; }
+    /* Context strips */
+    #social-proof .reveal + .reveal { grid-template-columns: 1fr !important; }
+    /* Partner grid */
+    #social-proof .reveal ~ div:first-of-type div { grid-template-columns: repeat(2,1fr) !important; }
+    /* AI tools */
+    #ai-tools > div > div:last-child { grid-template-columns: 1fr !important; }
+    /* Manifesto principle cards */
+    #manifesto > div:last-child { grid-template-columns: 1fr !important; }
+    /* Ecosystem cards */
+    #ecosystem > div > div:last-child { grid-template-columns: repeat(2,1fr) !important; }
+    /* Footer nav */
+    #trust > div > div:last-child > div:first-child { grid-template-columns: 1fr !important; }
+    /* Trust logos */
+    #trust > div > div:first-child > div:nth-child(2) { gap:1.5rem !important; }
+    /* CTA buttons */
+    #trust .btn-copper, #trust .btn-slate { width:100%; justify-content:center; }
+  }
+  @media (max-width: 480px) {
+    #social-proof .reveal > div { grid-template-columns: 1fr !important; }
+    #ecosystem > div > div:last-child { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+
+<!-- ════════════════════════════════════════════
+     SCROLL REVEAL — IntersectionObserver
+════════════════════════════════════════════ -->
+<script>
+  (function () {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el) => {
+      io.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>
