@@ -112,4 +112,15 @@ Hero elements use CSS `@keyframes fade-up` with `animation-delay` staggering on 
 
 ## Assets
 
-Logo files are in `F:\IIT-RCOM\tiqworld-github\consumer-app\public\logos\`. Since the HTML files run standalone (not served by Vite), reference logos either as absolute paths for local testing or use text/SVG placeholders for portable demos.
+**Logo files** are in `F:\IIT-RCOM\tiqworld-github\consumer-app\public\logos\`. A local copy exists in the `logos/` directory of this repo for standalone use. Reference them with relative paths: `logos/tiq-logo.png`, `logos/iitm-logo-o.png`, etc.
+
+Available logos:
+- `tiq-logo.png` — TIQ World primary logo
+- `iitm-logo-o.png`, `iitm-logo.png` — IIT Madras logos
+- `cnde-logo-o.png`, `cnde-logo.jpeg` — CNDE logos
+- `incubation-logo.png` — IITM Incubation Cell
+- `american-express.png` — Payment partner logo
+
+## Hub Page
+
+`index.html` serves as the revision hub — a gallery view linking to all landing page versions. When creating a new revision, add it to the hub's grid alongside existing versions.

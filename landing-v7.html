@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIQ World — The Digital Layer for Manufacturing Quality</title>
+  <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            copper: { 300:'#fac08a', 400:'#f5a66b', 500:'#f09247', 600:'#e07838', 700:'#c86528' },
+            teal:   { 300:'#6ee7e7', 400:'#38d4d4', 500:'#20c9c9', 600:'#14aeae', 700:'#0d9090' },
+          },
+          fontFamily: {
+            sans: ['Space Grotesk','system-ui','sans-serif'],
+            mono: ['JetBrains Mono','monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --c600:#e07838; --c500:#f09247; --c400:#f5a66b; --c300:#fac08a; --c700:#c86528;
+      --t600:#14aeae; --t500:#20c9c9; --t400:#38d4d4; --t700:#0d9090;
+      --s950:#0d1219; --s900:#141922; --s850:#1c2230; --s800:#252c38;
+      --s700:#3d4653; --s600:#5c6778; --s500:#6d7888; --s400:#9099a5;
+      --s300:#bdc2c7; --s200:#d0d4d8; --s100:#e9eaec; --s50:#f5f4f2;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--s950);
+      color: var(--s100);
+      overflow-x: hidden;
+    }
+
+    /* Blueprint grid */
+    .blueprint-grid {
+      background-image:
+        linear-gradient(rgba(224,120,56,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(224,120,56,.035) 1px, transparent 1px),
+        linear-gradient(rgba(61,70,83,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,70,83,.08) 1px, transparent 1px);
+      background-size: 240px 240px, 240px 240px, 48px 48px, 48px 48px;
+    }
+
+    /* Reveal animations */
+    .reveal       { opacity:0; transform:translateY(20px); transition:opacity .65s ease-out, transform .65s ease-out; }
+    .reveal.in    { opacity:1; transform:none; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+    .d4{transition-delay:.4s} .d5{transition-delay:.5s} .d6{transition-delay:.6s}
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(13,18,25,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(61,70,83,.3);
+      padding: 0 clamp(1.5rem,5vw,4rem);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    /* ── LOGO (uniform style) ── */
+    .tiq-logo {
+      display: flex; align-items: center; gap: .25rem;
+      font-weight: 700; font-size: .9375rem; letter-spacing: -.02em;
+      text-decoration: none;
+    }
+    .tiq-logo-globe {
+      width: 34px; height: 34px;
+      background: #fff; border-radius: .5rem;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; padding: 2px; flex-shrink: 0;
+    }
+    .tiq-logo-text-orange { color: var(--c600); }
+    .tiq-logo-text-blue { color: var(--t600); }
+
+    /* ── TYPOGRAPHY ── */
+    .hero-headline {
+      font-size: clamp(3rem, 5.5vw + 1rem, 7rem);
+      font-weight: 700; line-height: .93; letter-spacing: -.04em; text-transform: uppercase;
+    }
+    .section-headline {
+      font-size: clamp(1.875rem, 2.5vw + .75rem, 3.25rem);
+      font-weight: 700; letter-spacing: -.04em; text-transform: uppercase;
+      color: var(--s50); line-height: 1.0;
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--c600);
+      display: flex; align-items: center; gap: .875rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-label::after { content:''; flex:1; height:1px; background:rgba(61,70,83,.4); }
+
+    /* ── STAT BAR ── */
+    .stat-bar {
+      display: flex;
+      border-top: 1px solid rgba(61,70,83,.45);
+      border-bottom: 1px solid rgba(61,70,83,.45);
+      background: rgba(13,18,25,.5);
+    }
+    .stat-item { flex:1; padding:1.25rem 1.75rem; border-right:1px solid rgba(61,70,83,.45); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+      font-weight: 700; color: var(--c500); letter-spacing: -.02em; line-height: 1.1;
+    }
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--s600); margin-top: .3rem;
+    }
+
+    /* ── TRACTION METRICS (new section) ── */
+    .traction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .traction-card {
+      background: var(--s900);
+      border: 1px solid rgba(61,70,83,.25);
+      border-radius: .875rem;
+      padding: 2rem;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+    .traction-card:hover {
+      border-color: rgba(224,120,56,.35);
+      transform: translateY(-2px);
+    }
+    .traction-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 700;
+      color: var(--c500);
+      line-height: 1;
+      margin-bottom: .625rem;
+    }
+    .traction-label {
+      font-size: .9375rem;
+      color: var(--s400);
+      line-height: 1.5;
+    }
+
+    /* ── AUDIENCE GRID ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px;
+      background: rgba(61,70,83,.2);
+      border: 1px solid rgba(61,70,83,.2);
+    }
+    .audience-card {
+      background: var(--s900);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s ease;
+    }
+    .audience-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--c500);
+      transition: height .4s ease;
+    }
+    .audience-card.teal::before { background: var(--t500); }
+    .audience-card:hover::before { height: 100%; }
+    .audience-card:hover { background: rgba(28,34,48,.9); }
+
+    .card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--c500); opacity: .5; margin-bottom: 1.25rem;
+    }
+    .audience-card.teal .card-num { color: var(--t500); }
+
+    .audience-card h3 {
+      font-size: 1.375rem; font-weight: 700; letter-spacing: -.025em;
+      color: var(--s50); margin-bottom: .625rem;
+    }
+    .card-desc { font-size: .9375rem; color: var(--s400); line-height: 1.65; margin-bottom: 1.5rem; }
+
+    .feat-list { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.75rem; }
+    .feat-item { display: flex; align-items: flex-start; gap: .625rem; font-size: .875rem; color: var(--s400); line-height: 1.55; }
+    .feat-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c500); flex-shrink: 0; margin-top: .42rem; }
+    .audience-card.teal .feat-dot { background: var(--t500); }
+
+    .card-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--c500); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+      transition: gap .2s;
+    }
+    .audience-card.teal .card-cta { color: var(--t500); }
+    .card-cta:hover { gap: .875rem; }
+
+    /* ── HI + AI TILES (3-tile layout, equal emphasis) ── */
+    .hi-ai-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hi-ai-card {
+      background: var(--s900);
+      border: 1px solid rgba(61,70,83,.25);
+      border-radius: .875rem;
+      padding: 2.25rem;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+    .hi-ai-card:hover {
+      border-color: rgba(224,120,56,.35);
+      transform: translateY(-3px);
+    }
+    .hi-ai-card.teal-accent { border-color: rgba(20,174,174,.2); }
+    .hi-ai-card.teal-accent:hover { border-color: rgba(20,174,174,.4); }
+
+    .hi-ai-icon {
+      width: 64px; height: 64px;
+      margin: 0 auto 1.5rem;
+      border-radius: .875rem;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(224,120,56,.08);
+      border: 1px solid rgba(224,120,56,.15);
+    }
+    .hi-ai-card.teal-accent .hi-ai-icon {
+      background: rgba(20,174,174,.08);
+      border-color: rgba(20,174,174,.15);
+    }
+    .hi-ai-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--s50);
+      margin-bottom: .75rem;
+    }
+    .hi-ai-desc {
+      font-size: .875rem;
+      color: var(--s400);
+      line-height: 1.65;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid rgba(61,70,83,.3); border-bottom: 1px solid rgba(61,70,83,.3); background: rgba(13,18,25,.7); }
+    .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: .875rem;
+      padding: 1rem 2rem;
+      border-right: 1px solid rgba(61,70,83,.35);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--s600); white-space: nowrap;
+    }
+    .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--c600); flex-shrink: 0; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--c600); color: var(--s950);
+      font-weight: 600; font-size: .9375rem;
+      padding: .875rem 2rem; border-radius: .5rem;
+      text-decoration: none; display: inline-flex; align-items: center; gap: .5rem;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--c500); transform: translateY(-1px); }
+    .btn-outline {
+      color: var(--s300); border: 1px solid rgba(61,70,83,.7);
+      font-weight: 500; font-size: .9375rem;
+      padding: .875rem 2rem; border-radius: .5rem;
+      text-decoration: none; display: inline-flex; align-items: center; gap: .5rem;
+      transition: border-color .2s, color .2s;
+      background: transparent;
+    }
+    .btn-outline:hover { border-color: var(--s500); color: var(--s100); }
+
+    /* ── TRUST LOGOS ── */
+    .logo-box {
+      background: #fff; border-radius: .5rem;
+      padding: .625rem 1.125rem;
+      display: flex; align-items: center; justify-content: center;
+      height: 60px;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: linear-gradient(135deg, rgba(224,120,56,.1) 0%, rgba(20,174,174,.05) 100%);
+      border-top: 1px solid rgba(224,120,56,.18);
+      border-bottom: 1px solid rgba(224,120,56,.18);
+    }
+
+    /* ── SKILLS / CERTIFICATIONS GRID ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .skill-item {
+      background: var(--s900);
+      border: 1px solid rgba(61,70,83,.25);
+      border-radius: .625rem;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: border-color .3s, background .3s;
+    }
+    .skill-item:hover {
+      border-color: rgba(224,120,56,.35);
+      background: var(--s850);
+    }
+    .skill-name {
+      font-size: .9375rem;
+      font-weight: 500;
+      color: var(--s100);
+      line-height: 1.4;
+    }
+    .skill-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--c500);
+      flex-shrink: 0;
+    }
+    .cert-item {
+      background: var(--s900);
+      border: 1px solid rgba(20,174,174,.2);
+      border-radius: .625rem;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: border-color .3s, background .3s;
+    }
+    .cert-item:hover {
+      border-color: rgba(20,174,174,.4);
+      background: var(--s850);
+    }
+    .cert-name {
+      font-size: .9375rem;
+      font-weight: 500;
+      color: var(--s100);
+      line-height: 1.4;
+    }
+    .cert-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--t500);
+      flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .traction-grid { grid-template-columns: 1fr; }
+      .hi-ai-layout { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    }
+    @media (max-width: 768px) {
+      .audience-grid { grid-template-columns: 1fr; }
+      .stat-bar { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(61,70,83,.4); }
+      .stat-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 560px) {
+      .audience-card { padding: 1.75rem 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="blueprint-grid">
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="tiq-logo">
+    <div class="tiq-logo-globe">
+      <img src="logos/custom-favicon.png" alt="TIQ" style="width:100%;height:100%;object-fit:contain;" />
+    </div>
+    <span class="tiq-logo-text-orange">TIQ</span><span class="tiq-logo-text-blue">World</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s700);display:none;" class="md-show">V7 — Skills Showcase</span>
+    <a href="#audience" class="btn-outline" style="padding:.5rem 1.125rem;font-size:.8125rem;">Explore</a>
+    <a href="#cta" class="btn-primary" style="padding:.5rem 1.125rem;font-size:.8125rem;">Get Early Access</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:0 clamp(1.5rem,5vw,5rem);overflow:hidden;">
+
+  <!-- Giant background text -->
+  <div aria-hidden="true" style="position:absolute;bottom:-1.5rem;right:-1rem;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(5rem,18vw,16rem);line-height:1;letter-spacing:-.06em;color:rgba(13,18,25,1);-webkit-text-stroke:1px rgba(61,70,83,.2);user-select:none;pointer-events:none;z-index:0;text-transform:uppercase;">
+    TIQ
+  </div>
+
+  <!-- Left accent strip -->
+  <div style="position:absolute;left:0;top:8%;bottom:8%;width:3px;background:linear-gradient(to bottom,transparent 0%,var(--c600) 30%,var(--c600) 70%,transparent 100%);opacity:.6;"></div>
+
+  <div style="max-width:900px;position:relative;z-index:1;padding:5rem 0 2rem;">
+
+    <!-- Eyebrow -->
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;" class="reveal">
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--c500);"></div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--c500);">IITM Incubated · Manufacturing Technology</span>
+      <div style="width:2.5rem;height:1px;background:rgba(224,120,56,.3);"></div>
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="hero-headline reveal d1">
+      <span style="color:var(--s50);">The Digital</span><br/>
+      <span style="color:var(--c500);">Layer</span><span style="color:var(--s50);"> for</span><br/>
+      <span style="color:var(--s50);">Manufacturing</span><br/>
+      <span style="background:linear-gradient(90deg,var(--t500),var(--t400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Quality</span>
+    </h1>
+
+    <!-- Subhead -->
+    <p class="reveal d2" style="max-width:44rem;margin:1.75rem 0 2.5rem;font-size:clamp(1rem,1.5vw+.4rem,1.25rem);line-height:1.65;color:var(--s400);">
+      TIQ World is a precision platform connecting NDT &amp; QC professionals, training providers, manufacturers, and the recruiters who build the teams that inspect the world's critical infrastructure.
+    </p>
+
+    <!-- CTA row -->
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;" class="reveal d3">
+      <a href="#cta" class="btn-primary">
+        Get Early Access
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#audience" class="btn-outline">
+        See How It Works
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Backed-by logos -->
+    <div style="margin-top:3rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;" class="reveal d4">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s700);flex-shrink:0;">Backed by</span>
+      <div class="logo-box" style="height:48px;padding:.5rem 1rem;">
+        <img src="logos/iitm-logo.png" alt="IIT Madras" style="height:30px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box" style="height:48px;padding:.5rem 1rem;">
+        <img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:30px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box" style="height:48px;padding:.5rem 1rem;">
+        <img src="logos/incubation-logo.png" alt="IITM Incubation" style="height:30px;width:auto;object-fit:contain;" />
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     STAT BAR (platform overview)
+════════════════════════════════════════════════ -->
+<div class="stat-bar reveal">
+  <div class="stat-item">
+    <div class="stat-num">12,000+</div>
+    <div class="stat-label">NDT Professionals</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">340+</div>
+    <div class="stat-label">Training Providers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">90+</div>
+    <div class="stat-label">Industry Partners</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">8</div>
+    <div class="stat-label">NDT Methods Covered</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TRACTION METRICS (NEW — shows ecosystem activity)
+════════════════════════════════════════════════ -->
+<section style="padding:6rem clamp(1.5rem,5vw,5rem);background:var(--s900);border-top:1px solid rgba(61,70,83,.3);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label reveal">Live Ecosystem Activity</div>
+    <h2 class="section-headline reveal d1" style="margin-bottom:3rem;">Proof of Traction</h2>
+
+    <div class="traction-grid">
+      <div class="traction-card reveal d1">
+        <div class="traction-value">850+</div>
+        <div class="traction-label">Skills &amp; Certifications<br/>Available</div>
+      </div>
+      <div class="traction-card reveal d2">
+        <div class="traction-value">1,200+</div>
+        <div class="traction-label">Training Courses<br/>Listed</div>
+      </div>
+      <div class="traction-card reveal d3">
+        <div class="traction-value">4,300+</div>
+        <div class="traction-label">Active Job<br/>Postings</div>
+      </div>
+      <div class="traction-card reveal d4">
+        <div class="traction-value">750+</div>
+        <div class="traction-label">Marketplace<br/>Products</div>
+      </div>
+      <div class="traction-card reveal d5">
+        <div class="traction-value">180+</div>
+        <div class="traction-label">Enterprise<br/>Recruiters</div>
+      </div>
+      <div class="traction-card reveal d6">
+        <div class="traction-value">95+</div>
+        <div class="traction-label">Enterprise Training<br/>Partners</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SKILLS & CERTIFICATIONS AVAILABLE
+════════════════════════════════════════════════ -->
+<section style="padding:6rem clamp(1.5rem,5vw,5rem);background:var(--s950);">
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <!-- Skills Available -->
+    <div class="section-label reveal">Skills Available</div>
+    <h2 class="section-headline reveal d1" style="margin-bottom:1rem;">Professional Expertise</h2>
+    <p class="reveal d2" style="font-size:.9375rem;color:var(--s400);line-height:1.7;max-width:42rem;margin-bottom:3rem;">
+      Explore a diverse range of professional expertise offered by our talented freelancers across NDT and quality control disciplines.
+    </p>
+
+    <div class="skills-grid" style="margin-bottom:5rem;">
+      <div class="skill-item reveal d1">
+        <div class="skill-name">Welding Inspection - General</div>
+        <div class="skill-count">342</div>
+      </div>
+      <div class="skill-item reveal d2">
+        <div class="skill-name">NDT Services</div>
+        <div class="skill-count">1,240</div>
+      </div>
+      <div class="skill-item reveal d3">
+        <div class="skill-name">Welding Procedure Qualification (WPQ)</div>
+        <div class="skill-count">218</div>
+      </div>
+      <div class="skill-item reveal d4">
+        <div class="skill-name">Welding Test by NDT</div>
+        <div class="skill-count">456</div>
+      </div>
+      <div class="skill-item reveal d5">
+        <div class="skill-name">Inspection and Test Plan (ITP)</div>
+        <div class="skill-count">189</div>
+      </div>
+      <div class="skill-item reveal d6">
+        <div class="skill-name">Ultrasonic Testing (UT)</div>
+        <div class="skill-count">894</div>
+      </div>
+      <div class="skill-item reveal d1">
+        <div class="skill-name">Radiographic Testing (RT)</div>
+        <div class="skill-count">756</div>
+      </div>
+      <div class="skill-item reveal d2">
+        <div class="skill-name">Magnetic Particle Testing (MT)</div>
+        <div class="skill-count">623</div>
+      </div>
+      <div class="skill-item reveal d3">
+        <div class="skill-name">Liquid Penetrant Testing (PT)</div>
+        <div class="skill-count">687</div>
+      </div>
+      <div class="skill-item reveal d4">
+        <div class="skill-name">Eddy Current Testing (ET)</div>
+        <div class="skill-count">412</div>
+      </div>
+      <div class="skill-item reveal d5">
+        <div class="skill-name">Visual Inspection (VT)</div>
+        <div class="skill-count">1,120</div>
+      </div>
+      <div class="skill-item reveal d6">
+        <div class="skill-name">Phased Array Ultrasonic Testing (PAUT)</div>
+        <div class="skill-count">285</div>
+      </div>
+    </div>
+
+    <!-- Certifications Available -->
+    <div class="section-label reveal">Certifications Available</div>
+    <h2 class="section-headline reveal d1" style="margin-bottom:1rem;">Industry Certifications</h2>
+    <p class="reveal d2" style="font-size:.9375rem;color:var(--s400);line-height:1.7;max-width:42rem;margin-bottom:3rem;">
+      Explore the various certifications held by our skilled professionals, verified and recognized across the industry.
+    </p>
+
+    <div class="skills-grid">
+      <div class="cert-item reveal d1">
+        <div class="cert-name">ASNT NDT UT Level 2</div>
+        <div class="cert-count">412</div>
+      </div>
+      <div class="cert-item reveal d2">
+        <div class="cert-name">ASNT NDT PT Level 2</div>
+        <div class="cert-count">389</div>
+      </div>
+      <div class="cert-item reveal d3">
+        <div class="cert-name">ASNT NDT MT Level 2</div>
+        <div class="cert-count">356</div>
+      </div>
+      <div class="cert-item reveal d4">
+        <div class="cert-name">ASNT NDT RT Level 2</div>
+        <div class="cert-count">378</div>
+      </div>
+      <div class="cert-item reveal d5">
+        <div class="cert-name">AWS CSWIP 3.1</div>
+        <div class="cert-count">245</div>
+      </div>
+      <div class="cert-item reveal d6">
+        <div class="cert-name">PCN Level 2 (UT)</div>
+        <div class="cert-count">298</div>
+      </div>
+      <div class="cert-item reveal d1">
+        <div class="cert-name">PCN Level 2 (RT)</div>
+        <div class="cert-count">267</div>
+      </div>
+      <div class="cert-item reveal d2">
+        <div class="cert-name">BINDT Level 2 (MT)</div>
+        <div class="cert-count">224</div>
+      </div>
+      <div class="cert-item reveal d3">
+        <div class="cert-name">ISO 9712 Certified</div>
+        <div class="cert-count">512</div>
+      </div>
+      <div class="cert-item reveal d4">
+        <div class="cert-name">API 510 Inspector</div>
+        <div class="cert-count">189</div>
+      </div>
+      <div class="cert-item reveal d5">
+        <div class="cert-name">API 570 Inspector</div>
+        <div class="cert-count">156</div>
+      </div>
+      <div class="cert-item reveal d6">
+        <div class="cert-name">CWI (Certified Welding Inspector)</div>
+        <div class="cert-count">334</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     AUDIENCE — 2×2 CARD GRID
+════════════════════════════════════════════════ -->
+<section id="audience" style="padding:6rem clamp(1.5rem,5vw,5rem);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label reveal">Four Ways to Join</div>
+    <h2 class="section-headline reveal d1" style="margin-bottom:3rem;">Built For Every<br/>Stakeholder</h2>
+
+    <div class="audience-grid">
+
+      <!-- 01 Professionals -->
+      <div class="audience-card reveal d1">
+        <div class="card-num">01 — Professionals</div>
+        <h3>NDT &amp; Quality Inspectors</h3>
+        <p class="card-desc">Build a verified portfolio, earn recognised certifications, and find quality roles at top manufacturers and EPC firms.</p>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-dot"></span>Skill-verified professional profile</li>
+          <li class="feat-item"><span class="feat-dot"></span>AI-powered career matching</li>
+          <li class="feat-item"><span class="feat-dot"></span>Internationally recognised certifications</li>
+          <li class="feat-item"><span class="feat-dot"></span>Proctored online assessment sessions</li>
+        </ul>
+        <a href="#cta" class="card-cta">Start Your Profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <!-- 02 Recruiters -->
+      <div class="audience-card teal reveal d2">
+        <div class="card-num">02 — Recruiters</div>
+        <h3>HR &amp; Talent Leads</h3>
+        <p class="card-desc">Stop sifting CVs. Find pre-screened, skill-verified NDT talent with transparent competency records and fast-track contracting.</p>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-dot"></span>Verified competency search filters</li>
+          <li class="feat-item"><span class="feat-dot"></span>AI-matched shortlist in minutes</li>
+          <li class="feat-item"><span class="feat-dot"></span>Integrated contract workflows</li>
+          <li class="feat-item"><span class="feat-dot"></span>Compliance-ready documentation</li>
+        </ul>
+        <a href="#cta" class="card-cta">Post a Job <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <!-- 03 Training -->
+      <div class="audience-card reveal d3">
+        <div class="card-num">03 — Training</div>
+        <h3>Training Institutes</h3>
+        <p class="card-desc">Publish courses on a platform built for NDT. Reach professionals actively seeking certification upgrades and enrolment.</p>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-dot"></span>Dedicated course catalogue page</li>
+          <li class="feat-item"><span class="feat-dot"></span>Enrolment management dashboard</li>
+          <li class="feat-item"><span class="feat-dot"></span>Certificate issuance automation</li>
+          <li class="feat-item"><span class="feat-dot"></span>Student progress analytics</li>
+        </ul>
+        <a href="#cta" class="card-cta">List Your Courses <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <!-- 04 Manufacturers -->
+      <div class="audience-card teal reveal d4">
+        <div class="card-num">04 — Manufacturers</div>
+        <h3>OEMs &amp; EPC Firms</h3>
+        <p class="card-desc">Hire proven inspectors, mandate supplier quality standards, and run verifiable inspections — all within a single compliance system.</p>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-dot"></span>Supplier quality benchmark dashboards</li>
+          <li class="feat-item"><span class="feat-dot"></span>On-demand inspection workforce</li>
+          <li class="feat-item"><span class="feat-dot"></span>Audit-ready inspection records</li>
+          <li class="feat-item"><span class="feat-dot"></span>Real-time workforce compliance view</li>
+        </ul>
+        <a href="#cta" class="card-cta">Request a Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+    </div><!-- /audience-grid -->
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     MARQUEE TICKER
+════════════════════════════════════════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>NDT Level I · II · III</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ultrasonic Testing</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Radiographic Testing</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Magnetic Particle</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Phased Array UT</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Eddy Current</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Visual Inspection</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Liquid Penetrant</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ASNT · PCN · BINDT</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ISO 9712 Certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Oil &amp; Gas · Aerospace · Power</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item"><span class="marquee-dot"></span>NDT Level I · II · III</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ultrasonic Testing</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Radiographic Testing</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Magnetic Particle</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Phased Array UT</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Eddy Current</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Visual Inspection</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Liquid Penetrant</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ASNT · PCN · BINDT</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ISO 9712 Certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Oil &amp; Gas · Aerospace · Power</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     HI + AI (3 tiles, equal emphasis)
+════════════════════════════════════════════════ -->
+<section style="padding:6rem clamp(1.5rem,5vw,5rem);background:var(--s900);border-top:1px solid rgba(61,70,83,.3);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label reveal">Intelligence Layer</div>
+    <h2 class="section-headline reveal d1" style="margin-bottom:1.5rem;">
+      Human Intelligence<br/>
+      <span style="color:var(--c500);">+</span><br/>
+      AI Assistance
+    </h2>
+    <p class="reveal d2" style="font-size:.9375rem;color:var(--s400);line-height:1.7;max-width:36rem;margin-bottom:3.5rem;">
+      NDT doesn't just need a job board. It needs infrastructure that understands quality — the skills, the standards, and the stakes involved.
+    </p>
+
+    <div class="hi-ai-layout">
+      <!-- Tile 1: Skill Verification -->
+      <div class="hi-ai-card reveal d3">
+        <div class="hi-ai-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f09247" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+        </div>
+        <div class="hi-ai-title">AI Skill Verification</div>
+        <p class="hi-ai-desc">Adaptive assessments map competency against live industry standards — no human bias, no paper checklists.</p>
+      </div>
+
+      <!-- Tile 2: Smart Matching -->
+      <div class="hi-ai-card teal-accent reveal d4">
+        <div class="hi-ai-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#20c9c9" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="hi-ai-title">Smart Matching Engine</div>
+        <p class="hi-ai-desc">Role requirements parsed against verified profiles to surface the right candidate at the right moment.</p>
+      </div>
+
+      <!-- Tile 3: Question Bank -->
+      <div class="hi-ai-card reveal d5">
+        <div class="hi-ai-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f09247" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="hi-ai-title">Question Bank Engine</div>
+        <p class="hi-ai-desc">AI-generated, expert-reviewed question sets for every NDT discipline — keeping assessments current.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     MANIFESTO BAND
+════════════════════════════════════════════════ -->
+<section style="padding:5.5rem clamp(1.5rem,5vw,5rem);border-top:1px solid rgba(61,70,83,.3);border-bottom:1px solid rgba(61,70,83,.3);position:relative;overflow:hidden;">
+  <!-- Faint decorative rule -->
+  <div style="position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(to right,transparent,rgba(224,120,56,.08),transparent);pointer-events:none;"></div>
+  <div style="max-width:800px;margin:0 auto;text-align:center;" class="reveal">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--s700);margin-bottom:2rem;">Our Founding Principle</div>
+    <blockquote style="font-size:clamp(1.375rem,2vw+.5rem,2rem);font-weight:600;letter-spacing:-.025em;line-height:1.4;color:var(--s100);">
+      "This is not just any website.<br/>
+      <span style="color:var(--c500);">It's an institution — founded on People,</span><br/>
+      assisted by Technology."
+    </blockquote>
+    <div style="margin-top:2.25rem;display:inline-flex;align-items:center;gap:.875rem;">
+      <div style="height:1px;width:2rem;background:rgba(224,120,56,.35);"></div>
+      <span style="font-size:.875rem;color:var(--s600);">TIQ World Founders · IIT Madras</span>
+      <div style="height:1px;width:2rem;background:rgba(224,120,56,.35);"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     TRUST / INSTITUTIONAL BACKING
+════════════════════════════════════════════════ -->
+<section style="padding:4rem clamp(1.5rem,5vw,5rem);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label reveal">Institutional Backing</div>
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;" class="reveal d1">
+      <div class="logo-box">
+        <img src="logos/iitm-logo.png" alt="IIT Madras" style="height:42px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box">
+        <img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:42px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box">
+        <img src="logos/incubation-logo.png" alt="IITM Incubation Cell" style="height:42px;width:auto;object-fit:contain;" />
+      </div>
+      <div class="logo-box" style="width:64px;height:60px;padding:.5rem;">
+        <img src="logos/tiq-logo.png" alt="TIQ World" style="height:100%;width:auto;object-fit:contain;" />
+      </div>
+      <p style="max-width:320px;margin-left:auto;font-size:.875rem;color:var(--s600);line-height:1.7;">
+        Developed within IIT Madras's Centre for Non-Destructive Evaluation and incubated at IITM — bringing academic rigour to industrial quality assurance.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════════════ -->
+<section id="cta" class="cta-band" style="padding:6.5rem clamp(1.5rem,5vw,5rem);">
+  <div style="max-width:760px;margin:0 auto;text-align:center;" class="reveal">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c600);margin-bottom:1.25rem;">Early Access · Limited Seats</div>
+    <h2 class="section-headline" style="margin-bottom:1.25rem;font-size:clamp(2rem,3vw+.75rem,3.75rem);">
+      Ready to Join the<br/><span style="color:var(--c500);">Quality Revolution?</span>
+    </h2>
+    <p style="font-size:1.0625rem;color:var(--s400);line-height:1.65;max-width:480px;margin:0 auto 2.5rem;">
+      Whether you inspect, train, hire, or manufacture — TIQ World is the digital foundation the industry has been missing.
+    </p>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+      <a href="#" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">
+        Get Early Access
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="btn-outline" style="font-size:1rem;padding:1rem 2.5rem;">Request a Demo</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer style="padding:2.25rem clamp(1.5rem,5vw,5rem);border-top:1px solid rgba(61,70,83,.3);">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <a href="index.html" class="tiq-logo" style="font-size:.875rem;">
+      <div class="tiq-logo-globe" style="width:26px;height:26px;border-radius:.375rem;">
+        <img src="logos/custom-favicon.png" alt="TIQ" style="width:100%;height:100%;object-fit:contain;" />
+      </div>
+      <span class="tiq-logo-text-orange">TIQ</span><span class="tiq-logo-text-blue">World</span>
+    </a>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--s700);">© 2025 TIQ World · IIT Madras Incubated · Quality Intelligence Platform</span>
+    <div style="display:flex;align-items:center;gap:1.25rem;">
+      <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Privacy</a>
+      <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Terms</a>
+      <a href="index.html" style="font-size:.8125rem;color:var(--s700);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">← All Revisions</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const io = new IntersectionObserver(
+    es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }),
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
