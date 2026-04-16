@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIQ World — The Digital Layer for Manufacturing Quality</title>
+  <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            copper: { 50:'#fef3e9', 100:'#fde2c8', 300:'#fac08a', 400:'#f5a66b', 500:'#f09247', 600:'#e07838', 700:'#c86528' },
+            teal:   { 50:'#e8fafa', 100:'#c5f2f2', 300:'#6ee7e7', 400:'#38d4d4', 500:'#20c9c9', 600:'#14aeae', 700:'#0d9090' },
+            slate:  { 50:'#f5f4f2', 100:'#e9eaec', 200:'#d0d4d8', 300:'#bdc2c7', 400:'#9099a5', 500:'#6d7888', 600:'#5c6778', 700:'#3d4653', 800:'#252c38', 850:'#1c2230', 900:'#141922', 950:'#0d1219' },
+          },
+          fontFamily: {
+            sans: ['Space Grotesk','system-ui','sans-serif'],
+            mono: ['JetBrains Mono','monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: #f5f4f2; color: #1c2230; }
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity .6s ease-out, transform .6s ease-out; }
+    .reveal.in { opacity:1; transform:none; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+
+    /* Tabbed audience section */
+    .tab-btn { cursor: pointer; transition: all .25s; border-bottom: 3px solid transparent; }
+    .tab-btn.active { border-bottom-color: #e07838; color: #e07838; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: grid; }
+
+    /* FAQ accordion */
+    .faq-item summary { cursor: pointer; list-style: none; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+    .faq-chevron { transition: transform .3s; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-slate-200">
+  <div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 h-16">
+    <a href="index.html" class="flex items-center gap-1.5 no-underline">
+      <div class="w-9 h-9 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center justify-center overflow-hidden p-0.5">
+        <img src="logos/custom-favicon.png" alt="TIQ" class="w-full h-full object-contain" />
+      </div>
+      <span class="font-bold text-copper-600">TIQ</span><span class="font-bold text-teal-600">World</span>
+    </a>
+    <div class="flex items-center gap-5">
+      <a href="#browse" class="text-sm text-slate-500 hover:text-slate-900 no-underline hidden md:block">Browse</a>
+      <a href="#how" class="text-sm text-slate-500 hover:text-slate-900 no-underline hidden md:block">How It Works</a>
+      <a href="#faq" class="text-sm text-slate-500 hover:text-slate-900 no-underline hidden md:block">FAQ</a>
+      <a href="#cta" class="bg-copper-600 hover:bg-copper-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg no-underline transition">Get Early Access</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO — Compact, high-impact
+════════════════════════════════════════════════ -->
+<section class="bg-slate-950 text-white relative overflow-hidden">
+  <div class="absolute inset-0" style="background-image:linear-gradient(rgba(224,120,56,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(224,120,56,.03) 1px,transparent 1px);background-size:48px 48px;"></div>
+  <div class="max-w-[1200px] mx-auto px-6 py-28 relative z-10 text-center">
+    <!-- Backed-by inline -->
+    <div class="flex items-center justify-center gap-3 mb-8 reveal">
+      <div class="bg-white rounded px-3 py-1"><img src="logos/iitm-logo.png" alt="IIT Madras" class="h-5 object-contain" /></div>
+      <div class="bg-white rounded px-3 py-1"><img src="logos/cnde-logo.jpeg" alt="CNDE" class="h-5 object-contain" /></div>
+      <div class="bg-white rounded px-3 py-1"><img src="logos/incubation-logo.png" alt="IITM Incubation" class="h-5 object-contain" /></div>
+      <span class="font-mono text-[10px] tracking-[.14em] uppercase text-slate-600">IITM Incubated</span>
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-bold leading-[.93] tracking-tight uppercase mb-6 reveal d1">
+      The Digital Layer<br/>for Manufacturing <span class="text-copper-500">Quality</span>
+    </h1>
+    <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 reveal d2">
+      Connecting 12,000+ NDT professionals, 340+ training providers, and 90+ industry partners on a single precision platform built for manufacturing quality assurance.
+    </p>
+    <div class="flex justify-center gap-4 flex-wrap reveal d3">
+      <a href="#cta" class="bg-copper-600 hover:bg-copper-500 text-white font-semibold px-8 py-3.5 rounded-lg no-underline transition inline-flex items-center gap-2">
+        Get Early Access
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#how" class="border border-slate-700 text-slate-300 hover:border-slate-500 font-medium px-8 py-3.5 rounded-lg no-underline transition">See How It Works</a>
+    </div>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="border-t border-slate-800">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-6 reveal d4">
+      <div class="px-5 py-4 border-r border-slate-800 text-center">
+        <div class="font-mono text-xl font-bold text-copper-500">12K+</div>
+        <div class="font-mono text-[9px] tracking-[.1em] uppercase text-slate-600">Professionals</div>
+      </div>
+      <div class="px-5 py-4 border-r border-slate-800 text-center">
+        <div class="font-mono text-xl font-bold text-teal-500">1,200+</div>
+        <div class="font-mono text-[9px] tracking-[.1em] uppercase text-slate-600">Courses</div>
+      </div>
+      <div class="px-5 py-4 border-r border-slate-800 text-center">
+        <div class="font-mono text-xl font-bold text-copper-500">4,300+</div>
+        <div class="font-mono text-[9px] tracking-[.1em] uppercase text-slate-600">Jobs</div>
+      </div>
+      <div class="px-5 py-4 border-r border-slate-800 text-center">
+        <div class="font-mono text-xl font-bold text-teal-500">850+</div>
+        <div class="font-mono text-[9px] tracking-[.1em] uppercase text-slate-600">Skills</div>
+      </div>
+      <div class="px-5 py-4 border-r border-slate-800 text-center">
+        <div class="font-mono text-xl font-bold text-copper-500">750+</div>
+        <div class="font-mono text-[9px] tracking-[.1em] uppercase text-slate-600">Products</div>
+      </div>
+      <div class="px-5 py-4 text-center">
+        <div class="font-mono text-xl font-bold text-teal-500">8</div>
+        <div class="font-mono text-[9px] tracking-[.1em] uppercase text-slate-600">NDT Methods</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     TABBED AUDIENCES
+════════════════════════════════════════════════ -->
+<section class="py-20 px-6 bg-white">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="text-center mb-10">
+      <p class="font-mono text-[11px] tracking-[.14em] uppercase text-copper-600 mb-2 reveal">Built for Every Stakeholder</p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight reveal d1">Choose Your Path</h2>
+    </div>
+
+    <!-- Tab buttons -->
+    <div class="flex justify-center gap-6 border-b border-slate-200 mb-10 reveal d2 overflow-x-auto">
+      <button class="tab-btn active pb-4 font-semibold text-sm" data-tab="prof">Professionals</button>
+      <button class="tab-btn pb-4 font-semibold text-sm text-slate-500" data-tab="recr">Recruiters</button>
+      <button class="tab-btn pb-4 font-semibold text-sm text-slate-500" data-tab="train">Training</button>
+      <button class="tab-btn pb-4 font-semibold text-sm text-slate-500" data-tab="mfg">Manufacturers</button>
+    </div>
+
+    <!-- Tab panels -->
+    <div id="panel-prof" class="tab-panel active grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h3 class="text-2xl font-bold mb-3">NDT &amp; Quality Inspectors</h3>
+        <p class="text-slate-500 mb-6">Build a verified portfolio, earn internationally recognised certifications, and find quality roles at top manufacturers and EPC firms.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Skill-verified professional profile with competency map</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>AI-powered career matching across 4,300+ active postings</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Internationally recognised certifications (ASNT, PCN, BINDT)</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Proctored online assessment sessions with anti-cheat</li>
+        </ul>
+        <a href="#cta" class="bg-copper-600 hover:bg-copper-500 text-white font-semibold px-6 py-3 rounded-lg no-underline transition inline-flex items-center gap-2 text-sm">Start Your Profile →</a>
+      </div>
+      <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+        <div class="font-mono text-[10px] tracking-[.14em] uppercase text-slate-500 mb-4">Top Skills in Demand</div>
+        <div class="space-y-3">
+          <div class="flex justify-between"><span class="text-sm font-medium">NDT Services</span><span class="font-mono text-sm font-bold text-copper-600">1,240</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-copper-500 h-1.5 rounded-full" style="width:100%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">Visual Inspection (VT)</span><span class="font-mono text-sm font-bold text-copper-600">1,120</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-copper-400 h-1.5 rounded-full" style="width:90%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">Ultrasonic Testing (UT)</span><span class="font-mono text-sm font-bold text-copper-600">894</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-copper-400 h-1.5 rounded-full" style="width:72%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">Radiographic Testing (RT)</span><span class="font-mono text-sm font-bold text-copper-600">756</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-copper-300 h-1.5 rounded-full" style="width:61%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">Magnetic Particle (MT)</span><span class="font-mono text-sm font-bold text-copper-600">623</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-copper-300 h-1.5 rounded-full" style="width:50%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-recr" class="tab-panel grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h3 class="text-2xl font-bold mb-3">HR &amp; Talent Leads</h3>
+        <p class="text-slate-500 mb-6">Stop sifting CVs. Find pre-screened, skill-verified NDT talent with transparent competency records and fast-track contracting.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>Verified competency search filters across 12,000+ professionals</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>AI-matched shortlist generated in minutes, not weeks</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>Integrated contract workflows with digital signing</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>Compliance-ready documentation for audits</li>
+        </ul>
+        <a href="#cta" class="bg-teal-600 hover:bg-teal-500 text-white font-semibold px-6 py-3 rounded-lg no-underline transition inline-flex items-center gap-2 text-sm">Post a Job →</a>
+      </div>
+      <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+        <div class="font-mono text-[10px] tracking-[.14em] uppercase text-slate-500 mb-4">Top Certifications Available</div>
+        <div class="space-y-3">
+          <div class="flex justify-between"><span class="text-sm font-medium">ISO 9712 Certified</span><span class="font-mono text-sm font-bold text-teal-600">512</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-teal-500 h-1.5 rounded-full" style="width:100%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">ASNT NDT UT Level 2</span><span class="font-mono text-sm font-bold text-teal-600">412</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-teal-400 h-1.5 rounded-full" style="width:80%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">ASNT NDT PT Level 2</span><span class="font-mono text-sm font-bold text-teal-600">389</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-teal-400 h-1.5 rounded-full" style="width:76%"></div></div>
+          <div class="flex justify-between"><span class="text-sm font-medium">CWI (Welding Inspector)</span><span class="font-mono text-sm font-bold text-teal-600">334</span></div>
+          <div class="w-full bg-slate-200 rounded-full h-1.5"><div class="bg-teal-300 h-1.5 rounded-full" style="width:65%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-train" class="tab-panel grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h3 class="text-2xl font-bold mb-3">Training Institutes</h3>
+        <p class="text-slate-500 mb-6">Publish courses on a platform built for NDT. Reach professionals actively seeking certification upgrades and enrolment.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Dedicated course catalogue with rich descriptions</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Enrolment management dashboard with analytics</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Certificate issuance automation</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-copper-50 border border-copper-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-copper-500"></span></span>Student progress analytics and completion tracking</li>
+        </ul>
+        <a href="#cta" class="bg-copper-600 hover:bg-copper-500 text-white font-semibold px-6 py-3 rounded-lg no-underline transition inline-flex items-center gap-2 text-sm">List Your Courses →</a>
+      </div>
+      <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 text-center">
+        <div class="font-mono text-5xl font-bold text-copper-500">1,200+</div>
+        <div class="text-slate-500 mt-2">Training courses currently listed</div>
+        <div class="h-px bg-slate-200 my-6"></div>
+        <div class="font-mono text-5xl font-bold text-teal-500">340+</div>
+        <div class="text-slate-500 mt-2">Training providers on platform</div>
+      </div>
+    </div>
+
+    <div id="panel-mfg" class="tab-panel grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h3 class="text-2xl font-bold mb-3">OEMs &amp; EPC Firms</h3>
+        <p class="text-slate-500 mb-6">Hire proven inspectors, mandate supplier quality standards, and run verifiable inspections — all within a single compliance system.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>Supplier quality benchmark dashboards</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>On-demand inspection workforce from 12,000+ verified professionals</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>Audit-ready inspection records with full traceability</li>
+          <li class="flex items-start gap-2.5 text-slate-600"><span class="w-5 h-5 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span></span>Real-time workforce compliance view across all sites</li>
+        </ul>
+        <a href="#cta" class="bg-teal-600 hover:bg-teal-500 text-white font-semibold px-6 py-3 rounded-lg no-underline transition inline-flex items-center gap-2 text-sm">Request a Demo →</a>
+      </div>
+      <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8 text-center">
+        <div class="font-mono text-5xl font-bold text-teal-500">90+</div>
+        <div class="text-slate-500 mt-2">Industry partners</div>
+        <div class="h-px bg-slate-200 my-6"></div>
+        <div class="font-mono text-5xl font-bold text-copper-500">750+</div>
+        <div class="text-slate-500 mt-2">Marketplace products available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     HOW IT WORKS — 3-step
+════════════════════════════════════════════════ -->
+<section id="how" class="py-20 px-6">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="text-center mb-12">
+      <p class="font-mono text-[11px] tracking-[.14em] uppercase text-copper-600 mb-2 reveal">How It Works</p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight reveal d1">Three Steps to Get Started</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center reveal d1">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-copper-50 border border-copper-200 flex items-center justify-center font-mono text-2xl font-bold text-copper-600">1</div>
+        <h3 class="text-lg font-bold mb-2">Create Your Profile</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Sign up, upload credentials. AI verifies your competency against ASNT, ISO 9712, PCN standards automatically.</p>
+      </div>
+      <div class="text-center reveal d2">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center font-mono text-2xl font-bold text-teal-600">2</div>
+        <h3 class="text-lg font-bold mb-2">Get Verified &amp; Matched</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Complete adaptive skill assessments. Our matching engine connects you with relevant opportunities based on verified skills.</p>
+      </div>
+      <div class="text-center reveal d3">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-copper-50 border border-copper-200 flex items-center justify-center font-mono text-2xl font-bold text-copper-600">3</div>
+        <h3 class="text-lg font-bold mb-2">Start Working</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Apply for contracts, enrol in training, hire talent, or list products — with compliance-ready documentation built in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     MANIFESTO
+════════════════════════════════════════════════ -->
+<section class="py-20 px-6 bg-slate-950 text-white">
+  <div class="max-w-[800px] mx-auto text-center reveal">
+    <div class="flex items-center justify-center gap-3 mb-8 flex-wrap">
+      <div class="bg-white rounded px-3 py-1.5"><img src="logos/iitm-logo.png" alt="IIT Madras" class="h-7 object-contain" /></div>
+      <div class="bg-white rounded px-3 py-1.5"><img src="logos/cnde-logo.jpeg" alt="CNDE" class="h-7 object-contain" /></div>
+      <div class="bg-white rounded px-3 py-1.5"><img src="logos/incubation-logo.png" alt="IITM Incubation" class="h-7 object-contain" /></div>
+    </div>
+    <blockquote class="text-2xl md:text-3xl font-bold leading-snug tracking-tight">
+      "This is not just any website.<br/>
+      <span class="text-copper-500">It's an institution — founded on People,</span><br/>
+      assisted by Technology."
+    </blockquote>
+    <p class="text-slate-500 mt-4">TIQ World Founders · IIT Madras</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════ -->
+<section id="faq" class="py-20 px-6 bg-white">
+  <div class="max-w-[700px] mx-auto">
+    <div class="text-center mb-12">
+      <p class="font-mono text-[11px] tracking-[.14em] uppercase text-copper-600 mb-2 reveal">FAQ</p>
+      <h2 class="text-3xl font-bold tracking-tight reveal d1">Common Questions</h2>
+    </div>
+    <div class="space-y-3">
+      <details class="faq-item bg-slate-50 border border-slate-200 rounded-xl reveal d1">
+        <summary class="flex items-center justify-between p-5 font-semibold">
+          What is TIQ World?
+          <svg class="faq-chevron w-5 h-5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">TIQ World is a precision platform connecting NDT (Non-Destructive Testing) professionals, training providers, manufacturers, and recruiters. Incubated at IIT Madras and developed within the Centre for Non-Destructive Evaluation (CNDE), it's the digital foundation for manufacturing quality assurance.</div>
+      </details>
+      <details class="faq-item bg-slate-50 border border-slate-200 rounded-xl reveal d2">
+        <summary class="flex items-center justify-between p-5 font-semibold">
+          Who is TIQ World for?
+          <svg class="faq-chevron w-5 h-5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Four audiences: <strong>Professionals</strong> (NDT inspectors seeking jobs and certifications), <strong>Recruiters</strong> (HR leads hiring verified talent), <strong>Training Providers</strong> (institutes listing courses), and <strong>Manufacturers</strong> (OEMs/EPC firms needing on-demand inspection workforce).</div>
+      </details>
+      <details class="faq-item bg-slate-50 border border-slate-200 rounded-xl reveal d3">
+        <summary class="flex items-center justify-between p-5 font-semibold">
+          What NDT methods are covered?
+          <svg class="faq-chevron w-5 h-5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">All 8 major NDT methods: Ultrasonic Testing (UT), Radiographic Testing (RT), Magnetic Particle Testing (MT), Liquid Penetrant Testing (PT), Eddy Current Testing (ET), Visual Inspection (VT), Phased Array UT (PAUT), and Time of Flight Diffraction (TOFD). Covering ASNT, PCN, and BINDT standards across Oil &amp; Gas, Aerospace, Power, and Infrastructure sectors.</div>
+      </details>
+      <details class="faq-item bg-slate-50 border border-slate-200 rounded-xl reveal d4">
+        <summary class="flex items-center justify-between p-5 font-semibold">
+          How does AI skill verification work?
+          <svg class="faq-chevron w-5 h-5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Our adaptive assessment engine generates expert-reviewed questions for each NDT discipline and level. Professionals complete proctored online sessions, and results are mapped against live industry standards — providing verified competency records without human bias or paper checklists.</div>
+      </details>
+      <details class="faq-item bg-slate-50 border border-slate-200 rounded-xl reveal d1">
+        <summary class="flex items-center justify-between p-5 font-semibold">
+          Is TIQ World free for professionals?
+          <svg class="faq-chevron w-5 h-5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Creating a profile and browsing opportunities is free. Training enrolments have a course fee set by the training provider, plus a convenient fee and payment gateway charges (transparently shown before checkout). Enterprise features have separate pricing.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════════════ -->
+<section id="cta" class="py-20 px-6 bg-gradient-to-br from-copper-600/5 to-teal-600/5 border-y border-slate-200">
+  <div class="max-w-[700px] mx-auto text-center reveal">
+    <p class="font-mono text-[11px] tracking-[.14em] uppercase text-copper-600 mb-4">Early Access · Limited Seats</p>
+    <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+      Ready to join the<br/><span class="text-copper-600">quality revolution?</span>
+    </h2>
+    <p class="text-lg text-slate-500 mb-8 max-w-lg mx-auto">Whether you inspect, train, hire, or manufacture — TIQ World is the digital foundation the industry has been missing.</p>
+    <div class="flex justify-center gap-4 flex-wrap">
+      <a href="#" class="bg-copper-600 hover:bg-copper-500 text-white font-semibold px-8 py-3.5 rounded-lg no-underline transition inline-flex items-center gap-2">
+        Get Early Access
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="border border-slate-300 text-slate-700 hover:border-slate-400 font-semibold px-8 py-3.5 rounded-lg no-underline transition">Request a Demo</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer class="bg-slate-950 text-white px-6 py-6">
+  <div class="max-w-[1200px] mx-auto flex items-center justify-between flex-wrap gap-4">
+    <a href="index.html" class="flex items-center gap-1 no-underline">
+      <span class="font-bold text-copper-600 text-sm">TIQ</span><span class="font-bold text-teal-600 text-sm">World</span>
+    </a>
+    <span class="font-mono text-[10px] tracking-wider text-slate-700">© 2025 TIQ World · IIT Madras Incubated · Quality Intelligence Platform</span>
+    <div class="flex gap-4">
+      <a href="#" class="text-xs text-slate-700 hover:text-slate-400 no-underline">Privacy</a>
+      <a href="#" class="text-xs text-slate-700 hover:text-slate-400 no-underline">Terms</a>
+      <a href="index.html" class="text-xs text-slate-700 hover:text-slate-400 no-underline">← All Revisions</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Reveal animations
+  const io = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
