@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIQ World — Quality Intelligence Platform</title>
+  <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --term-bg: #0a0e14;
+      --term-surface: #131821;
+      --term-border: #1f2937;
+      --term-text: #e9eaec;
+      --term-dim: #7d8590;
+      --term-accent: #e07838;
+      --term-success: #14aeae;
+      --term-warning: #f09247;
+      --term-error: #ff4757;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--term-bg);
+      color: var(--term-text);
+      line-height: 1.5;
+    }
+
+    /* ── TERMINAL GRID BACKGROUND ── */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--term-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--term-border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 14, 20, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--term-border);
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .logo-terminal {
+      display: flex; align-items: center; gap: .625rem;
+      font-size: .875rem; font-weight: 700;
+      text-decoration: none; color: var(--term-text);
+    }
+    .logo-bracket { color: var(--term-dim); }
+    .logo-tiq { color: var(--term-accent); }
+    .logo-world { color: var(--term-success); }
+    .terminal-prompt::before { content: '> '; color: var(--term-accent); }
+
+    .btn-terminal {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      padding: .625rem 1.25rem;
+      background: var(--term-surface);
+      color: var(--term-accent);
+      border: 1px solid var(--term-accent);
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-terminal:hover {
+      background: var(--term-accent);
+      color: var(--term-bg);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; position: relative; z-index: 1; }
+    .container { max-width: 1400px; margin: 0 auto; }
+
+    /* ── TERMINAL WINDOW ── */
+    .terminal-window {
+      background: var(--term-surface);
+      border: 1px solid var(--term-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .terminal-header {
+      background: var(--term-bg);
+      border-bottom: 1px solid var(--term-border);
+      padding: .75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .terminal-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--term-dim);
+    }
+    .terminal-dot:nth-child(1) { background: #ff5f56; }
+    .terminal-dot:nth-child(2) { background: #ffbd2e; }
+    .terminal-dot:nth-child(3) { background: #27c93f; }
+    .terminal-body {
+      padding: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .875rem;
+      line-height: 1.8;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 80px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span { color: var(--term-accent); }
+    .hero-subtitle {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--term-dim);
+      margin-bottom: 2.5rem;
+      max-width: 32rem;
+    }
+    .terminal-line { margin-bottom: .5rem; }
+    .terminal-key { color: var(--term-accent); }
+    .terminal-value { color: var(--term-success); }
+    .terminal-string { color: var(--term-warning); }
+
+    /* ── HUD CARD ── */
+    .hud-card {
+      background: var(--term-surface);
+      border: 1px solid var(--term-border);
+      border-left: 3px solid var(--term-accent);
+      padding: 2rem;
+      position: relative;
+      transition: border-color .3s;
+    }
+    .hud-card:hover { border-left-color: var(--term-success); }
+    .hud-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .625rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--term-dim);
+      margin-bottom: .75rem;
+    }
+    .hud-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--term-accent);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .hud-desc {
+      font-size: .875rem;
+      color: var(--term-dim);
+      line-height: 1.6;
+    }
+
+    /* ── METRIC GRID ── */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .metric-card {
+      background: var(--term-surface);
+      border: 1px solid var(--term-border);
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: border-color .3s;
+    }
+    .metric-card:hover { border-color: var(--term-accent); }
+    .metric-header {
+      font-size: .625rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--term-dim);
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--term-border);
+    }
+    .metric-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .metric-name {
+      font-size: .8125rem;
+      color: var(--term-text);
+    }
+    .metric-count {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--term-success);
+    }
+
+    /* ── DATA TABLE ── */
+    .data-table {
+      background: var(--term-surface);
+      border: 1px solid var(--term-border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8125rem;
+    }
+    .table-header {
+      background: var(--term-bg);
+      border-bottom: 1px solid var(--term-border);
+      padding: 1rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 1rem;
+      font-size: .625rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--term-dim);
+    }
+    .table-row {
+      padding: 1rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 1rem;
+      border-bottom: 1px solid var(--term-border);
+      transition: background .2s;
+    }
+    .table-row:hover { background: rgba(0, 217, 255, 0.05); }
+    .table-row:last-child { border-bottom: none; }
+    .table-id { color: var(--term-dim); }
+    .table-name { color: var(--term-text); }
+    .table-count { color: var(--term-success); font-weight: 700; text-align: right; }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .625rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--term-accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-header::before {
+      content: '//';
+      color: var(--term-dim);
+    }
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    /* ── STATUS INDICATORS ── */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .status-card {
+      background: var(--term-surface);
+      border: 1px solid var(--term-border);
+      padding: 2rem;
+    }
+    .status-icon {
+      width: 48px; height: 48px;
+      background: rgba(0, 217, 255, 0.1);
+      border: 1px solid var(--term-accent);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--term-accent);
+    }
+    .status-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .status-desc {
+      font-size: .875rem;
+      line-height: 1.6;
+      color: var(--term-dim);
+    }
+
+    /* ── CTA ── */
+    .cta-terminal {
+      background: var(--term-surface);
+      border: 2px solid var(--term-accent);
+      padding: 4rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-terminal::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .btn-primary-terminal {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .875rem;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      background: var(--term-accent);
+      color: var(--term-bg);
+      border: 2px solid var(--term-accent);
+      text-decoration: none;
+      display: inline-block;
+      transition: all .3s;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .btn-primary-terminal:hover {
+      background: transparent;
+      color: var(--term-accent);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--term-bg);
+      border-top: 1px solid var(--term-border);
+      padding: 2rem;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--term-dim);
+    }
+    footer a {
+      color: var(--term-accent);
+      text-decoration: none;
+      margin: 0 .75rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .table-header, .table-row { grid-template-columns: 1fr; text-align: left; }
+      .table-count { text-align: left; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 3rem 1.5rem; }
+      .hero { padding-top: 100px; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .status-grid { grid-template-columns: 1fr; }
+      .cta-terminal { padding: 3rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="logo-terminal">
+    <span class="logo-bracket">[</span>
+    <span class="logo-tiq">TIQ</span>
+    <span class="logo-world">WORLD</span>
+    <span class="logo-bracket">]</span>
+  </a>
+  <a href="#access" class="btn-terminal terminal-prompt">GET_ACCESS</a>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="section-header">SYSTEM_STATUS: ONLINE</div>
+        <h1 class="hero-title">
+          QUALITY<br/>
+          INTELLIGENCE<br/>
+          <span>PLATFORM</span>
+        </h1>
+        <p class="hero-subtitle">
+          Digital infrastructure connecting NDT professionals, training providers, manufacturers, and enterprise recruiters across the quality assurance ecosystem.
+        </p>
+        <a href="#access" class="btn-terminal terminal-prompt">INITIALIZE_ACCESS</a>
+      </div>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="terminal-key">platform_stats</span> = {</div>
+          <div class="terminal-line">  <span class="terminal-key">professionals</span>: <span class="terminal-value">12000</span>,</div>
+          <div class="terminal-line">  <span class="terminal-key">training_providers</span>: <span class="terminal-value">340</span>,</div>
+          <div class="terminal-line">  <span class="terminal-key">industry_partners</span>: <span class="terminal-value">90</span>,</div>
+          <div class="terminal-line">  <span class="terminal-key">ndt_methods</span>: <span class="terminal-value">8</span>,</div>
+          <div class="terminal-line">  <span class="terminal-key">status</span>: <span class="terminal-string">"active"</span></div>
+          <div class="terminal-line">}</div>
+          <div class="terminal-line" style="margin-top:1rem;color:var(--term-accent);">&gt; system.deploy(platform_stats)</div>
+          <div class="terminal-line" style="color:var(--term-success);">✓ Deployment successful</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     TRACTION METRICS
+════════════════════════════════════════════════ -->
+<section style="background:var(--term-bg);">
+  <div class="container">
+    <div class="section-header">ECOSYSTEM_ACTIVITY</div>
+    <h2 class="section-title">LIVE TRACTION METRICS</h2>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-header">→ SKILLS</div>
+        <div class="metric-body">
+          <div class="metric-name">Available</div>
+          <div class="metric-count">850+</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">→ TRAININGS</div>
+        <div class="metric-body">
+          <div class="metric-name">Listed</div>
+          <div class="metric-count">1,200+</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">→ JOBS</div>
+        <div class="metric-body">
+          <div class="metric-name">Posted</div>
+          <div class="metric-count">4,300+</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">→ MARKETPLACE</div>
+        <div class="metric-body">
+          <div class="metric-name">Products</div>
+          <div class="metric-count">750+</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">→ RECRUITERS</div>
+        <div class="metric-body">
+          <div class="metric-name">Enterprise</div>
+          <div class="metric-count">180+</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">→ TRAINERS</div>
+        <div class="metric-body">
+          <div class="metric-name">Enterprise</div>
+          <div class="metric-count">95+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     STAKEHOLDERS
+════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">MODULE_REGISTRY</div>
+    <h2 class="section-title">SYSTEM STAKEHOLDERS</h2>
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-icon">01</div>
+        <div class="status-title">PROFESSIONALS</div>
+        <p class="status-desc">Build verified portfolios, earn certifications, find quality roles at manufacturers and EPC firms.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">02</div>
+        <div class="status-title">RECRUITERS</div>
+        <p class="status-desc">Find pre-screened, skill-verified NDT talent with transparent competency records.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">03</div>
+        <div class="status-title">TRAINING</div>
+        <p class="status-desc">Publish courses on a platform purpose-built for NDT certification and training.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">04</div>
+        <div class="status-title">MANUFACTURERS</div>
+        <p class="status-desc">Hire proven inspectors, mandate quality standards, run verifiable inspections.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SKILLS DATABASE
+════════════════════════════════════════════════ -->
+<section style="background:var(--term-bg);">
+  <div class="container">
+    <div class="section-header">DATABASE_QUERY</div>
+    <h2 class="section-title" style="margin-bottom:1rem;">SKILLS_TABLE</h2>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--term-dim);margin-bottom:2rem;">
+      SELECT skill_name, professional_count FROM skills WHERE status = 'active' ORDER BY professional_count DESC;
+    </p>
+    <div class="data-table">
+      <div class="table-header">
+        <div>ID</div>
+        <div>SKILL_NAME</div>
+        <div>COUNT</div>
+      </div>
+      <div class="table-row">
+        <div class="table-id">SK_001</div>
+        <div class="table-name">NDT Services</div>
+        <div class="table-count">1,240</div>
+      </div>
+      <div class="table-row">
+        <div class="table-id">SK_002</div>
+        <div class="table-name">Visual Inspection (VT)</div>
+        <div class="table-count">1,120</div>
+      </div>
+      <div class="table-row">
+        <div class="table-id">SK_003</div>
+        <div class="table-name">Ultrasonic Testing (UT)</div>
+        <div class="table-count">894</div>
+      </div>
+      <div class="table-row">
+        <div class="table-id">SK_004</div>
+        <div class="table-name">Radiographic Testing (RT)</div>
+        <div class="table-count">756</div>
+      </div>
+      <div class="table-row">
+        <div class="table-id">SK_005</div>
+        <div class="table-name">Liquid Penetrant Testing (PT)</div>
+        <div class="table-count">687</div>
+      </div>
+      <div class="table-row">
+        <div class="table-id">SK_006</div>
+        <div class="table-name">Magnetic Particle Testing (MT)</div>
+        <div class="table-count">623</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     AI INTELLIGENCE
+════════════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">AI_MODULE</div>
+    <h2 class="section-title">INTELLIGENCE LAYER</h2>
+    <div class="metric-grid">
+      <div class="hud-card">
+        <div class="hud-label">MODULE_01</div>
+        <div class="hud-value">AI_VERIFY</div>
+        <p class="hud-desc">Adaptive assessments map competency against live industry standards.</p>
+      </div>
+      <div class="hud-card">
+        <div class="hud-label">MODULE_02</div>
+        <div class="hud-value">AI_MATCH</div>
+        <p class="hud-desc">Requirements parsed against verified profiles to surface right candidates.</p>
+      </div>
+      <div class="hud-card">
+        <div class="hud-label">MODULE_03</div>
+        <div class="hud-value">AI_BANK</div>
+        <p class="hud-desc">AI-generated, expert-reviewed question sets for every NDT discipline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════ -->
+<section id="access" style="background:var(--term-bg);">
+  <div class="container">
+    <div class="cta-terminal">
+      <div class="section-header" style="justify-content:center;margin-bottom:1.5rem;">EARLY_ACCESS_PROGRAM</div>
+      <h2 style="font-family:'JetBrains Mono',monospace;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;">
+        INITIALIZE<br/>
+        <span style="color:var(--term-accent);">DEPLOYMENT</span>
+      </h2>
+      <p style="font-size:1rem;line-height:1.7;color:var(--term-dim);max-width:500px;margin:0 auto 2.5rem;">
+        Whether you inspect, train, hire, or manufacture — access the digital foundation for quality assurance.
+      </p>
+      <a href="#" class="btn-primary-terminal">&gt; Get_Early_Access()</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer>
+  <div style="margin-bottom:1rem;">
+    <span class="logo-bracket">[</span>
+    <span style="color:var(--term-accent);">TIQ</span>
+    <span style="color:var(--term-success);">WORLD</span>
+    <span class="logo-bracket">]</span>
+  </div>
+  <p style="margin-bottom:1rem;">© 2025 TIQ WORLD // IIT MADRAS INCUBATED</p>
+  <div>
+    <a href="#">PRIVACY</a>
+    <a href="#">TERMS</a>
+    <a href="index.html">← ALL_REVISIONS</a>
+  </div>
+</footer>
+
+</body>
+</html>
