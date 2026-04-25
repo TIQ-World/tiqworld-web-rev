@@ -165,10 +165,10 @@
     .ai-hcard.teal-card::before { background:var(--t500); }
     .ai-hcard:hover::before { transform:scaleX(1); }
     .ai-hcard:hover { background:var(--s850); }
-    /* TIQWiki always-open detail for tab interaction */
+    /* TIQWiki always-open — inline detail, no slide animation */
+    .ai-hcard--open { background:var(--s850) !important; overflow:visible !important; display:flex; flex-direction:column; height:auto !important; min-height:0 !important; }
     .ai-hcard--open::before { transform:scaleX(1); }
-    .ai-hcard--open { background:var(--s850) !important; }
-    .ai-hcard--open .ai-hcard-detail { transform:translateY(0) !important; }
+    .ai-hcard--open .ai-hcard-detail { position:static !important; transform:none !important; background:transparent !important; border-top:1px solid rgba(20,174,174,.18) !important; padding:1rem 0 0 !important; margin-top:auto; }
     .ai-hcard--open .ai-hcard-icon { background:rgba(20,174,174,.18) !important; border-color:rgba(20,174,174,.35) !important; }
     .ai-hcard-icon { width:44px; height:44px; border-radius:.625rem; background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.18); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; flex-shrink:0; transition:background .3s, border-color .3s, transform .3s; }
     .ai-hcard.teal-card .ai-hcard-icon { background:rgba(20,174,174,.1); border-color:rgba(20,174,174,.18); }
