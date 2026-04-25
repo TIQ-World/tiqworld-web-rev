@@ -149,8 +149,10 @@
     .marquee-wrap { overflow:hidden; border-top:1px solid rgba(61,70,83,.3); border-bottom:1px solid rgba(61,70,83,.3); background:rgba(13,18,25,.7); }
     .marquee-track { display:flex; width:max-content; animation:marquee 32s linear infinite; }
     .marquee-track:hover { animation-play-state:paused; }
-    .marquee-item { display:inline-flex; align-items:center; gap:.875rem; padding:1rem 2rem; border-right:1px solid rgba(61,70,83,.35); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--s600); white-space:nowrap; }
-    .marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--c600); flex-shrink:0; }
+    .marquee-item { display:inline-flex; align-items:center; gap:.75rem; padding:.875rem 1.75rem; border-right:1px solid rgba(61,70,83,.3); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--s500); white-space:nowrap; transition:color .2s, background .2s; cursor:default; }
+    .marquee-item:hover { color:var(--s200); background:rgba(224,120,56,.04); }
+    .marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--c500); opacity:.7; flex-shrink:0; transition:opacity .2s; }
+    .marquee-item:hover .marquee-dot { opacity:1; background:var(--c500); }
 
     /* AI Tools */
     .ai-grid-wrap { position:relative; }
@@ -298,14 +300,17 @@
     .lang-opt.active { color:var(--c500); }
 
     /* Events banner above Platform Overview */
-    .events-banner { background:rgba(20,174,174,.04); border:1px solid rgba(20,174,174,.18); border-radius:.75rem; padding:.875rem 1.25rem; margin-bottom:0; display:flex; align-items:center; gap:1rem; overflow:hidden; }
+    .events-banner { background:transparent; border:none; border-bottom:1px solid rgba(61,70,83,.2); border-radius:0; padding:.625rem 1.25rem; margin-bottom:0; display:flex; align-items:center; gap:.875rem; overflow:hidden; }
     .events-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--t500); background:rgba(20,174,174,.1); border:1px solid rgba(20,174,174,.2); border-radius:999px; padding:.2rem .55rem; flex-shrink:0; }
     .events-ticker { display:flex; overflow:hidden; flex:1; min-width:0; }
-    .events-track { display:flex; gap:2rem; animation:marquee 22s linear infinite; white-space:nowrap; }
+    .events-track { display:flex; gap:0; animation:marquee 22s linear infinite; white-space:nowrap; }
     .events-track:hover { animation-play-state:paused; }
-    .event-item { display:inline-flex; align-items:center; gap:.5rem; font-size:.8125rem; color:var(--s400); cursor:default; }
-    .event-item strong { color:var(--s200); font-weight:500; }
-    .event-dot { width:4px; height:4px; border-radius:50%; background:var(--t500); flex-shrink:0; }
+    .event-item { display:inline-flex; align-items:center; gap:.5rem; font-size:.8125rem; color:var(--s500); cursor:default; padding:.125rem 1.5rem .125rem 0; margin-right:1.5rem; border-right:1px solid rgba(61,70,83,.3); transition:color .2s; }
+    .event-item:last-child { border-right:none; }
+    .event-item:hover { color:var(--s200); }
+    .event-item strong { color:var(--s300); font-weight:600; transition:color .2s; }
+    .event-item:hover strong { color:var(--t400); }
+    .event-dot { width:5px; height:5px; border-radius:50%; background:var(--t500); flex-shrink:0; opacity:.7; }
 
     /* TIQWiki tab card */
     .tiqwiki-tabs { display:flex; gap:.25rem; margin-top:.75rem; margin-bottom:.625rem; flex-wrap:wrap; }
