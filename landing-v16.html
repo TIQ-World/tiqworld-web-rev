@@ -308,7 +308,8 @@
       .hero-grid { grid-template-columns:1fr; }
       .hero-visual { display:none; }
       .skills-cert-grid { grid-template-columns:1fr !important; }
-      .footer-cols { grid-template-columns:repeat(2,1fr) !important; }
+      .footer-top-grid { grid-template-columns:1fr 1fr !important; }
+      .footer-top-grid > div:first-child { grid-column:1/-1; }
     }
     .mobile-nav-link { font-size:1.375rem; font-weight:600; color:var(--s300); text-decoration:none; letter-spacing:-.02em; transition:color .2s; padding:.25rem 0; }
     .mobile-nav-link:hover { color:var(--c500); }
@@ -357,7 +358,8 @@
       /* FAQ */
       .faq-item summary { padding:1rem 1.25rem; font-size:.875rem; }
       /* Footer */
-      .footer-cols { grid-template-columns:1fr !important; gap:1.75rem !important; }
+      .footer-top-grid { grid-template-columns:1fr !important; gap:1.75rem !important; }
+      .footer-top-grid > div:first-child { grid-column:1; }
       /* Modal */
       .modal-box { padding:1.5rem 1rem; border-radius:.75rem; }
       .modal-tab { padding:.5rem .875rem; font-size:.8125rem; }
@@ -853,7 +855,7 @@
 
 <!-- Schedule tooltip (shared, positioned by JS) -->
 <div class="schedule-tooltip" id="scheduleTooltip">
-  <div class="sched-label">Training Schedule</div>
+  <div class="sched-label" id="schedTooltipLabel">Training Schedule</div>
   <div id="schedTooltipContent"></div>
 </div>
 
@@ -1228,63 +1230,64 @@
 <footer style="background:var(--s950);border-top:1px solid rgba(61,70,83,.3);padding:3.5rem clamp(1.5rem,5vw,5rem) 2rem;">
   <div style="max-width:1100px;margin:0 auto;">
 
-    <!-- Footer top: logo + tagline + incubation badge -->
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(61,70,83,.25);">
-      <div style="max-width:380px;">
-        <div style="font-weight:700;font-size:1rem;letter-spacing:-.02em;color:var(--s100);margin-bottom:.75rem;">The digital layer for<br/><span style="color:var(--c500);">manufacturing quality.</span></div>
-        <p style="font-size:.875rem;color:var(--s600);line-height:1.65;margin-bottom:1rem;">Connecting NDT professionals, training providers, manufacturers, and recruiters on one verified platform.</p>
-        <div style="display:flex;align-items:center;gap:.5rem;">
+    <!-- Footer top: logo + tagline + nav cols -->
+    <div class="footer-top-grid" style="display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:2.5rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(61,70,83,.2);">
+
+      <!-- Brand col -->
+      <div style="padding-right:1rem;">
+        <div style="margin-bottom:.875rem;">
+          <img src="logos/tiq-logo.png" alt="TIQWorld" style="height:26px;width:auto;object-fit:contain;" />
+        </div>
+        <p style="font-size:.8125rem;color:var(--s600);line-height:1.7;margin-bottom:1.25rem;">The digital layer for manufacturing quality — connecting NDT professionals, training providers, manufacturers, and recruiters.</p>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;">
           <div style="width:5px;height:5px;border-radius:50%;background:var(--c500);animation:pulseDot 2.5s ease-in-out infinite;flex-shrink:0;"></div>
           <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--s700);">IIT Madras Incubated · Early Access Open</span>
         </div>
+        <button onclick="openModal()" class="btn-primary" style="font-size:.8125rem;padding:.625rem 1.25rem;">
+          Get Early Access
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
       </div>
-      <button onclick="openModal()" class="btn-primary" style="font-size:.875rem;padding:.75rem 1.5rem;align-self:center;">
-        Get Early Access
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-
-    <div class="footer-cols" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;margin-bottom:2.5rem;">
 
       <div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c500);margin-bottom:1rem;">For Job Seekers</div>
         <div style="display:flex;flex-direction:column;gap:.625rem;">
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Jobs</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Training &amp; Certification</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Free Skill Assessment</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWiki</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Market Place</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Jobs</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Training &amp; Certification</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Free Skill Assessment</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWiki</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Market Place</a>
         </div>
       </div>
 
       <div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t500);margin-bottom:1rem;">For Enterprises</div>
         <div style="display:flex;flex-direction:column;gap:.625rem;">
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Recruit</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Training &amp; Certification</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">AI Report Studio</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWiki</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Market Place</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Recruit</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Training &amp; Certification</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">AI Report Studio</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWiki</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Market Place</a>
         </div>
       </div>
 
       <div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s500);margin-bottom:1rem;">Resources</div>
         <div style="display:flex;flex-direction:column;gap:.625rem;">
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWorld Varsity</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">User Feedback</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWorld Varsity</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">User Feedback</a>
         </div>
       </div>
 
       <div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s500);margin-bottom:1rem;">About Us</div>
         <div style="display:flex;flex-direction:column;gap:.625rem;">
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Partners in Progress</a>
-          <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Contact Us</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Partners in Progress</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Contact Us</a>
         </div>
       </div>
 
-    </div>
+    </div><!-- /footer-top-grid -->
 
     <div style="padding-top:1.5rem;border-top:1px solid rgba(61,70,83,.2);">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
@@ -1468,6 +1471,8 @@
   function showSchedule(e, row) {
     clearTimeout(tooltipTimeout);
     const isJob = row.dataset.ttype === 'job';
+    document.getElementById('schedTooltipLabel').textContent = isJob ? 'Job Details' : 'Training Schedule';
+    tooltip.style.borderColor = isJob ? 'rgba(224,120,56,.35)' : 'rgba(20,174,174,.25)';
     const course = row.dataset.course;
     const venue = row.dataset.venue;
     const type = row.dataset.type;
