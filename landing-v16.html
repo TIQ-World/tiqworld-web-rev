@@ -786,28 +786,28 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr>
+              <tr class="job-extra" style="display:none;">
                 <td>Six Sigma <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(1)</span></td>
                 <td>New Delhi</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man Month</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr>
+              <tr class="job-extra" style="display:none;">
                 <td>NDT Services, ASNT NDT ET 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
                 <td>Bhopal</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man Month</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr>
+              <tr class="job-extra" style="display:none;">
                 <td>NDT Services, Welding Inspection, ASNT NDT RT 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(3)</span></td>
                 <td>Chennai</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr>
+              <tr class="job-extra" style="display:none;">
                 <td>NDT Services, Valves, Asset Integrity ASNT NDT RT 3 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
                 <td>Hubli</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
@@ -818,7 +818,10 @@
           </table>
           </div>
           <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--s700);">+ more listings available</span>
+            <button id="jobToggleBtn" onclick="toggleRows('job')" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--c500);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;padding:0;transition:gap .2s;">
+              <svg id="jobToggleIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .3s;"><path d="M6 9l6 6 6-6"/></svg>
+              <span id="jobToggleText">Show 4 more</span>
+            </button>
             <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">Post a Job →</a>
           </div>
         </div>
@@ -873,7 +876,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr
+              <tr class="train-extra" style="display:none;"
                 data-course="Six Sigma"
                 data-venue="New Delhi" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -887,7 +890,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr
+              <tr class="train-extra" style="display:none;"
                 data-course="NDT Services ASNT NDT ET 1"
                 data-venue="Bhopal" data-type="Class Room"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -901,7 +904,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr
+              <tr class="train-extra" style="display:none;"
                 data-course="NDT Services, Welding Inspection, ASNT NDT RT 1"
                 data-venue="Chennai" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -915,7 +918,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr
+              <tr class="train-extra" style="display:none;"
                 data-course="NDT Services, Valves, Asset Integrity ASNT NDT RT 3"
                 data-venue="Hubli" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -933,7 +936,10 @@
           </table>
           </div>
           <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--s700);">+ more courses available</span>
+            <button id="trainToggleBtn" onclick="toggleRows('train')" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t500);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;padding:0;transition:gap .2s;">
+              <svg id="trainToggleIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .3s;"><path d="M6 9l6 6 6-6"/></svg>
+              <span id="trainToggleText">Show 4 more</span>
+            </button>
             <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">List Your Courses →</a>
           </div>
         </div>
@@ -1237,6 +1243,24 @@
   window.addEventListener('scroll', () => {
     navWrapper.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
+
+  function toggleRows(type) {
+    const rows = document.querySelectorAll('.' + type + '-extra');
+    const btn = document.getElementById(type + 'ToggleBtn');
+    const icon = document.getElementById(type + 'ToggleIcon');
+    const text = document.getElementById(type + 'ToggleText');
+    const isHidden = rows[0].style.display === 'none';
+    rows.forEach((r, i) => {
+      r.style.display = isHidden ? 'table-row' : 'none';
+      if (isHidden) {
+        r.style.opacity = '0';
+        r.style.transition = 'opacity .3s ease ' + (i * 0.06) + 's';
+        requestAnimationFrame(() => { r.style.opacity = '1'; });
+      }
+    });
+    icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+    text.textContent = isHidden ? 'Show less' : 'Show 4 more';
+  }
 
   function openTrainerModal(name, initials, spec, location, exp, certs) {
     document.getElementById('trainerInitials').textContent = initials;
