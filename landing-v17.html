@@ -307,9 +307,14 @@
     .event-item strong { color:var(--s200); font-weight:500; }
     .event-dot { width:4px; height:4px; border-radius:50%; background:var(--t500); flex-shrink:0; }
 
-    /* TIQWiki improved card */
-    .tiqwiki-nav { display:flex; flex-direction:column; gap:.375rem; margin-top:.625rem; }
-    .tiqwiki-nav-item { display:flex; align-items:center; gap:.5rem; font-size:.8125rem; color:var(--s500); padding:.3rem .5rem; border-radius:.375rem; cursor:default; transition:background .15s,color .15s; border:1px solid transparent; }
+    /* TIQWiki tab card */
+    .tiqwiki-tabs { display:flex; gap:.25rem; margin-top:.75rem; margin-bottom:.625rem; flex-wrap:wrap; }
+    .tiqwiki-tab { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .6rem; border-radius:.375rem; border:1px solid rgba(61,70,83,.4); background:transparent; color:var(--s600); cursor:pointer; transition:background .15s,color .15s,border-color .15s; white-space:nowrap; }
+    .tiqwiki-tab:hover { border-color:rgba(20,174,174,.35); color:var(--t400); }
+    .tiqwiki-tab.active { background:rgba(20,174,174,.12); border-color:rgba(20,174,174,.4); color:var(--t400); }
+    .tiqwiki-panel { display:none; flex-direction:column; gap:.3rem; }
+    .tiqwiki-panel.active { display:flex; }
+    .tiqwiki-nav-item { display:flex; align-items:center; gap:.5rem; font-size:.8125rem; color:var(--s400); padding:.3rem .5rem; border-radius:.375rem; cursor:default; transition:background .15s,color .15s; border:1px solid transparent; }
     .tiqwiki-nav-item:hover { background:rgba(20,174,174,.07); color:var(--t400); border-color:rgba(20,174,174,.18); }
     .tiqwiki-nav-dot { width:5px; height:5px; border-radius:50%; background:var(--t500); flex-shrink:0; }
 
@@ -919,15 +924,40 @@
             <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;padding:.15rem .4rem;border-radius:999px;background:rgba(20,174,174,.12);border:1px solid rgba(20,174,174,.25);color:var(--t500);">BETA</span>
           </div>
           <div class="ai-hcard-detail">
-            <p style="font-size:.75rem;font-weight:600;color:var(--t500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">Navigate TIQWiki</p>
-            <p>Instant access to NDT standards, procedures, and best practices — always current, always compliant. Browse by topic:</p>
-            <div class="tiqwiki-nav">
-              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>NDT Standards & Codes</div>
-              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Inspection Procedures</div>
-              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Certification Guides</div>
-              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Material & Defect Library</div>
+            <p style="font-size:.75rem;line-height:1.6;margin-bottom:0;">Instant access to NDT standards, procedures, and best practices — always current, always compliant.</p>
+            <!-- Tab bar -->
+            <div class="tiqwiki-tabs">
+              <button class="tiqwiki-tab active" onclick="tiqwikiTab(this,'std')">Standards</button>
+              <button class="tiqwiki-tab" onclick="tiqwikiTab(this,'proc')">Procedures</button>
+              <button class="tiqwiki-tab" onclick="tiqwikiTab(this,'cert')">Certifications</button>
+              <button class="tiqwiki-tab" onclick="tiqwikiTab(this,'lib')">Library</button>
             </div>
-            <span style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.875rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t600);">
+            <!-- Panels -->
+            <div id="tiqwiki-std" class="tiqwiki-panel active">
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>ASNT Standards</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>ISO 9712 / EN 473</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>ASME Section V</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>AWS D1.1 Welding</div>
+            </div>
+            <div id="tiqwiki-proc" class="tiqwiki-panel">
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>UT Procedure Templates</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>PAUT / TOFD Setup</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>RT Film & CR Guides</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>MT / PT Procedures</div>
+            </div>
+            <div id="tiqwiki-cert" class="tiqwiki-panel">
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Level I / II / III Paths</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>PCN Certification Guide</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>BINDT Requirements</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Recertification Rules</div>
+            </div>
+            <div id="tiqwiki-lib" class="tiqwiki-panel">
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Defect Atlas</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Material Properties DB</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Weld Discontinuity Types</div>
+              <div class="tiqwiki-nav-item"><span class="tiqwiki-nav-dot"></span>Equipment Reference</div>
+            </div>
+            <span style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.75rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t600);">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               Launching Soon
             </span>
@@ -1791,6 +1821,14 @@
     if (e.isIntersecting) { shimmerObs.unobserve(e.target); }
   }), { threshold: 0.5 });
   document.querySelectorAll('.skill-count').forEach(el => shimmerObs.observe(el));
+
+  /* ── TIQWiki tabs ── */
+  function tiqwikiTab(btn, panel) {
+    btn.closest('.ai-hcard-detail').querySelectorAll('.tiqwiki-tab').forEach(t => t.classList.remove('active'));
+    btn.closest('.ai-hcard-detail').querySelectorAll('.tiqwiki-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tiqwiki-' + panel).classList.add('active');
+  }
 
   /* ── Day / Night toggle ── */
   function toggleTheme() {
