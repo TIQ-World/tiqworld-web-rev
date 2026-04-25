@@ -271,6 +271,16 @@
     body.light-mode .nav-wrapper { background:rgba(235,234,228,.55); backdrop-filter:blur(18px); }
     body.light-mode nav { background:rgba(240,240,236,.75); border-color:rgba(0,0,0,.1); }
     body.light-mode .promo-bar { background:rgba(240,240,236,.98); }
+    /* Light mode: scrolled nav stays light */
+    body.light-mode .nav-wrapper.scrolled nav { background:rgba(240,240,236,.95); border-color:rgba(0,0,0,.12); box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 8px 24px rgba(0,0,0,.08); }
+    body.light-mode .nav-link { color:var(--s500); }
+    body.light-mode .nav-link:hover { color:var(--s100); }
+    /* Light mode hover backgrounds — replace hardcoded dark with light equivalents */
+    body.light-mode .audience-card:hover { background:rgba(200,198,191,.85) !important; }
+    body.light-mode .faq-item:hover { background:rgba(200,198,191,.55) !important; box-shadow:0 2px 12px rgba(0,0,0,.08); }
+    body.light-mode .faq-item[open] { background:rgba(200,198,191,.7) !important; }
+    /* Light mode: skill card hover */
+    body.light-mode .skill-card:hover { background:var(--s800); border-color:rgba(61,70,83,.35); }
     .icon-sun { display:none; }
     .icon-moon { display:block; }
     body.light-mode .icon-sun { display:block; }
