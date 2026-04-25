@@ -191,6 +191,10 @@
     .badge-copper { color:var(--c500); background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.2); }
     .badge-teal   { color:var(--t500); background:rgba(20,174,174,.1);  border:1px solid rgba(20,174,174,.2); }
 
+    /* Table row scroll reveal */
+    .tr-reveal td { opacity:0; transform:translateX(-10px); transition:opacity .4s ease, transform .4s ease; }
+    .tr-reveal.tr-in td { opacity:1; transform:none; }
+
     /* Trainer link button */
     .trainer-link { background:none; border:none; cursor:pointer; color:var(--t500); font-size:.875rem; font-family:'Space Grotesk',sans-serif; padding:0; text-decoration:underline; text-decoration-color:rgba(20,174,174,.35); text-underline-offset:3px; transition:color .2s, text-decoration-color .2s; }
     .trainer-link:hover { color:var(--t400); text-decoration-color:var(--t400); }
@@ -772,42 +776,42 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="tr-reveal">
                 <td>Welding Inspection <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(2)</span></td>
                 <td>Mumbai</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">16-Jan-2023</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2023</td>
               </tr>
-              <tr>
+              <tr class="tr-reveal">
                 <td>NDT Services <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(2)</span></td>
                 <td>Pune</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="job-extra" style="display:none;">
+              <tr class="tr-reveal">
                 <td>Six Sigma <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(1)</span></td>
                 <td>New Delhi</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man Month</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="job-extra" style="display:none;">
+              <tr class="tr-reveal">
                 <td>NDT Services, ASNT NDT ET 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
                 <td>Bhopal</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man Month</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="job-extra" style="display:none;">
+              <tr class="tr-reveal">
                 <td>NDT Services, Welding Inspection, ASNT NDT RT 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(3)</span></td>
                 <td>Chennai</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="job-extra" style="display:none;">
+              <tr class="tr-reveal">
                 <td>NDT Services, Valves, Asset Integrity ASNT NDT RT 3 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
                 <td>Hubli</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
@@ -817,11 +821,7 @@
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
-            <button id="jobToggleBtn" onclick="toggleRows('job')" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--c500);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;padding:0;transition:gap .2s;">
-              <svg id="jobToggleIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .3s;"><path d="M6 9l6 6 6-6"/></svg>
-              <span id="jobToggleText">Show 4 more</span>
-            </button>
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;justify-content:flex-end;">
             <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">Post a Job →</a>
           </div>
         </div>
@@ -848,7 +848,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr
+              <tr class="tr-reveal"
                 data-course="Welding Inspection"
                 data-venue="Mumbai" data-type="Class Room"
                 data-from="13-Jan-2023" data-to="20-Jan-2023"
@@ -862,7 +862,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">13-Jan-2023</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2023</td>
               </tr>
-              <tr
+              <tr class="tr-reveal"
                 data-course="NDT Services"
                 data-venue="Pune" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -876,7 +876,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="train-extra" style="display:none;"
+              <tr class="tr-reveal"
                 data-course="Six Sigma"
                 data-venue="New Delhi" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -890,7 +890,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="train-extra" style="display:none;"
+              <tr class="tr-reveal"
                 data-course="NDT Services ASNT NDT ET 1"
                 data-venue="Bhopal" data-type="Class Room"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -904,7 +904,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="train-extra" style="display:none;"
+              <tr class="tr-reveal"
                 data-course="NDT Services, Welding Inspection, ASNT NDT RT 1"
                 data-venue="Chennai" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -918,7 +918,7 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
               </tr>
-              <tr class="train-extra" style="display:none;"
+              <tr class="tr-reveal"
                 data-course="NDT Services, Valves, Asset Integrity ASNT NDT RT 3"
                 data-venue="Hubli" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
@@ -935,11 +935,7 @@
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
-            <button id="trainToggleBtn" onclick="toggleRows('train')" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t500);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;padding:0;transition:gap .2s;">
-              <svg id="trainToggleIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .3s;"><path d="M6 9l6 6 6-6"/></svg>
-              <span id="trainToggleText">Show 4 more</span>
-            </button>
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;justify-content:flex-end;">
             <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">List Your Courses →</a>
           </div>
         </div>
@@ -1244,23 +1240,19 @@
     navWrapper.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  function toggleRows(type) {
-    const rows = document.querySelectorAll('.' + type + '-extra');
-    const btn = document.getElementById(type + 'ToggleBtn');
-    const icon = document.getElementById(type + 'ToggleIcon');
-    const text = document.getElementById(type + 'ToggleText');
-    const isHidden = rows[0].style.display === 'none';
-    rows.forEach((r, i) => {
-      r.style.display = isHidden ? 'table-row' : 'none';
-      if (isHidden) {
-        r.style.opacity = '0';
-        r.style.transition = 'opacity .3s ease ' + (i * 0.06) + 's';
-        requestAnimationFrame(() => { r.style.opacity = '1'; });
+  const trRowObs = new IntersectionObserver(entries => {
+    entries.forEach((e, idx) => {
+      if (e.isIntersecting) {
+        const delay = idx * 80;
+        e.target.querySelectorAll('td').forEach(td => {
+          td.style.transitionDelay = delay + 'ms';
+        });
+        e.target.classList.add('tr-in');
+        trRowObs.unobserve(e.target);
       }
     });
-    icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-    text.textContent = isHidden ? 'Show less' : 'Show 4 more';
-  }
+  }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.tr-reveal').forEach(row => trRowObs.observe(row));
 
   function openTrainerModal(name, initials, spec, location, exp, certs) {
     document.getElementById('trainerInitials').textContent = initials;
