@@ -191,6 +191,15 @@
     .badge-copper { color:var(--c500); background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.2); }
     .badge-teal   { color:var(--t500); background:rgba(20,174,174,.1);  border:1px solid rgba(20,174,174,.2); }
 
+    /* Tab switcher */
+    .tab-bar { display:flex; gap:0; border:1px solid rgba(61,70,83,.35); border-radius:.625rem; overflow:hidden; width:fit-content; margin-bottom:1.5rem; }
+    .tab-btn { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; padding:.625rem 1.25rem; border:none; background:var(--s900); color:var(--s600); cursor:pointer; transition:background .2s,color .2s; display:flex; align-items:center; gap:.5rem; }
+    .tab-btn:not(:last-child) { border-right:1px solid rgba(61,70,83,.35); }
+    .tab-btn.active-jobs { background:rgba(224,120,56,.1); color:var(--c500); }
+    .tab-btn.active-training { background:rgba(20,174,174,.1); color:var(--t500); }
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
+
     /* Table first-column expand */
     .td-title { max-width:190px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
     .td-title::after { content:'+'; position:absolute; right:.625rem; top:50%; transform:translateY(-50%); font-size:.75rem; font-family:'JetBrains Mono',monospace; color:var(--s700); line-height:1; transition:color .2s; pointer-events:none; }
@@ -511,10 +520,6 @@
         </button>
         <a href="#audience" class="btn-outline" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">
           Who is this for
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#ai-tools" class="btn-outline" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">
-          See How It Works
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -858,14 +863,25 @@
     <div class="section-label reveal">Platform Activity</div>
     <h2 class="section-headline reveal d1" style="margin-bottom:3rem;">Live on<br/><span style="color:var(--c500);">TIQWorld</span> Today</h2>
 
-    <div class="reveal d2" style="display:flex;flex-direction:column;gap:2.5rem;margin-bottom:3rem;">
+    <div class="reveal d2" style="margin-bottom:3rem;">
 
-      <!-- Jobs Available -->
-      <div>
-        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c500);">Jobs Available</span>
-          <span class="badge badge-copper">Live</span>
-        </div>
+      <!-- Tab bar -->
+      <div class="tab-bar">
+        <button class="tab-btn active-jobs" id="tabJobs" onclick="switchTab('jobs')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          Jobs Available
+          <span class="badge badge-copper" style="margin-left:.25rem;">6</span>
+        </button>
+        <button class="tab-btn" id="tabTraining" onclick="switchTab('training')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Training Courses
+          <span class="badge badge-teal" style="margin-left:.25rem;">6</span>
+        </button>
+      </div>
+
+      <!-- Jobs panel -->
+      <div class="tab-panel active" id="panelJobs">
+        <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
           <div style="overflow-x:auto;">
           <table class="data-table" style="min-width:700px;">
@@ -930,13 +946,11 @@
           </div>
         </div>
       </div>
+      </div><!-- /panelJobs -->
 
-      <!-- Training Courses -->
-      <div>
-        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t500);">Training Courses</span>
-          <span class="badge badge-teal">Live</span>
-        </div>
+      <!-- Training panel -->
+      <div class="tab-panel" id="panelTraining">
+        <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
           <div style="overflow-x:auto;">
           <table class="data-table" style="min-width:780px;">
@@ -1039,6 +1053,7 @@
           </div>
         </div>
       </div>
+      </div><!-- /panelTraining -->
 
     </div>
 
@@ -1204,7 +1219,6 @@
         Get Early Access
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
-      <button onclick="openModal()" class="btn-outline" style="font-size:1rem;padding:1rem 2.5rem;">Learn More</button>
     </div>
   </div>
 </section>
@@ -1218,9 +1232,7 @@
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(61,70,83,.25);">
       <div style="max-width:340px;">
         <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.875rem;">
-          <div style="width:32px;height:32px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.3);">
-            <img src="logos/tiq-logo.png" alt="TIQ" style="width:100%;height:100%;object-fit:contain;" />
-          </div>
+          <img src="logos/tiq-logo.png" alt="TIQWorld" style="height:26px;width:auto;object-fit:contain;flex-shrink:0;" />
           <span style="font-weight:700;font-size:1rem;letter-spacing:-.02em;color:var(--s100);">TIQ<span style="color:var(--c500);">World</span></span>
         </div>
         <p style="font-size:.875rem;color:var(--s600);line-height:1.65;margin-bottom:1rem;">The digital layer for manufacturing quality — connecting NDT professionals, training providers, manufacturers, and recruiters.</p>
@@ -1260,7 +1272,7 @@
       </div>
 
       <div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s600);margin-bottom:1rem;">Resources</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s500);margin-bottom:1rem;">Resources</div>
         <div style="display:flex;flex-direction:column;gap:.625rem;">
           <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">TIQWorld Varsity</a>
           <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">User Feedback</a>
@@ -1268,7 +1280,7 @@
       </div>
 
       <div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s600);margin-bottom:1rem;">About Us</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s500);margin-bottom:1rem;">About Us</div>
         <div style="display:flex;flex-direction:column;gap:.625rem;">
           <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Partners in Progress</a>
           <a href="#" style="font-size:.875rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">Contact Us</a>
@@ -1277,16 +1289,18 @@
 
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid rgba(61,70,83,.2);">
-      <div style="display:flex;align-items:center;gap:1.5rem;">
+    <div style="padding-top:1.5rem;border-top:1px solid rgba(61,70,83,.2);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
         <span style="font-size:.8125rem;color:var(--s700);">© 2026 TIQWorld. All rights reserved.</span>
-        <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Privacy</a>
-        <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Terms</a>
+        <div style="display:flex;align-items:center;gap:1.25rem;">
+          <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Privacy Policy</a>
+          <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Terms of Use</a>
+          <a href="https://linkedin.com/company/tiqworld" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.375rem;font-size:.8125rem;color:var(--s600);text-decoration:none;border:1px solid rgba(61,70,83,.3);border-radius:.375rem;padding:.3rem .6rem;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='rgba(224,120,56,.4)';this.style.color='var(--s300)'" onmouseout="this.style.borderColor='rgba(61,70,83,.3)';this.style.color='var(--s600)'">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.327-.025-3.036-1.849-3.036-1.851 0-2.135 1.445-2.135 2.939v5.666H9.989V9h3.099v1.562h.044c.43-.815 1.48-1.674 3.048-1.674 3.261 0 3.863 2.146 3.863 4.938v6.626zM5.337 7.433a1.796 1.796 0 1 1 0-3.591 1.796 1.796 0 0 1 0 3.591zm1.553 13.019H3.782V9h3.108v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
-      <a href="https://linkedin.com/company/tiqworld" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.5rem;font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.327-.025-3.036-1.849-3.036-1.851 0-2.135 1.445-2.135 2.939v5.666H9.989V9h3.099v1.562h.044c.43-.815 1.48-1.674 3.048-1.674 3.261 0 3.863 2.146 3.863 4.938v6.626zM5.337 7.433a1.796 1.796 0 1 1 0-3.591 1.796 1.796 0 0 1 0 3.591zm1.553 13.019H3.782V9h3.108v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
     </div>
 
   </div>
@@ -1362,6 +1376,17 @@
     document.body.style.overflow = '';
     document.getElementById('menuIconOpen').style.display = '';
     document.getElementById('menuIconClose').style.display = 'none';
+  }
+
+  /* Tab switcher */
+  function switchTab(tab) {
+    const isJobs = tab === 'jobs';
+    document.getElementById('panelJobs').classList.toggle('active', isJobs);
+    document.getElementById('panelTraining').classList.toggle('active', !isJobs);
+    const jBtn = document.getElementById('tabJobs');
+    const tBtn = document.getElementById('tabTraining');
+    jBtn.classList.toggle('active-jobs', isJobs);
+    tBtn.classList.toggle('active-training', !isJobs);
   }
 
   /* Table first-column expand/collapse */
