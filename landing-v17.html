@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TIQ World — The Digital Layer for Manufacturing Quality</title>
+  <title>TIQ World · The Digital Layer for Manufacturing Quality</title>
   <link rel="icon" href="logos/Logo TIQ Favicon 32 X 32.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -104,7 +104,7 @@
     .nav-wrapper.scrolled nav { height:48px; background:rgba(13,18,25,.82); border-color:rgba(255,255,255,.1); box-shadow:0 1px 0 rgba(255,255,255,.05) inset, 0 12px 40px rgba(0,0,0,.4); }
     nav::before { content:''; position:absolute; top:0; left:20%; right:20%; height:1px; background:linear-gradient(to right, transparent, rgba(224,120,56,.45), transparent); opacity:0; transition:opacity .4s; }
     nav:hover::before, .nav-wrapper.scrolled nav::before { opacity:1; }
-    .nav-link { font-size:.875rem; font-weight:400; color:var(--s500); text-decoration:none; transition:color .2s; position:relative; padding-bottom:1px; }
+    .nav-link { font-size:.875rem; font-weight:400; color:var(--s500); text-decoration:none; transition:color .2s; position:relative; padding-bottom:1px; white-space:nowrap; }
     .nav-link::after { content:''; position:absolute; left:0; bottom:-1px; width:0; height:1px; background:var(--c500); transition:width .25s ease; }
     .nav-link:hover { color:var(--s100); }
     .nav-link:hover::after { width:100%; }
@@ -201,7 +201,7 @@
     .tab-panel.active { display:block; }
 
     /* Table first-column expand */
-    .td-title { max-width:190px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
+    .td-title { max-width:220px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
     .td-title::after { content:'+'; position:absolute; right:.625rem; top:50%; transform:translateY(-50%); font-size:.75rem; font-family:'JetBrains Mono',monospace; color:var(--s700); line-height:1; transition:color .2s; pointer-events:none; }
     .td-title.td-exp { white-space:normal; overflow:visible; text-overflow:clip; max-width:300px; cursor:default; }
     .td-title.td-exp::after { content:'–'; color:var(--c500); }
@@ -478,7 +478,7 @@
 <!-- Promo Bar -->
 <div class="promo-bar" id="promoBar">
   <span class="promo-dot"></span>
-  <span>TIQWorld is now in <strong>early access</strong> — <a href="#" onclick="openModal();return false;">Join the waitlist</a></span>
+  <span>TIQWorld is now in <strong>early access</strong> · <a href="#" onclick="openModal();return false;">Join the waitlist</a></span>
   <span class="promo-tag">Limited Seats</span>
   <button class="promo-dismiss" onclick="document.getElementById('promoBar').style.display='none'" aria-label="Dismiss">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -606,17 +606,17 @@
         </div>
         <div style="display:flex;align-items:center;gap:1px;flex-wrap:wrap;background:rgba(61,70,83,.2);border:1px solid rgba(61,70,83,.25);border-radius:1rem;overflow:hidden;max-width:480px;">
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.625rem;padding:1rem 1.25rem;background:var(--s900);transition:background .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="width:48px;height:40px;display:flex;align-items:center;justify-content:center;"><img src="logos/iitm-logo-o.png" alt="IIT Madras" style="width:100%;height:100%;object-fit:contain;" /></div>
+            <div style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;"><img src="logos/iitm-logo-o.png" alt="IIT Madras" style="width:100%;height:100%;object-fit:contain;filter:brightness(1.3) contrast(1.1);" /></div>
             <div style="text-align:center;"><div style="font-size:.75rem;font-weight:600;color:var(--s200);white-space:nowrap;">IIT Madras</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Research Partner</div></div>
           </div>
           <div style="width:1px;height:70px;background:rgba(61,70,83,.4);flex-shrink:0;"></div>
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.625rem;padding:1rem 1.25rem;background:var(--s900);transition:background .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="width:48px;height:40px;display:flex;align-items:center;justify-content:center;"><img src="logos/cnde-logo-o.png" alt="CNDE" style="width:100%;height:100%;object-fit:contain;" /></div>
+            <div style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;"><img src="logos/cnde-logo-o.png" alt="CNDE" style="width:100%;height:100%;object-fit:contain;filter:brightness(1.3) contrast(1.1);" /></div>
             <div style="text-align:center;"><div style="font-size:.75rem;font-weight:600;color:var(--s200);white-space:nowrap;">CNDE</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Research Partner</div></div>
           </div>
           <div style="width:1px;height:70px;background:rgba(61,70,83,.4);flex-shrink:0;"></div>
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.625rem;padding:1rem 1.25rem;background:var(--s900);transition:background .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="width:48px;height:40px;display:flex;align-items:center;justify-content:center;"><img src="logos/incubation-logo.png" alt="IITM Incubation" style="width:100%;height:100%;object-fit:contain;" /></div>
+            <div style="width:52px;height:44px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:4px;"><img src="logos/incubation-logo.png" alt="IITM Incubation" style="width:100%;height:100%;object-fit:contain;" /></div>
             <div style="text-align:center;"><div style="font-size:.75rem;font-weight:600;color:var(--s200);white-space:nowrap;">IITM Incubation</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Incubation Partner</div></div>
           </div>
         </div>
@@ -624,7 +624,7 @@
     </div>
 
     <!-- Right: live metrics visual panel -->
-    <div class="hero-visual" style="animation:fadeUp .8s ease-out .7s both;">
+    <div class="hero-visual" style="animation:fadeUp .8s ease-out .7s both;align-self:start;position:sticky;top:80px;">
       <div style="background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:1rem;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.4);">
 
         <!-- Events / Featured Banner -->
@@ -739,7 +739,7 @@
     <div class="audience-grid">
 
       <div class="audience-card reveal d1">
-        <div class="card-num">01 — NDT, QA/QC Professionals</div>
+        <div class="card-num">01 · NDT, QA/QC Professionals</div>
         <h3>NDT, QA/QC Professionals &amp; QA Auditors</h3>
         <p class="card-desc">Build a verified portfolio, earn recognised certifications, and find quality roles at top manufacturers and EPC firms.</p>
         <ul class="feat-list">
@@ -752,7 +752,7 @@
       </div>
 
       <div class="audience-card teal reveal d2">
-        <div class="card-num">02 — Recruiters</div>
+        <div class="card-num">02 · Recruiters</div>
         <h3>HR &amp; Talent Leads</h3>
         <p class="card-desc">Stop sifting CVs. Find pre-screened, skill-verified NDT, QA/QC talent with transparent competency records and fast-track contracting.</p>
         <ul class="feat-list">
@@ -765,7 +765,7 @@
       </div>
 
       <div class="audience-card reveal d3">
-        <div class="card-num">03 — Training Institutes &amp; Trainers</div>
+        <div class="card-num">03 · Training Institutes &amp; Trainers</div>
         <h3>Training Institutes &amp; Trainers</h3>
         <p class="card-desc">Publish your training course and relax. TIQWorld is your back office from enrolment to certification.</p>
         <ul class="feat-list">
@@ -778,7 +778,7 @@
       </div>
 
       <div class="audience-card teal reveal d4">
-        <div class="card-num">04 — Manufacturers</div>
+        <div class="card-num">04 · Manufacturers</div>
         <h3>QA/QC Heads of OEMs &amp; EPC Firms</h3>
         <p class="card-desc">Hire or add inspectors to get standardised inspection reports with our AI Report Studio, adhering to codes and standards.</p>
         <ul class="feat-list">
@@ -999,15 +999,15 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">16-Jan-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer — Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="Permanent" data-batches="Vacancies: 3 · Pune">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer — Pressure Vessels<span class="vac-count">×3</span></td>
+              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer, Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="Permanent" data-batches="Vacancies: 3 · Pune">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer, Pressure Vessels<span class="vac-count">×3</span></td>
                 <td class="venue-cell">Pune</td>
                 <td><span class="badge" style="color:#6ee7b7;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);">Full-time</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Permanent</td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II — RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-batches="Vacancies: 1 · New Delhi">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II — RT Specialist<span class="vac-count">×1</span></td>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-batches="Vacancies: 1 · New Delhi">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II RT Specialist<span class="vac-count">×1</span></td>
                 <td class="venue-cell">New Delhi</td>
                 <td><span class="badge" style="color:#a78bfa;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);">Contract</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jun-2026</td>
@@ -1053,7 +1053,7 @@
         <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
           <div style="overflow-x:auto;">
-          <table class="data-table" style="min-width:780px;">
+          <table class="data-table" style="min-width:860px;">
             <thead>
               <tr>
                 <th>Training Available For</th>
@@ -1080,11 +1080,11 @@
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
               </tr>
               <tr class="tr-reveal"
-                data-course="NDT Services — UT & ET"
+                data-course="NDT Services UT &amp; ET"
                 data-venue="Online" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
                 data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services — UT &amp; ET<span class="batch-count">×2</span></td>
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services UT &amp; ET<span class="batch-count">×2</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Online</td>
@@ -1106,11 +1106,11 @@
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
               <tr class="tr-reveal"
-                data-course="ASNT NDT ET Level 1 — Self-Paced"
+                data-course="ASNT NDT ET Level 1 Self-Paced"
                 data-venue="Self-Learning" data-type="Self-Learning"
                 data-from="Enrol anytime" data-to="Self-paced"
                 data-batches="Available 24/7 · Self-paced online">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT ET Level 1 — Self-Paced<span class="batch-count">×4</span></td>
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT ET Level 1 Self-Paced<span class="batch-count">×4</span></td>
                 <td><span style="font-size:.875rem;color:var(--s600);">TIQWorld</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Online</td>
@@ -1124,7 +1124,7 @@
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
                 data-batches="Batch 1: Upcoming · Chennai">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT RT Level 1 &amp; 2<span class="batch-count">×3</span></td>
-                <td><span style="font-size:.875rem;color:var(--s600);">—</span></td>
+                <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);">TBA</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Chennai</td>
                 <td><span class="badge badge-teal">Class Room</span></td>
@@ -1137,7 +1137,7 @@
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
                 data-batches="Batch 1: Upcoming · Online">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity PAUT &amp; TOFD<span class="batch-count">×4</span></td>
-                <td><span style="font-size:.875rem;color:var(--s600);">—</span></td>
+                <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);">TBA</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Online</td>
                 <td><span class="badge" style="color:#60a5fa;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);">Web Based</span></td>
@@ -1370,9 +1370,9 @@
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--s200);">50</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--s200);">50</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s800);">·</td>
             </tr>
 
             <!-- Training -->
@@ -1380,10 +1380,10 @@
               <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Training</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s800);">·</td>
             </tr>
 
             <!-- Recruitment + Report -->
@@ -1391,10 +1391,10 @@
               <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Recruitment + Report</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s800);">·</td>
             </tr>
 
             <!-- Report -->
@@ -1402,10 +1402,10 @@
               <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Report</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--s200);">50</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s800);">·</td>
             </tr>
 
             <!-- TIQWiki -->
@@ -1451,11 +1451,11 @@
             <!-- Marketplace Seller -->
             <tr>
               <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Marketplace Seller</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
-              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s800);">·</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s800);">·</td>
               <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.8125rem;color:var(--t400);font-weight:500;">Unlimited listings</td>
             </tr>
 
