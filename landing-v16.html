@@ -456,6 +456,8 @@
   <div class="nav-links-desktop" style="display:flex;align-items:center;gap:1.75rem;">
     <a href="#audience" class="nav-link" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
     <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+    <a href="#pricing" class="nav-link" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
+    <a href="#" class="nav-link">Marketplace</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <button onclick="openModal()" class="nav-cta">
       Get Early Access
@@ -477,6 +479,8 @@
 <div id="mobileMenu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:49;background:rgba(13,18,25,.96);backdrop-filter:blur(16px);padding:5rem 2rem 2rem;flex-direction:column;gap:1.5rem;">
   <a href="#audience" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
   <a href="#ai-tools" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+  <a href="#pricing" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
+  <a href="#" class="mobile-nav-link" onclick="closeMobileMenu()">Marketplace</a>
   <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()">FAQ</a>
   <div style="height:1px;background:rgba(61,70,83,.3);margin:.5rem 0;"></div>
   <button onclick="openModal();closeMobileMenu();" class="btn-primary" style="justify-content:center;font-size:1rem;padding:1rem 2rem;">
@@ -1206,22 +1210,202 @@
 </section>
 
 
-<!-- Final CTA -->
-<section class="cta-band" style="padding:6.5rem clamp(1.5rem,5vw,5rem);">
-  <div style="max-width:760px;margin:0 auto;text-align:center;" class="reveal">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c600);margin-bottom:1.25rem;">Early Access · Limited Seats</div>
-    <h2 class="section-headline" style="margin-bottom:1.25rem;font-size:clamp(2rem,3vw+.75rem,3.75rem);">
-      Ready to Join the<br/><span style="color:var(--c500);">Quality Revolution?</span>
-    </h2>
-    <p style="font-size:1.0625rem;color:var(--s400);line-height:1.65;max-width:480px;margin:0 auto 2.5rem;">
-      Whether you inspect, train, hire, or manufacture — TIQWorld is the digital foundation the industry has been missing.
-    </p>
-    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
-      <button onclick="openModal()" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">
-        Get Early Access
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+<!-- Pricing -->
+<section id="pricing" style="padding:6rem clamp(1.5rem,5vw,5rem);border-top:1px solid rgba(61,70,83,.3);">
+  <div style="max-width:1100px;margin:0 auto;">
+
+    <!-- Header -->
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-headline reveal d1" style="margin-bottom:.75rem;">Your Most Economical<br/><span style="color:var(--c500);">Digital Layer for Quality</span></h2>
+      <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;">
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <span style="font-size:.875rem;color:var(--s400);">Registration is <strong style="color:var(--s200);">Free</strong></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <span style="font-size:.875rem;color:var(--s400);">Overseas customers billed in <strong style="color:var(--s200);">USD</strong></span>
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1HTqFfinSavu85uNrXoWtal7YPsuC9FP3/edit?gid=1497988422#gid=1497988422" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.375rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;" onmouseover="this.style.color='var(--t400)'" onmouseout="this.style.color='var(--t500)'">
+          Full pricing sheet
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
     </div>
+
+    <!-- Pricing table -->
+    <div class="reveal d2" style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;overflow:hidden;">
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;min-width:780px;">
+
+          <!-- Plan headers -->
+          <thead>
+            <tr style="border-bottom:1px solid rgba(61,70,83,.4);">
+              <th style="padding:1.25rem 1.25rem;text-align:left;background:var(--s850);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);font-weight:500;width:22%;">Plan</th>
+              <th style="padding:1.25rem .875rem;text-align:center;background:var(--s850);border-left:1px solid rgba(61,70,83,.25);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s500);margin-bottom:.375rem;">Starter</div>
+                <div style="font-size:1.125rem;font-weight:700;color:var(--s100);">₹999</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--s700);margin-top:.25rem;">1 month · $10</div>
+              </th>
+              <th style="padding:1.25rem .875rem;text-align:center;background:rgba(224,120,56,.06);border-left:1px solid rgba(224,120,56,.2);border-top:2px solid var(--c500);position:relative;">
+                <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--s950);background:var(--c500);padding:.15rem .5rem;border-radius:0 0 .25rem .25rem;white-space:nowrap;">Popular</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--c500);margin-bottom:.375rem;margin-top:.5rem;">Professional</div>
+                <div style="font-size:1.125rem;font-weight:700;color:var(--c400);">₹2,999</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--s700);margin-top:.25rem;">3 months · $30</div>
+              </th>
+              <th style="padding:1.25rem .875rem;text-align:center;background:var(--s850);border-left:1px solid rgba(61,70,83,.25);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s500);margin-bottom:.375rem;">Recruiter Pro</div>
+                <div style="font-size:1.125rem;font-weight:700;color:var(--s100);">₹4,999</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--s700);margin-top:.25rem;">3 months · $50</div>
+              </th>
+              <th style="padding:1.25rem .875rem;text-align:center;background:var(--s850);border-left:1px solid rgba(61,70,83,.25);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s500);margin-bottom:.375rem;">Report Pro</div>
+                <div style="font-size:1.125rem;font-weight:700;color:var(--s100);">₹4,999</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--s700);margin-top:.25rem;">3 months · $50</div>
+              </th>
+              <th style="padding:1.25rem .875rem;text-align:center;background:var(--s850);border-left:1px solid rgba(61,70,83,.25);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s500);margin-bottom:.375rem;">Trainer Pro</div>
+                <div style="font-size:1.125rem;font-weight:700;color:var(--s100);">₹4,999</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--s700);margin-top:.25rem;">3 months · $50</div>
+              </th>
+              <th style="padding:1.25rem .875rem;text-align:center;background:rgba(20,174,174,.04);border-left:1px solid rgba(20,174,174,.2);">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t500);margin-bottom:.375rem;">Seller Pro</div>
+                <div style="font-size:1.125rem;font-weight:700;color:var(--s100);">₹4,999</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--s700);margin-top:.25rem;">3 months · $50</div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- Section label: Enterprises -->
+            <tr style="background:rgba(61,70,83,.12);">
+              <td colspan="7" style="padding:.5rem 1.25rem;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--s700);">Enterprises (job postings / listings)</td>
+            </tr>
+
+            <!-- Recruitment -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Recruitment</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--s200);">50</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--s200);">50</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+            </tr>
+
+            <!-- Training -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Training</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+            </tr>
+
+            <!-- Recruitment + Report -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Recruitment + Report</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+            </tr>
+
+            <!-- Report -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Report</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s300);">5</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--c400);">20</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:.8125rem;font-weight:600;color:var(--s200);">50</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-size:.875rem;color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.875rem;color:var(--s700);">—</td>
+            </tr>
+
+            <!-- TIQWiki -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">TIQWiki</td>
+              <td colspan="6" style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">Coming Soon</td>
+            </tr>
+
+            <!-- TIQWiki + Report -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">TIQWiki + Report</td>
+              <td colspan="6" style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">Coming Soon</td>
+            </tr>
+
+            <!-- Section label: Marketplace -->
+            <tr style="background:rgba(61,70,83,.12);">
+              <td colspan="7" style="padding:.5rem 1.25rem;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--s700);">Marketplace</td>
+            </tr>
+
+            <!-- Marketplace Buyer -->
+            <tr style="border-bottom:1px solid rgba(61,70,83,.15);">
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Marketplace Buyer</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.15rem .45rem;">Free</span>
+              </td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.15rem .45rem;">Free</span>
+              </td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.15rem .45rem;">Free</span>
+              </td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.15rem .45rem;">Free</span>
+              </td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.15rem .45rem;">Free</span>
+              </td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.15rem .45rem;">Free</span>
+              </td>
+            </tr>
+
+            <!-- Marketplace Seller -->
+            <tr>
+              <td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--s400);">Marketplace Seller</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);color:var(--s700);">—</td>
+              <td style="padding:.875rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);font-size:.8125rem;color:var(--t400);font-weight:500;">Unlimited listings</td>
+            </tr>
+
+            <!-- CTA row -->
+            <tr style="background:var(--s850);border-top:1px solid rgba(61,70,83,.3);">
+              <td style="padding:1rem 1.25rem;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--s700);">Get Started</td>
+              <td style="padding:1rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s300);background:rgba(61,70,83,.3);border:1px solid rgba(61,70,83,.4);border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;white-space:nowrap;transition:background .2s;" onmouseover="this.style.background='rgba(61,70,83,.5)'" onmouseout="this.style.background='rgba(61,70,83,.3)'">Join Free</button>
+              </td>
+              <td style="padding:1rem .875rem;text-align:center;border-left:1px solid rgba(224,120,56,.15);background:rgba(224,120,56,.03);">
+                <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s950);background:var(--c500);border:none;border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;white-space:nowrap;font-weight:600;transition:background .2s;" onmouseover="this.style.background='var(--c600)'" onmouseout="this.style.background='var(--c500)'">Get Access</button>
+              </td>
+              <td style="padding:1rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s300);background:rgba(61,70,83,.3);border:1px solid rgba(61,70,83,.4);border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;white-space:nowrap;transition:background .2s;" onmouseover="this.style.background='rgba(61,70,83,.5)'" onmouseout="this.style.background='rgba(61,70,83,.3)'">Get Access</button>
+              </td>
+              <td style="padding:1rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s300);background:rgba(61,70,83,.3);border:1px solid rgba(61,70,83,.4);border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;white-space:nowrap;transition:background .2s;" onmouseover="this.style.background='rgba(61,70,83,.5)'" onmouseout="this.style.background='rgba(61,70,83,.3)'">Get Access</button>
+              </td>
+              <td style="padding:1rem .875rem;text-align:center;border-left:1px solid rgba(61,70,83,.15);">
+                <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s300);background:rgba(61,70,83,.3);border:1px solid rgba(61,70,83,.4);border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;white-space:nowrap;transition:background .2s;" onmouseover="this.style.background='rgba(61,70,83,.5)'" onmouseout="this.style.background='rgba(61,70,83,.3)'">Get Access</button>
+              </td>
+              <td style="padding:1rem .875rem;text-align:center;border-left:1px solid rgba(20,174,174,.12);background:rgba(20,174,174,.02);">
+                <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s950);background:var(--t500);border:none;border-radius:.375rem;padding:.4rem .75rem;cursor:pointer;white-space:nowrap;font-weight:600;transition:background .2s;" onmouseover="this.style.background='var(--t600)'" onmouseout="this.style.background='var(--t500)'">Get Access</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </section>
 
