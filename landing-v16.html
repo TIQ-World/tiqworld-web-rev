@@ -284,19 +284,60 @@
       .skills-cert-grid { grid-template-columns:1fr !important; }
       .footer-cols { grid-template-columns:repeat(2,1fr) !important; }
     }
+    .mobile-nav-link { font-size:1.375rem; font-weight:600; color:var(--s300); text-decoration:none; letter-spacing:-.02em; transition:color .2s; padding:.25rem 0; }
+    .mobile-nav-link:hover { color:var(--c500); }
+
     @media (max-width:768px) {
       .audience-grid { grid-template-columns:1fr; }
       .stat-bar { flex-direction:column; }
       .stat-item { border-right:none; border-bottom:1px solid rgba(61,70,83,.4); }
       .stat-item:last-child { border-bottom:none; }
       .ai-hcard, .ai-hcard.teal-card { flex:0 0 260px; width:260px; }
+      /* Nav */
+      .nav-links-desktop { display:none !important; }
+      .nav-mobile-group { display:flex !important; }
+      /* Modal full-width on tablet */
+      .modal-box { padding:1.75rem 1.25rem; }
+      .trainer-modal-box { padding:1.5rem 1.25rem; }
+      .data-table th, .data-table td { padding:.625rem .75rem; font-size:.8125rem; }
     }
     @media (max-width:560px) {
-      .audience-card { padding:1.75rem 1.5rem; }
-      .promo-bar { font-size:9px; flex-wrap:wrap; text-align:center; }
-      .footer-cols { grid-template-columns:1fr !important; }
-      .ai-hcard, .ai-hcard.teal-card { flex:0 0 80vw; width:80vw; }
-      .ai-hcard-detail { position:static; transform:none; border-top:none; padding:.75rem 0 0; background:transparent; }
+      /* Promo bar */
+      .promo-bar { font-size:9px; flex-wrap:wrap; justify-content:center; gap:.4rem; padding:.5rem 2.5rem .5rem 1rem; }
+      /* Nav */
+      nav { padding:0 1rem; height:52px; }
+      .nav-cta { font-size:.8rem; padding:.4rem .875rem; }
+      /* Hero */
+      .hero-headline { letter-spacing:-.03em; }
+      .btn-primary, .btn-outline { font-size:.875rem; padding:.75rem 1.375rem; }
+      /* Buttons stack on tiny screens */
+      .hero-cta-group { flex-direction:column; align-items:flex-start; }
+      /* Backed-by strip */
+      .backed-by-strip { max-width:100% !important; }
+      /* Stat bar */
+      .stat-num { font-size:1.375rem !important; }
+      /* Audience */
+      .audience-card { padding:1.75rem 1.25rem; }
+      .audience-grid { gap:1px; }
+      /* AI cards */
+      .ai-hcard, .ai-hcard.teal-card { flex:0 0 82vw; width:82vw; }
+      .ai-hcard-detail { position:static; transform:none; border-top:1px solid rgba(61,70,83,.2); padding:.875rem 0 0; background:transparent; }
+      /* Data tables */
+      .data-table th { font-size:9px; letter-spacing:.08em; padding:.5rem .625rem; }
+      .data-table td { font-size:.8125rem; padding:.625rem .625rem; }
+      /* Skills grid already stacked via skills-cert-grid, gap reduce */
+      .skills-cert-grid { gap:2rem !important; }
+      /* FAQ */
+      .faq-item summary { padding:1rem 1.25rem; font-size:.875rem; }
+      /* Footer */
+      .footer-cols { grid-template-columns:1fr !important; gap:1.75rem !important; }
+      /* Modal */
+      .modal-box { padding:1.5rem 1rem; border-radius:.75rem; }
+      .modal-tab { padding:.5rem .875rem; font-size:.8125rem; }
+      /* CTA band */
+      .cta-band { padding:4rem 1.25rem !important; }
+      /* Section padding */
+      section { padding-left:1.25rem !important; padding-right:1.25rem !important; }
     }
   </style>
 </head>
@@ -383,7 +424,7 @@
     <img src="logos/tiq-logo.png" alt="TIQWorld" style="height:32px;width:auto;object-fit:contain;flex-shrink:0;" />
   </a>
 
-  <div style="display:flex;align-items:center;gap:1.75rem;">
+  <div class="nav-links-desktop" style="display:flex;align-items:center;gap:1.75rem;">
     <a href="#audience" class="nav-link" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
     <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
     <a href="#faq" class="nav-link">FAQ</a>
@@ -392,7 +433,27 @@
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
   </div>
+  <!-- Mobile: CTA + hamburger -->
+  <div class="nav-mobile-group" style="display:none;align-items:center;gap:.75rem;">
+    <button onclick="openModal()" class="nav-cta">Get Early Access</button>
+    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" style="background:none;border:1px solid rgba(61,70,83,.5);border-radius:.5rem;padding:.45rem .5rem;cursor:pointer;color:var(--s400);display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;" aria-label="Menu">
+      <svg id="menuIconOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      <svg id="menuIconClose" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
 </nav>
+</div>
+
+<!-- Mobile Menu Drawer -->
+<div id="mobileMenu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:49;background:rgba(13,18,25,.96);backdrop-filter:blur(16px);padding:5rem 2rem 2rem;flex-direction:column;gap:1.5rem;">
+  <a href="#audience" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
+  <a href="#ai-tools" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+  <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()">FAQ</a>
+  <div style="height:1px;background:rgba(61,70,83,.3);margin:.5rem 0;"></div>
+  <button onclick="openModal();closeMobileMenu();" class="btn-primary" style="justify-content:center;font-size:1rem;padding:1rem 2rem;">
+    Get Early Access
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
 </div>
 
 
@@ -425,7 +486,7 @@
         TIQWorld is a precision platform connecting NDT &amp; QC professionals, training providers, manufacturers, and the recruiters who build the teams that inspect the world's critical infrastructure.
       </p>
 
-      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s ease-out .6s both;">
+      <div class="hero-cta-group" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s ease-out .6s both;">
         <button onclick="openModal('enterprise')" class="btn-primary btn-pulse">
           Get Early Access
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1234,6 +1295,21 @@
     document.getElementById('modal-' + tab).classList.add('active');
   }
 
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const open = menu.style.display === 'flex';
+    menu.style.display = open ? 'none' : 'flex';
+    document.body.style.overflow = open ? '' : 'hidden';
+    document.getElementById('menuIconOpen').style.display = open ? '' : 'none';
+    document.getElementById('menuIconClose').style.display = open ? 'none' : '';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').style.display = 'none';
+    document.body.style.overflow = '';
+    document.getElementById('menuIconOpen').style.display = '';
+    document.getElementById('menuIconClose').style.display = 'none';
+  }
 
   const navWrapper = document.querySelector('.nav-wrapper');
   window.addEventListener('scroll', () => {
