@@ -191,9 +191,26 @@
     .badge-copper { color:var(--c500); background:rgba(224,120,56,.1); border:1px solid rgba(224,120,56,.2); }
     .badge-teal   { color:var(--t500); background:rgba(20,174,174,.1);  border:1px solid rgba(20,174,174,.2); }
 
+    /* Table first-column expand */
+    .td-title { max-width:190px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
+    .td-title::after { content:'+'; position:absolute; right:.625rem; top:50%; transform:translateY(-50%); font-size:.75rem; font-family:'JetBrains Mono',monospace; color:var(--s700); line-height:1; transition:color .2s; pointer-events:none; }
+    .td-title.td-exp { white-space:normal; overflow:visible; text-overflow:clip; max-width:300px; cursor:default; }
+    .td-title.td-exp::after { content:'–'; color:var(--c500); }
+    /* Venue cells */
+    .venue-cell::before { content:''; display:inline-block; width:4px; height:4px; border-radius:50%; background:var(--s700); margin-right:.4rem; vertical-align:middle; position:relative; top:-1px; }
+    /* Placeholder / TBD dates */
+    .date-ph { color:var(--s800) !important; font-style:italic !important; }
+    /* Table header band */
+    .data-table thead th { background:var(--s850); }
+    /* Vacancy / batch count pills */
+    .vac-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--c500); background:rgba(224,120,56,.08); border:1px solid rgba(224,120,56,.18); border-radius:.25rem; padding:.1rem .35rem; margin-left:.375rem; white-space:nowrap; }
+    .batch-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--t500); background:rgba(20,174,174,.08); border:1px solid rgba(20,174,174,.18); border-radius:.25rem; padding:.1rem .35rem; margin-left:.375rem; white-space:nowrap; }
+
     /* Table row scroll reveal */
     .tr-reveal td { opacity:0; transform:translateX(-10px); transition:opacity .4s ease, transform .4s ease; }
     .tr-reveal.tr-in td { opacity:1; transform:none; }
+    .has-tooltip { border-bottom:1px dashed rgba(224,120,56,.35) !important; transition:color .2s, border-color .2s; }
+    .has-tooltip:hover { color:var(--c400) !important; border-color:rgba(224,120,56,.7) !important; }
 
     /* Trainer link button */
     .trainer-link { background:none; border:none; cursor:pointer; color:var(--t500); font-size:.875rem; font-family:'Space Grotesk',sans-serif; padding:0; text-decoration:underline; text-decoration-color:rgba(20,174,174,.35); text-underline-offset:3px; transition:color .2s, text-decoration-color .2s; }
@@ -288,6 +305,7 @@
     .mobile-nav-link:hover { color:var(--c500); }
 
     @media (max-width:768px) {
+      .ai-section-header { grid-template-columns:1fr !important; gap:1rem !important; }
       .audience-grid { grid-template-columns:1fr; }
       .stat-bar { flex-direction:column; }
       .stat-item { border-right:none; border-bottom:1px solid rgba(61,70,83,.4); }
@@ -420,8 +438,11 @@
 <!-- Nav -->
 <div class="nav-wrapper">
 <nav>
-  <a href="index.html" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;flex-shrink:0;">
-    <img src="logos/tiq-logo.png" alt="TIQWorld" style="height:32px;width:auto;object-fit:contain;flex-shrink:0;" />
+  <a href="index.html" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;flex-shrink:0;">
+    <div style="width:28px;height:28px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:2px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.25);">
+      <img src="logos/tiq-logo.png" alt="TIQWorld" style="width:100%;height:100%;object-fit:contain;" />
+    </div>
+    <span style="font-weight:700;font-size:.9375rem;letter-spacing:-.02em;color:var(--s100);">TIQ<span style="color:var(--c500);">World</span></span>
   </a>
 
   <div class="nav-links-desktop" style="display:flex;align-items:center;gap:1.75rem;">
@@ -515,7 +536,7 @@
           <div style="width:1px;height:70px;background:rgba(61,70,83,.4);flex-shrink:0;"></div>
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.625rem;padding:1rem 1.25rem;background:var(--s900);transition:background .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)'" onmouseout="this.style.background='var(--s900)'">
             <div style="width:38px;height:38px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;box-shadow:0 2px 8px rgba(0,0,0,.3);"><img src="logos/cnde-logo.jpeg" alt="CNDE" style="width:100%;height:100%;object-fit:contain;border-radius:.2rem;" /></div>
-            <div style="text-align:center;"><div style="font-size:.75rem;font-weight:600;color:var(--s200);white-space:nowrap;">CNDE</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Technical Partner</div></div>
+            <div style="text-align:center;"><div style="font-size:.75rem;font-weight:600;color:var(--s200);white-space:nowrap;">CNDE</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Research Partner</div></div>
           </div>
           <div style="width:1px;height:70px;background:rgba(61,70,83,.4);flex-shrink:0;"></div>
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.625rem;padding:1rem 1.25rem;background:var(--s900);transition:background .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)'" onmouseout="this.style.background='var(--s900)'">
@@ -713,13 +734,30 @@
 <section id="ai-tools" style="padding:6rem clamp(1.5rem,5vw,5rem);background:var(--s900);border-top:1px solid rgba(61,70,83,.3);">
   <div style="max-width:1100px;margin:0 auto;">
 
-    <div style="margin-bottom:2.5rem;">
-      <div class="section-label reveal">HI + AI Intelligence</div>
-      <h2 class="section-headline reveal d1">Precision Powered by HI+AI</h2>
-      <p class="reveal d2" style="margin-top:1rem;font-size:.9375rem;color:var(--s500);max-width:520px;line-height:1.65;">Hover over each feature to learn more.</p>
+    <!-- Section header: left headline + right subtitle -->
+    <div class="ai-section-header reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end;margin-bottom:3rem;">
+      <div>
+        <div class="section-label">HI + AI Intelligence</div>
+        <h2 class="section-headline" style="margin-bottom:0;">Precision<br/>Powered by<br/><span style="color:var(--c500);">HI+AI</span></h2>
+      </div>
+      <div style="padding-bottom:.25rem;">
+        <p style="font-size:.9375rem;color:var(--s500);line-height:1.7;margin-bottom:1.25rem;">Every tool is built from two perspectives — the <strong style="color:var(--s300);">engineer in the field</strong> and the <strong style="color:var(--s300);">organisation</strong> that depends on them.</p>
+        <div style="display:flex;align-items:center;gap:.625rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">
+          Hover a card to explore each tool
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-top:.875rem;">
+          <button id="aiPrev" onclick="scrollAiCards(-1)" aria-label="Previous" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(61,70,83,.5);background:var(--s850);color:var(--s400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='var(--c500)';this.style.color='var(--c500)'" onmouseout="this.style.borderColor='rgba(61,70,83,.5)';this.style.color='var(--s400)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button id="aiNext" onclick="scrollAiCards(1)" aria-label="Next" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(61,70,83,.5);background:var(--s850);color:var(--s400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='var(--c500)';this.style.color='var(--c500)'" onmouseout="this.style.borderColor='rgba(61,70,83,.5)';this.style.color='var(--s400)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <span id="aiDots" style="display:flex;gap:.375rem;margin-left:.375rem;"></span>
+        </div>
+      </div>
     </div>
 
-    <div class="ai-grid-wrap reveal d2">
+    <div class="ai-grid-wrap reveal d1">
       <div class="ai-grid">
 
         <div class="ai-hcard">
@@ -729,10 +767,10 @@
           <div class="ai-hcard-title">Smart CV &amp; Job Matching</div>
           <div class="ai-hcard-tag">Engineer · Recruiter</div>
           <div class="ai-hcard-detail">
-            <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.5rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
-            <p>Sign up and upload your resume — it becomes a Smart CV. You receive job alerts based on your verified skills and certifications, plus notifications on training courses aligned to your career growth.</p>
+            <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
+            <p>Upload your resume — it becomes a Smart CV. Get job alerts based on verified skills and certifications, plus training recommendations aligned to your career growth.</p>
             <p style="font-size:.75rem;font-weight:600;color:var(--t500);margin:.625rem 0 .375rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As a Recruiter</p>
-            <p>Post a job and receive responses from candidates with the exact skills and certifications your role demands — shortlisted, verified, and ready to evaluate.</p>
+            <p>Post a job and receive candidates with the exact skills your role demands — shortlisted, verified, ready to evaluate.</p>
             <button onclick="openModal()" class="ai-detail-cta" style="margin-top:.75rem;">Get Early Access <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
           </div>
         </div>
@@ -744,10 +782,10 @@
           <div class="ai-hcard-title">Training &amp; Certification</div>
           <div class="ai-hcard-tag">Engineer · Training Institute</div>
           <div class="ai-hcard-detail">
-            <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.5rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
-            <p>Choose courses suited to your career ladder. Enrol, get certified, and have your skills instantly added to your profile. Take skill assessments to earn a verified badge. Certifications are viewable on demand by employers.</p>
+            <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
+            <p>Choose courses for your career ladder. Enrol, get certified — skills are instantly added to your profile. Earn verified badges via skill assessments. Certifications viewable on demand.</p>
             <p style="font-size:.75rem;font-weight:600;color:var(--t500);margin:.625rem 0 .375rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As a Training Institute</p>
-            <p>Host your training and relax. TIQWorld takes care of enrolment, back-office processes, and accreditation requirements — so you focus on teaching.</p>
+            <p>Host your training and relax. TIQWorld handles enrolment, back-office, and accreditation — so you focus on teaching.</p>
             <button onclick="openModal()" class="ai-detail-cta" style="margin-top:.75rem;">Explore Courses <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
           </div>
         </div>
@@ -759,10 +797,10 @@
           <div class="ai-hcard-title">AI Report Studio</div>
           <div class="ai-hcard-tag">Engineer · Manufacturer / OEM</div>
           <div class="ai-hcard-detail">
-            <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.5rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
-            <p>Write complete inspection reports with ease — AI Report Studio ensures no condition of evidence is omitted and every report adheres to the relevant industry codes and standards automatically.</p>
+            <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
+            <p>Write complete inspection reports with ease — AI ensures no evidence condition is omitted and every report adheres to the relevant codes and standards.</p>
             <p style="font-size:.75rem;font-weight:600;color:var(--t500);margin:.625rem 0 .375rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As a Manufacturer / OEM</p>
-            <p>Receive standardised, audit-ready inspection reports from your field engineers. Export records directly into your quality management systems.</p>
+            <p>Receive standardised, audit-ready reports from field engineers. Export directly into your quality management systems.</p>
             <button onclick="openModal()" class="ai-detail-cta" style="margin-top:.75rem;">Request a Demo <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
           </div>
         </div>
@@ -772,17 +810,24 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#20c9c9" stroke-width="1.75"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
           <div class="ai-hcard-title">TIQWiki</div>
-          <div class="ai-hcard-tag">Coming Soon</div>
+          <div class="ai-hcard-tag" style="display:flex;align-items:center;gap:.5rem;">
+            Coming Soon
+            <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;padding:.15rem .4rem;border-radius:999px;background:rgba(20,174,174,.12);border:1px solid rgba(20,174,174,.25);color:var(--t500);">BETA</span>
+          </div>
           <div class="ai-hcard-detail">
-            <p style="font-size:.75rem;font-weight:600;color:var(--t500);margin-bottom:.5rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
-            <p>TIQWorld is launching TIQWiki — an 'Operating Quality Layer' you can rely upon while planning and executing quality assurance in the field. Instant access to NDT standards, procedures, and best practices — always current, always compliant.</p>
-            <span style="display:inline-block;margin-top:.75rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t600);">Launching Soon</span>
+            <p style="font-size:.75rem;font-weight:600;color:var(--t500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
+            <p>TIQWiki is your 'Operating Quality Layer' — rely on it while planning and executing quality assurance in the field. Instant access to NDT standards, procedures, and best practices — always current, always compliant.</p>
+            <span style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.875rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t600);">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Launching Soon
+            </span>
           </div>
         </div>
 
       </div>
-      <p style="margin-top:.75rem;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">Scroll right to see TIQWiki — more tools coming →</p>
     </div>
+
+
   </div>
 </section>
 
@@ -798,7 +843,7 @@
     <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t500);margin-bottom:1.25rem;" id="trainerSpec">—</div>
     <div style="display:flex;flex-direction:column;gap:.625rem;" id="trainerDetails"></div>
     <button onclick="openModal('enterprise');closeTrainerModal();" class="btn-primary" style="width:100%;justify-content:center;margin-top:1.5rem;font-size:.875rem;padding:.75rem 1.5rem;">
-      Contact This Trainer
+      Register for Training
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
   </div>
@@ -814,7 +859,7 @@
 <section style="padding:6rem clamp(1.5rem,5vw,5rem);border-top:1px solid rgba(61,70,83,.3);">
   <div style="max-width:1100px;margin:0 auto;">
     <div class="section-label reveal">Platform Activity</div>
-    <h2 class="section-headline reveal d1" style="margin-bottom:3rem;">What's Available<br/>on TIQWorld</h2>
+    <h2 class="section-headline reveal d1" style="margin-bottom:3rem;">Live on<br/><span style="color:var(--c500);">TIQWorld</span> Today</h2>
 
     <div class="reveal d2" style="display:flex;flex-direction:column;gap:2.5rem;margin-bottom:3rem;">
 
@@ -837,52 +882,53 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="tr-reveal">
-                <td>Welding Inspection <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(2)</span></td>
-                <td>Mumbai</td>
+              <tr class="tr-reveal" data-course="Welding Inspection" data-venue="Mumbai" data-type="Man Day" data-from="16-Jan-2023" data-to="20-Jan-2023" data-batches="Vacancies: 2 · Mumbai">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="vac-count">×2</span></td>
+                <td class="venue-cell">Mumbai</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">16-Jan-2023</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2023</td>
               </tr>
-              <tr class="tr-reveal">
-                <td>NDT Services <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(2)</span></td>
-                <td>Pune</td>
+              <tr class="tr-reveal" data-course="NDT Services" data-venue="Pune" data-type="Man Day" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 2 · Pune">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services<span class="vac-count">×2</span></td>
+                <td class="venue-cell">Pune</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
-              <tr class="tr-reveal">
-                <td>Six Sigma <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(1)</span></td>
-                <td>New Delhi</td>
+              <tr class="tr-reveal" data-course="Six Sigma" data-venue="New Delhi" data-type="Man Month" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 1 · New Delhi">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Six Sigma<span class="vac-count">×1</span></td>
+                <td class="venue-cell">New Delhi</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man Month</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
-              <tr class="tr-reveal">
-                <td>NDT Services, ASNT NDT ET 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
-                <td>Bhopal</td>
+              <tr class="tr-reveal" data-course="NDT Services, ASNT NDT ET 1" data-venue="Bhopal" data-type="Man Month" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 4 · Bhopal">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, ASNT NDT ET 1<span class="vac-count">×4</span></td>
+                <td class="venue-cell">Bhopal</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man Month</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
-              <tr class="tr-reveal">
-                <td>NDT Services, Welding Inspection, ASNT NDT RT 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(3)</span></td>
-                <td>Chennai</td>
+              <tr class="tr-reveal" data-course="NDT Services, Welding Inspection, ASNT NDT RT 1" data-venue="Chennai" data-type="Man Day" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 3 · Chennai">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, Welding Inspection, ASNT NDT RT 1<span class="vac-count">×3</span></td>
+                <td class="venue-cell">Chennai</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
-              <tr class="tr-reveal">
-                <td>NDT Services, Valves, Asset Integrity ASNT NDT RT 3 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
-                <td>Hubli</td>
+              <tr class="tr-reveal" data-course="NDT Services, Valves, Asset Integrity ASNT NDT RT 3" data-venue="Hubli" data-type="Man Day" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 4 · Hubli">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, Valves, Asset Integrity ASNT NDT RT 3<span class="vac-count">×4</span></td>
+                <td class="venue-cell">Hubli</td>
                 <td><span class="badge badge-copper">Man Day</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;justify-content:flex-end;">
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">6 positions listed</span>
             <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">Post a Job →</a>
           </div>
         </div>
@@ -913,12 +959,11 @@
                 data-course="Welding Inspection"
                 data-venue="Mumbai" data-type="Class Room"
                 data-from="13-Jan-2023" data-to="20-Jan-2023"
-                data-batches="Batch 1: 13-Jan · 9:00 AM|Batch 2: 16-Jan · 2:00 PM"
-                onmouseenter="showSchedule(event,this)" onmouseleave="hideSchedule()">
-                <td>Welding Inspection <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(2)</span></td>
+                data-batches="Batch 1: 13-Jan · 9:00 AM|Batch 2: 16-Jan · 2:00 PM">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="batch-count">×2</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Rajesh Kumar','RK','UT · RT · Welding Inspection','Mumbai','12 years experience','ISO 9712 · ASNT Level III')">Rajesh Kumar</button></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td>Mumbai</td>
+                <td class="venue-cell">Mumbai</td>
                 <td><span class="badge badge-teal">Class Room</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">13-Jan-2023</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2023</td>
@@ -927,76 +972,72 @@
                 data-course="NDT Services"
                 data-venue="Pune" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD"
-                onmouseenter="showSchedule(event,this)" onmouseleave="hideSchedule()">
-                <td>NDT Services <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(2)</span></td>
+                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services<span class="batch-count">×2</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td>Pune</td>
+                <td class="venue-cell">Pune</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Web Based</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
               <tr class="tr-reveal"
                 data-course="Six Sigma"
                 data-venue="New Delhi" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online"
-                onmouseenter="showSchedule(event,this)" onmouseleave="hideSchedule()">
-                <td>Six Sigma <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(1)</span></td>
+                data-batches="Batch 1: Upcoming · Online">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Six Sigma<span class="batch-count">×1</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Priya Sharma','PS','Six Sigma · Quality Management','New Delhi','15 years experience','Six Sigma Black Belt · ISO 9001')">Priya Sharma</button></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td>New Delhi</td>
+                <td class="venue-cell">New Delhi</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Web Based</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
               <tr class="tr-reveal"
                 data-course="NDT Services ASNT NDT ET 1"
                 data-venue="Bhopal" data-type="Class Room"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Bhopal"
-                onmouseenter="showSchedule(event,this)" onmouseleave="hideSchedule()">
-                <td>NDT Services ASNT NDT ET 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
+                data-batches="Batch 1: Upcoming · Bhopal">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services ASNT NDT ET 1<span class="batch-count">×4</span></td>
                 <td><span style="font-size:.875rem;color:var(--s600);">—</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td>Bhopal</td>
+                <td class="venue-cell">Bhopal</td>
                 <td><span class="badge badge-teal">Class Room</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
               <tr class="tr-reveal"
                 data-course="NDT Services, Welding Inspection, ASNT NDT RT 1"
                 data-venue="Chennai" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online"
-                onmouseenter="showSchedule(event,this)" onmouseleave="hideSchedule()">
-                <td>NDT Services, Welding Inspection, ASNT NDT RT 1 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(3)</span></td>
+                data-batches="Batch 1: Upcoming · Online">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, Welding Inspection, ASNT NDT RT 1<span class="batch-count">×3</span></td>
                 <td><span style="font-size:.875rem;color:var(--s600);">—</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td>Chennai</td>
+                <td class="venue-cell">Chennai</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Web Based</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
               <tr class="tr-reveal"
                 data-course="NDT Services, Valves, Asset Integrity ASNT NDT RT 3"
                 data-venue="Hubli" data-type="Web Based"
                 data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online"
-                onmouseenter="showSchedule(event,this)" onmouseleave="hideSchedule()">
-                <td>NDT Services, Valves, Asset Integrity ASNT NDT RT 3 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--s600);">(4)</span></td>
+                data-batches="Batch 1: Upcoming · Online">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, Valves, Asset Integrity ASNT NDT RT 3<span class="batch-count">×4</span></td>
                 <td><span style="font-size:.875rem;color:var(--s600);">—</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td>Hubli</td>
+                <td class="venue-cell">Hubli</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Web Based</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--s600);">dd-Mon-yyyy</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;justify-content:flex-end;">
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">6 courses listed</span>
             <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">List Your Courses →</a>
           </div>
         </div>
@@ -1143,7 +1184,6 @@
       <div class="logo-box"><img src="logos/iitm-logo.png" alt="IIT Madras" style="height:42px;width:auto;object-fit:contain;" /></div>
       <div class="logo-box"><img src="logos/cnde-logo.jpeg" alt="CNDE" style="height:42px;width:auto;object-fit:contain;" /></div>
       <div class="logo-box"><img src="logos/incubation-logo.png" alt="IITM Incubation Cell" style="height:42px;width:auto;object-fit:contain;" /></div>
-      <div class="logo-box" style="width:64px;height:60px;padding:.5rem;"><img src="logos/tiq-logo.png" alt="TIQ World" style="height:100%;width:auto;object-fit:contain;" /></div>
       <p style="max-width:320px;margin-left:auto;font-size:.875rem;color:var(--s600);line-height:1.7;">
         Developed within IIT Madras's Centre for Non-Destructive Evaluation and incubated at IITM — bringing academic rigour to industrial quality assurance.
       </p>
@@ -1177,14 +1217,25 @@
 <footer style="background:var(--s950);border-top:1px solid rgba(61,70,83,.3);padding:3.5rem clamp(1.5rem,5vw,5rem) 2rem;">
   <div style="max-width:1100px;margin:0 auto;">
 
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(61,70,83,.3);">
-      <div style="display:flex;align-items:center;gap:.75rem;">
-        <div style="width:32px;height:32px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;flex-shrink:0;">
-          <img src="logos/tiq-logo.png" alt="TIQ" style="width:100%;height:100%;object-fit:contain;" />
+    <!-- Footer top: logo + tagline + incubation badge -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(61,70,83,.25);">
+      <div style="max-width:340px;">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.875rem;">
+          <div style="width:32px;height:32px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.3);">
+            <img src="logos/tiq-logo.png" alt="TIQ" style="width:100%;height:100%;object-fit:contain;" />
+          </div>
+          <span style="font-weight:700;font-size:1rem;letter-spacing:-.02em;color:var(--s100);">TIQ<span style="color:var(--c500);">World</span></span>
         </div>
-        <span style="font-weight:700;font-size:1rem;color:var(--s100);">TIQWorld</span>
+        <p style="font-size:.875rem;color:var(--s600);line-height:1.65;margin-bottom:1rem;">The digital layer for manufacturing quality — connecting NDT professionals, training providers, manufacturers, and recruiters.</p>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <div style="width:5px;height:5px;border-radius:50%;background:var(--c500);animation:pulseDot 2.5s ease-in-out infinite;flex-shrink:0;"></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--s700);">IIT Madras Incubated · Early Access Open</span>
+        </div>
       </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--s700);">© 2025 TIQWorld · IIT Madras Incubated · Quality Intelligence Platform</span>
+      <button onclick="openModal()" class="btn-primary" style="font-size:.875rem;padding:.75rem 1.5rem;align-self:center;">
+        Get Early Access
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     </div>
 
     <div class="footer-cols" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;margin-bottom:2.5rem;">
@@ -1230,10 +1281,15 @@
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid rgba(61,70,83,.2);">
-      <div style="display:flex;gap:1.25rem;">
+      <div style="display:flex;align-items:center;gap:1.5rem;">
+        <span style="font-size:.8125rem;color:var(--s700);">© 2026 TIQWorld. All rights reserved.</span>
         <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Privacy</a>
         <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Terms</a>
       </div>
+      <a href="https://linkedin.com/company/tiqworld" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.5rem;font-size:.8125rem;color:var(--s600);text-decoration:none;" onmouseover="this.style.color='var(--s300)'" onmouseout="this.style.color='var(--s600)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.327-.025-3.036-1.849-3.036-1.851 0-2.135 1.445-2.135 2.939v5.666H9.989V9h3.099v1.562h.044c.43-.815 1.48-1.674 3.048-1.674 3.261 0 3.863 2.146 3.863 4.938v6.626zM5.337 7.433a1.796 1.796 0 1 1 0-3.591 1.796 1.796 0 0 1 0 3.591zm1.553 13.019H3.782V9h3.108v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
     </div>
 
   </div>
@@ -1310,6 +1366,41 @@
     document.getElementById('menuIconOpen').style.display = '';
     document.getElementById('menuIconClose').style.display = 'none';
   }
+
+  /* Table first-column expand/collapse */
+  function toggleTdTitle(el) {
+    el.classList.toggle('td-exp');
+  }
+
+  /* AI cards scroll buttons */
+  (function() {
+    const grid = document.querySelector('.ai-grid');
+    const dotsEl = document.getElementById('aiDots');
+    if (!grid || !dotsEl) return;
+    const cards = grid.querySelectorAll('.ai-hcard');
+    const count = cards.length;
+    const dots = [];
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('span');
+      d.style.cssText = 'display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--s700);transition:background .2s,transform .2s;';
+      dotsEl.appendChild(d);
+      dots.push(d);
+    }
+    function updateDots() {
+      const cardW = cards[0].offsetWidth;
+      const idx = Math.round(grid.scrollLeft / cardW);
+      dots.forEach((d, i) => {
+        d.style.background = i === idx ? 'var(--c500)' : 'var(--s700)';
+        d.style.transform = i === idx ? 'scale(1.4)' : 'scale(1)';
+      });
+    }
+    grid.addEventListener('scroll', updateDots, { passive: true });
+    updateDots();
+    window.scrollAiCards = function(dir) {
+      const cardW = cards[0].offsetWidth;
+      grid.scrollBy({ left: dir * cardW, behavior: 'smooth' });
+    };
+  })();
 
   const navWrapper = document.querySelector('.nav-wrapper');
   window.addEventListener('scroll', () => {
