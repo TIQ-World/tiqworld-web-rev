@@ -540,8 +540,8 @@
     <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
     <a href="#pricing" class="nav-link" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
     <a href="#" class="nav-link">Marketplace</a>
-    <a href="#industry-partners" class="nav-link" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
     <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#industry-partners" class="nav-link" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
     <!-- Language selector -->
     <div class="lang-selector" id="langSelector">
       <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select language">
@@ -591,8 +591,8 @@
   <a href="#ai-tools" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
   <a href="#pricing" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
   <a href="#" class="mobile-nav-link" onclick="closeMobileMenu()">Marketplace</a>
-  <a href="#industry-partners" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
   <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#industry-partners" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
   <div style="height:1px;background:rgba(61,70,83,.3);margin:.5rem 0;"></div>
   <button onclick="openModal();closeMobileMenu();" class="btn-primary" style="justify-content:center;font-size:1rem;padding:1rem 2rem;">
     Get Early Access
@@ -639,7 +639,7 @@
         </a>
       </div>
 
-      <div id="industry-partners" style="margin-top:3.5rem;animation:fadeUp .7s ease-out .75s both;">
+      <div style="margin-top:3.5rem;animation:fadeUp .7s ease-out .75s both;">
         <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
           <div style="flex:0 0 2rem;height:1px;background:rgba(61,70,83,.4);"></div>
           <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--s700);white-space:nowrap;">Backed &amp; Incubated by</span>
@@ -1613,6 +1613,137 @@
 
           </tbody>
         </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Industry Partners -->
+<section id="industry-partners" style="padding:5rem clamp(1.5rem,5vw,5rem);border-top:1px solid rgba(61,70,83,.3);background:var(--s900);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label reveal">Institutional Backing</div>
+    <h2 class="section-headline reveal d1" style="margin-bottom:.75rem;">INDUSTRY TRUSTED<br/><span style="color:var(--c500);">PLATFORM</span></h2>
+    <p class="reveal d2" style="font-size:1rem;color:var(--s400);line-height:1.7;max-width:600px;margin-bottom:3rem;">In collaboration with IIT Madras Incubation Centre and CNDE, trusted by manufacturing companies, academic institutions, and NDT societies worldwide.</p>
+
+    <!-- Logo grid -->
+    <div class="reveal d2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem;">
+
+      <!-- IIT Madras -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(61,70,83,.35);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(224,120,56,.35)';this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.borderColor='rgba(61,70,83,.35)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;display:flex;align-items:center;justify-content:center;"><img src="logos/iitm-logo.png" alt="IIT Madras" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">IIT Madras</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Incubation Centre</div></div>
+      </div>
+
+      <!-- CNDE -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(61,70,83,.35);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(224,120,56,.35)';this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.borderColor='rgba(61,70,83,.35)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;display:flex;align-items:center;justify-content:center;"><img src="logos/cnde-logo.jpeg" alt="CNDE" style="width:100%;height:100%;object-fit:contain;border-radius:.25rem;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">CNDE</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Centre for NDE</div></div>
+      </div>
+
+      <!-- IITM Incubation -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(61,70,83,.35);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(224,120,56,.35)';this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.borderColor='rgba(61,70,83,.35)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:5px;"><img src="logos/incubation-logo.png" alt="IITM Incubation" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">IITM Incubation</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Innovation &amp; E'ship</div></div>
+      </div>
+
+      <!-- American Express -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(61,70,83,.35);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(224,120,56,.35)';this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.borderColor='rgba(61,70,83,.35)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;background:#016FD0;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:8px;"><img src="logos/american-express.svg" alt="American Express" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">American Express</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Partner</div></div>
+      </div>
+
+      <!-- ISNT -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(20,174,174,.2);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(20,174,174,.45)';this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.borderColor='rgba(20,174,174,.2)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:5px;"><img src="logos/isnt-logo.png" alt="ISNT" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">ISNT</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--t600);margin-top:.25rem;">Academic Partner</div></div>
+      </div>
+
+      <!-- ASNT -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(20,174,174,.2);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(20,174,174,.45)';this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.borderColor='rgba(20,174,174,.2)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:5px;"><img src="logos/asnt-logo.png" alt="ASNT" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">ASNT</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--t600);margin-top:.25rem;">Academic Partner</div></div>
+      </div>
+
+      <!-- BARC -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(20,174,174,.2);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(20,174,174,.45)';this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.borderColor='rgba(20,174,174,.2)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:5px;"><img src="logos/barc-logo.jpg" alt="BARC" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">BARC</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--t600);margin-top:.25rem;">Academic Partner</div></div>
+      </div>
+
+      <!-- BINDT -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;padding:1.5rem 1rem;background:var(--s850);border:1px solid rgba(20,174,174,.2);border-radius:1rem;transition:background .25s,border-color .25s;" onmouseover="this.style.borderColor='rgba(20,174,174,.45)';this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.borderColor='rgba(20,174,174,.2)';this.style.background='var(--s850)'">
+        <div style="width:64px;height:56px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:5px;"><img src="logos/bindt-logo.png" alt="BINDT" style="width:100%;height:100%;object-fit:contain;"/></div>
+        <div style="text-align:center;"><div style="font-size:.875rem;font-weight:600;color:var(--s100);">BINDT</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--t600);margin-top:.25rem;">Academic Partner</div></div>
+      </div>
+
+    </div>
+
+    <!-- Company marquee label -->
+    <div class="reveal d3" style="text-align:center;margin-bottom:1.5rem;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--s600);">Trusted by leading industry companies</span>
+    </div>
+    <div class="reveal d3" style="border:1px solid rgba(61,70,83,.25);border-radius:.75rem;overflow:hidden;">
+      <div class="marquee-wrap" style="border:none;padding:.875rem 0;">
+        <div class="marquee-track">
+          <span class="marquee-item"><img src="logos/GAIL Logo.png" alt="GAIL" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/RIL Logo.png" alt="Reliance" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Thermax Logo.png" alt="Thermax" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/TWI Logo.png" alt="TWI" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Welspun.png" alt="Welspun" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/lt-logo.png" alt="L&T" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Sigma NDT Logo.png" alt="Sigma NDT" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Trinity-NDT-Logo.png" alt="Trinity NDT" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/QInsight.png" alt="QInsight" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/PALLAKKI-LOGO.png" alt="Pallakki" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Meena International.png" alt="Meena International" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/KQSPL.jpg" alt="KQSPL" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Dhvani.jpg" alt="Dhvani" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/pradeep-logo.png" alt="Pradeep Group" class="marquee-logo"></span>
+          <!-- duplicate -->
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/GAIL Logo.png" alt="GAIL" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/RIL Logo.png" alt="Reliance" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Thermax Logo.png" alt="Thermax" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/TWI Logo.png" alt="TWI" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Welspun.png" alt="Welspun" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/lt-logo.png" alt="L&T" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Sigma NDT Logo.png" alt="Sigma NDT" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Trinity-NDT-Logo.png" alt="Trinity NDT" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/QInsight.png" alt="QInsight" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/PALLAKKI-LOGO.png" alt="Pallakki" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Meena International.png" alt="Meena International" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/KQSPL.jpg" alt="KQSPL" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/Dhvani.jpg" alt="Dhvani" class="marquee-logo"></span>
+          <span class="marquee-sep"></span>
+          <span class="marquee-item"><img src="logos/pradeep-logo.png" alt="Pradeep Group" class="marquee-logo"></span>
+        </div>
       </div>
     </div>
 
