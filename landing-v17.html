@@ -146,17 +146,20 @@
     .card-cta:hover { gap:.875rem; }
 
     /* Marquee */
-    .marquee-wrap { overflow:hidden; border-top:1px solid rgba(61,70,83,.3); border-bottom:1px solid rgba(61,70,83,.3); background:rgba(13,18,25,.7); }
+    .marquee-wrap { overflow:hidden; width:100%; border-top:1px solid rgba(61,70,83,.35); border-bottom:1px solid rgba(61,70,83,.35); background:var(--s950,rgba(10,14,20,.85)); }
     .marquee-track { display:flex; width:max-content; animation:marquee 32s linear infinite; }
     .marquee-track:hover { animation-play-state:paused; }
-    .marquee-item { display:inline-flex; align-items:center; gap:.75rem; padding:.875rem 1.75rem; border-right:1px solid rgba(61,70,83,.3); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--s500); white-space:nowrap; transition:color .2s, background .2s; cursor:default; }
-    .marquee-item:hover { color:var(--s200); background:rgba(224,120,56,.04); }
-    .marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--c500); opacity:.7; flex-shrink:0; transition:opacity .2s; }
+    .marquee-item { display:inline-flex; align-items:center; gap:.75rem; padding:.875rem 1.75rem; border-right:1px solid rgba(61,70,83,.25); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--s400); white-space:nowrap; transition:color .2s, background .2s; cursor:default; }
+    .marquee-item:hover { color:var(--s100); background:rgba(224,120,56,.06); }
+    .marquee-dot { width:5px; height:5px; border-radius:50%; background:var(--c500); opacity:.8; flex-shrink:0; transition:opacity .2s; }
     .marquee-item:hover .marquee-dot { opacity:1; background:var(--c500); }
+    [data-theme="light"] .marquee-wrap { background:rgba(235,235,240,.9); }
+    [data-theme="light"] .marquee-item { color:var(--s600,#4a5568); border-right-color:rgba(61,70,83,.15); }
+    [data-theme="light"] .marquee-item:hover { color:var(--s900,#1a202c); background:rgba(224,120,56,.06); }
 
     /* AI Tools */
-    .ai-grid-wrap { position:relative; }
-    .ai-grid-wrap::after { content:''; position:absolute; top:1px; right:0; bottom:0; width:60px; background:linear-gradient(to right, transparent, var(--s900) 90%); pointer-events:none; z-index:2; }
+    .ai-grid-wrap { position:relative; padding:0 22px; }
+    .ai-grid-wrap::after { content:''; position:absolute; top:1px; right:22px; bottom:0; width:60px; background:linear-gradient(to right, transparent, var(--s900) 90%); pointer-events:none; z-index:2; }
     .ai-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; border:1px solid rgba(61,70,83,.3); border-radius:.75rem; }
     .ai-grid::-webkit-scrollbar { display:none; }
     .ai-hcard, .ai-hcard.teal-card { position:relative; background:var(--s900); border-right:1px solid rgba(61,70,83,.3); padding:2rem 1.75rem 1.75rem; min-height:360px; flex:0 0 300px; width:300px; display:flex; flex-direction:column; overflow:hidden; cursor:default; scroll-snap-align:start; transition:background .35s; }
@@ -650,6 +653,16 @@
             <div style="width:56px;height:48px;display:flex;align-items:center;justify-content:center;"><img src="logos/american-express.png" alt="American Express" style="width:100%;height:100%;object-fit:contain;border-radius:.375rem;" /></div>
             <div style="text-align:center;"><div style="font-size:.7rem;font-weight:600;color:var(--s200);white-space:nowrap;">Amex</div><div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Partner</div></div>
           </div>
+          <!-- ISNT -->
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:1rem 1.25rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;width:110px;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
+            <div style="width:56px;height:48px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;"><img src="logos/isnt-logo.jpeg" alt="ISNT" style="width:100%;height:100%;object-fit:contain;" /></div>
+            <div style="text-align:center;"><div style="font-size:.7rem;font-weight:600;color:var(--s200);white-space:nowrap;">ISNT</div><div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Academic Partner</div></div>
+          </div>
+          <!-- ASNT -->
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:1rem 1.25rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;width:110px;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
+            <div style="width:56px;height:48px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;"><img src="logos/asnt-logo.jpeg" alt="ASNT" style="width:100%;height:100%;object-fit:contain;" /></div>
+            <div style="text-align:center;"><div style="font-size:.7rem;font-weight:600;color:var(--s200);white-space:nowrap;">ASNT</div><div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);margin-top:.15rem;">Academic Partner</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -881,7 +894,14 @@
       </div>
     </div>
 
-    <div class="ai-grid-wrap reveal d1">
+    <div class="ai-grid-wrap reveal d1" style="position:relative;">
+      <!-- Side scroll arrows -->
+      <button onclick="scrollAiCards(-1)" aria-label="Previous" style="position:absolute;left:-18px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;border:1px solid rgba(61,70,83,.5);background:var(--s850);color:var(--s400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s,background .2s;box-shadow:0 2px 8px rgba(0,0,0,.3);" onmouseover="this.style.borderColor='var(--c500)';this.style.color='var(--c500)';this.style.background='var(--s800)'" onmouseout="this.style.borderColor='rgba(61,70,83,.5)';this.style.color='var(--s400)';this.style.background='var(--s850)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button onclick="scrollAiCards(1)" aria-label="Next" style="position:absolute;right:-18px;top:50%;transform:translateY(-50%);z-index:10;width:36px;height:36px;border-radius:50%;border:1px solid rgba(61,70,83,.5);background:var(--s850);color:var(--s400);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s,background .2s;box-shadow:0 2px 8px rgba(0,0,0,.3);" onmouseover="this.style.borderColor='var(--c500)';this.style.color='var(--c500)';this.style.background='var(--s800)'" onmouseout="this.style.borderColor='rgba(61,70,83,.5)';this.style.color='var(--s400)';this.style.background='var(--s850)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
       <div class="ai-grid">
 
         <div class="ai-hcard">
