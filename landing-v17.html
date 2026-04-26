@@ -538,10 +538,10 @@
   <div class="nav-links-desktop" style="display:flex;align-items:center;gap:1.75rem;">
     <a href="#audience" class="nav-link" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
     <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+    <a href="#faq" class="nav-link" onclick="event.preventDefault();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
     <a href="#pricing" class="nav-link" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
-    <a href="#" class="nav-link">Marketplace</a>
-    <a href="#faq" class="nav-link">FAQ</a>
     <a href="#industry-partners" class="nav-link" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
+    <a href="#" class="nav-link">Marketplace</a>
     <!-- Language selector -->
     <div class="lang-selector" id="langSelector">
       <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select language">
@@ -589,10 +589,10 @@
 <div id="mobileMenu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:49;background:rgba(13,18,25,.96);backdrop-filter:blur(16px);padding:5rem 2rem 2rem;flex-direction:column;gap:1.5rem;">
   <a href="#audience" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
   <a href="#ai-tools" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+  <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
   <a href="#pricing" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
-  <a href="#" class="mobile-nav-link" onclick="closeMobileMenu()">Marketplace</a>
-  <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()">FAQ</a>
   <a href="#industry-partners" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
+  <a href="#" class="mobile-nav-link" onclick="closeMobileMenu()">Marketplace</a>
   <div style="height:1px;background:rgba(61,70,83,.3);margin:.5rem 0;"></div>
   <button onclick="openModal();closeMobileMenu();" class="btn-primary" style="justify-content:center;font-size:1rem;padding:1rem 2rem;">
     Get Early Access
@@ -639,52 +639,22 @@
         </a>
       </div>
 
-      <div style="margin-top:3.5rem;animation:fadeUp .7s ease-out .75s both;">
-        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+      <div style="margin-top:3rem;animation:fadeUp .7s ease-out .75s both;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;">
           <div style="flex:0 0 2rem;height:1px;background:rgba(61,70,83,.4);"></div>
           <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--s700);white-space:nowrap;">Backed &amp; Incubated by</span>
           <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(61,70,83,.4),transparent);"></div>
         </div>
-        <div class="logo-grid">
-          <!-- IIT Madras -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><img src="logos/iitm-logo.png" alt="IIT Madras" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">IIT Madras</div><div class="logo-card-sub">Incubation</div></div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+          <!-- IIT Madras Incubation Cell -->
+          <div style="display:flex;align-items:center;gap:.625rem;padding:.625rem .875rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.75rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
+            <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><img src="logos/iitm-logo.png" alt="IIT Madras" style="width:100%;height:100%;object-fit:contain;" /></div>
+            <div><div style="font-size:.75rem;font-weight:600;color:var(--s100);white-space:nowrap;">IIT Madras</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:var(--s600);margin-top:.1rem;">Incubation Cell</div></div>
           </div>
           <!-- CNDE -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><img src="logos/cnde-logo.jpeg" alt="CNDE" style="width:100%;height:100%;object-fit:contain;border-radius:.25rem;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">CNDE</div><div class="logo-card-sub">Centre for NDE</div></div>
-          </div>
-          <!-- IITM Incubation Cell -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;background:#fff;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:4px;flex-shrink:0;"><img src="logos/incubation-logo.png" alt="IITM Incubation Cell" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">IITM Incub.</div><div class="logo-card-sub">Innovation</div></div>
-          </div>
-          <!-- American Express -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;background:#016FD0;border-radius:.5rem;display:flex;align-items:center;justify-content:center;padding:5px;flex-shrink:0;"><img src="logos/american-express.svg" alt="American Express" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">Amex</div><div class="logo-card-sub">Partner</div></div>
-          </div>
-          <!-- ISNT -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;flex-shrink:0;"><img src="logos/isnt-logo.png" alt="ISNT" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">ISNT</div><div class="logo-card-sub">Academic Partner</div></div>
-          </div>
-          <!-- ASNT -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;flex-shrink:0;"><img src="logos/asnt-logo.png" alt="ASNT" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">ASNT</div><div class="logo-card-sub">Academic Partner</div></div>
-          </div>
-          <!-- BARC -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;flex-shrink:0;"><img src="logos/barc-logo.jpg" alt="BARC" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">BARC</div><div class="logo-card-sub">Academic Partner</div></div>
-          </div>
-          <!-- BINDT -->
-          <div class="logo-grid-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:.875rem .5rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.875rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
-            <div style="width:48px;height:44px;background:#fff;border-radius:.375rem;display:flex;align-items:center;justify-content:center;padding:3px;flex-shrink:0;"><img src="logos/bindt-logo.png" alt="BINDT" style="width:100%;height:100%;object-fit:contain;" /></div>
-            <div style="text-align:center;width:100%;"><div class="logo-card-label">BINDT</div><div class="logo-card-sub">Academic Partner</div></div>
+          <div style="display:flex;align-items:center;gap:.625rem;padding:.625rem .875rem;background:var(--s900);border:1px solid rgba(61,70,83,.35);border-radius:.75rem;transition:background .25s,border-color .25s;cursor:default;" onmouseover="this.style.background='rgba(224,120,56,.06)';this.style.borderColor='rgba(224,120,56,.25)'" onmouseout="this.style.background='var(--s900)';this.style.borderColor='rgba(61,70,83,.35)'">
+            <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><img src="logos/cnde-logo.jpeg" alt="CNDE" style="width:100%;height:100%;object-fit:contain;border-radius:.25rem;" /></div>
+            <div><div style="font-size:.75rem;font-weight:600;color:var(--s100);white-space:nowrap;">CNDE</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:var(--s600);margin-top:.1rem;">Centre for NDE</div></div>
           </div>
         </div>
       </div>
@@ -1923,27 +1893,29 @@
   /* AI cards scroll buttons */
   (function() {
     const grid = document.querySelector('.ai-grid');
-    const dotsEl = document.getElementById('aiDots');
-    if (!grid || !dotsEl) return;
+    if (!grid) return;
     const cards = grid.querySelectorAll('.ai-hcard');
-    const count = cards.length;
+    if (!cards.length) return;
+    const dotsEl = document.getElementById('aiDots');
     const dots = [];
-    for (let i = 0; i < count; i++) {
-      const d = document.createElement('span');
-      d.style.cssText = 'display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--s700);transition:background .2s,transform .2s;';
-      dotsEl.appendChild(d);
-      dots.push(d);
+    if (dotsEl) {
+      for (let i = 0; i < cards.length; i++) {
+        const d = document.createElement('span');
+        d.style.cssText = 'display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--s700);transition:background .2s,transform .2s;';
+        dotsEl.appendChild(d);
+        dots.push(d);
+      }
+      function updateDots() {
+        const cardW = cards[0].offsetWidth;
+        const idx = Math.round(grid.scrollLeft / cardW);
+        dots.forEach((d, i) => {
+          d.style.background = i === idx ? 'var(--c500)' : 'var(--s700)';
+          d.style.transform = i === idx ? 'scale(1.4)' : 'scale(1)';
+        });
+      }
+      grid.addEventListener('scroll', updateDots, { passive: true });
+      updateDots();
     }
-    function updateDots() {
-      const cardW = cards[0].offsetWidth;
-      const idx = Math.round(grid.scrollLeft / cardW);
-      dots.forEach((d, i) => {
-        d.style.background = i === idx ? 'var(--c500)' : 'var(--s700)';
-        d.style.transform = i === idx ? 'scale(1.4)' : 'scale(1)';
-      });
-    }
-    grid.addEventListener('scroll', updateDots, { passive: true });
-    updateDots();
     window.scrollAiCards = function(dir) {
       const cardW = cards[0].offsetWidth;
       grid.scrollBy({ left: dir * cardW, behavior: 'smooth' });
