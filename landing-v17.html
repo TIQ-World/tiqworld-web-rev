@@ -158,7 +158,7 @@
     .marquee-track:hover { animation-play-state:paused; }
     .marquee-item { display:inline-flex; align-items:center; justify-content:center; padding:.5rem 1.25rem; height:52px; flex-shrink:0; transition:opacity .2s; opacity:.7; background:rgba(255,255,255,.07); border-radius:.5rem; margin:0 .625rem; }
     .marquee-item:hover { opacity:1; background:rgba(255,255,255,.12); }
-    .marquee-logo { height:28px; width:auto; max-width:100px; object-fit:contain; filter:grayscale(100%) brightness(1.8) contrast(.9); transition:filter .25s; }
+    .marquee-logo { height:40px; width:auto; max-width:120px; object-fit:contain; filter:grayscale(100%) brightness(1.8) contrast(.9); transition:filter .25s; }
     .marquee-item:hover .marquee-logo { filter:grayscale(0%) brightness(1) contrast(1); }
     .marquee-sep { width:3px; height:3px; border-radius:50%; background:rgba(61,70,83,.6); margin:0 0; flex-shrink:0; }
     body.light-mode .marquee-wrap { background:hsl(30,8%,93%); border-top-color:rgba(0,0,0,.08); border-bottom-color:rgba(0,0,0,.08); }
@@ -178,7 +178,7 @@
     .ai-grid-wrap::after { content:''; position:absolute; top:1px; right:22px; bottom:0; width:60px; background:linear-gradient(to right, transparent, var(--s900) 90%); pointer-events:none; z-index:2; }
     .ai-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; border:1px solid rgba(61,70,83,.3); border-radius:.75rem; }
     .ai-grid::-webkit-scrollbar { display:none; }
-    .ai-hcard, .ai-hcard.teal-card { position:relative; background:var(--s900); border-right:1px solid rgba(61,70,83,.3); padding:2rem 1.75rem 1.75rem; min-height:360px; flex:0 0 300px; width:300px; display:flex; flex-direction:column; overflow:hidden; cursor:default; scroll-snap-align:start; transition:background .35s; }
+    .ai-hcard, .ai-hcard.teal-card { position:relative; background:var(--s900); border-right:1px solid rgba(61,70,83,.3); padding:2rem 1.75rem 1.75rem; min-height:210px; flex:0 0 300px; width:300px; display:flex; flex-direction:column; overflow:hidden; cursor:default; scroll-snap-align:start; transition:background .35s; }
     .ai-hcard:last-child { border-right:none; }
     .ai-hcard::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--c500); transform:scaleX(0); transform-origin:left; transition:transform .35s ease; }
     .ai-hcard.teal-card::before { background:var(--t500); }
@@ -194,7 +194,8 @@
     .ai-hcard:hover .ai-hcard-icon { background:rgba(224,120,56,.18); border-color:rgba(224,120,56,.35); transform:scale(1.1); }
     .ai-hcard.teal-card:hover .ai-hcard-icon { background:rgba(20,174,174,.18); border-color:rgba(20,174,174,.35); }
     .ai-hcard-title { font-size:1rem; font-weight:700; color:var(--s100); letter-spacing:-.015em; line-height:1.35; margin-bottom:.5rem; }
-    .ai-hcard-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--c500); margin-bottom:auto; }
+    .ai-hcard-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--c500); margin-bottom:.875rem; }
+    .ai-hcard-desc { font-size:.8125rem; color:var(--s500); line-height:1.6; }
     .ai-hcard.teal-card .ai-hcard-tag { color:var(--t500); }
     .ai-hcard-detail { position:absolute; left:0; right:0; bottom:0; background:var(--s850); border-top:1px solid rgba(61,70,83,.3); padding:1.25rem 1.75rem 1.5rem; transform:translateY(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); }
     .ai-hcard:hover .ai-hcard-detail { transform:translateY(0); }
@@ -869,6 +870,7 @@
           </div>
           <div class="ai-hcard-title">Smart CV &amp; Job Matching</div>
           <div class="ai-hcard-tag">Engineer · Recruiter</div>
+          <div class="ai-hcard-desc">Build a verified portfolio. Get AI-matched job alerts. Recruiters receive shortlisted, competency-verified candidates ready to hire.</div>
           <div class="ai-hcard-detail">
             <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
             <p>Upload your resume. It becomes a Smart CV. Get job alerts based on verified skills and certifications, plus training recommendations aligned to your career growth.</p>
@@ -884,6 +886,7 @@
           </div>
           <div class="ai-hcard-title">Training &amp; Certification</div>
           <div class="ai-hcard-tag">Engineer · Training Institute</div>
+          <div class="ai-hcard-desc">Enrol in NDT courses, earn verified badges, and build your career ladder. Institutes manage enrolment, certificates, and analytics in one place.</div>
           <div class="ai-hcard-detail">
             <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
             <p>Choose courses for your career ladder. Enrol, get certified. Skills are instantly added to your profile. Earn verified badges via skill assessments. Certifications viewable on demand.</p>
@@ -899,6 +902,7 @@
           </div>
           <div class="ai-hcard-title">AI Report Studio</div>
           <div class="ai-hcard-tag">Engineer · Manufacturer / OEM</div>
+          <div class="ai-hcard-desc">Write complete, code-compliant inspection reports in the field. Manufacturers receive standardised, audit-ready records directly into their QMS.</div>
           <div class="ai-hcard-detail">
             <p style="font-size:.75rem;font-weight:600;color:var(--c500);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;">As an Engineer</p>
             <p>Write complete inspection reports with ease. AI ensures no evidence condition is omitted and every report adheres to the relevant codes and standards.</p>
@@ -1617,7 +1621,7 @@
 
     <!-- Company marquee label -->
     <div class="reveal d3" style="text-align:center;margin-bottom:1.5rem;">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--s600);">Trusted by leading industry companies</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--s600);">Trusted by Leading Companies</span>
     </div>
     <div class="reveal d3" style="border:1px solid rgba(61,70,83,.25);border-radius:.75rem;overflow:hidden;">
       <div class="marquee-wrap" style="border:none;padding:.875rem 0;">
