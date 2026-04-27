@@ -570,12 +570,12 @@
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="lang-dropdown" id="langDropdown">
-        <div class="lang-opt active" onclick="selectLang('en','EN')">🇺🇸 English</div>
-        <div class="lang-opt" onclick="selectLang('hi','HI')">🇮🇳 हिन्दी</div>
-        <div class="lang-opt" onclick="selectLang('ar','AR')">🇸🇦 العربية</div>
-        <div class="lang-opt" onclick="selectLang('fr','FR')">🇫🇷 Français</div>
-        <div class="lang-opt" onclick="selectLang('de','DE')">🇩🇪 Deutsch</div>
-        <div class="lang-opt" onclick="selectLang('zh-CN','ZH')">🇨🇳 中文</div>
+        <div class="lang-opt active" onclick="selectLang('en','EN',this)">🇺🇸 English</div>
+        <div class="lang-opt" onclick="selectLang('hi','HI',this)">🇮🇳 हिन्दी</div>
+        <div class="lang-opt" onclick="selectLang('ar','AR',this)">🇸🇦 العربية</div>
+        <div class="lang-opt" onclick="selectLang('fr','FR',this)">🇫🇷 Français</div>
+        <div class="lang-opt" onclick="selectLang('de','DE',this)">🇩🇪 Deutsch</div>
+        <div class="lang-opt" onclick="selectLang('zh-CN','ZH',this)">🇨🇳 中文</div>
       </div>
     </div>
     <!-- Day/Night toggle -->
@@ -2026,18 +2026,32 @@
       'google_translate_element'
     );
   }
-  function selectLang(code, label) {
+  function selectLang(code, label, el) {
     document.getElementById('langLabel').textContent = label;
     document.querySelectorAll('.lang-opt').forEach(o => o.classList.remove('active'));
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
     closeLangDropdown();
     if (code === 'en') {
-      const sel = document.querySelector('.goog-te-combo');
-      if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+      location.reload();
       return;
     }
+    const tryTranslate = function() {
+      const sel = document.querySelector('.goog-te-combo');
+      if (sel) {
+        sel.value = code;
+        sel.dispatchEvent(new Event('change'));
+      } else if (typeof doGTranslate === 'function') {
+        doGTranslate('en|' + code);
+      }
+    };
     const sel = document.querySelector('.goog-te-combo');
-    if (sel) { sel.value = code; sel.dispatchEvent(new Event('change')); }
+    if (sel) {
+      tryTranslate();
+    } else {
+      setTimeout(tryTranslate, 800);
+    }
   }
   function toggleLangDropdown() {
     document.getElementById('langDropdown').classList.toggle('open');
