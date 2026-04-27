@@ -400,11 +400,12 @@
     .mobile-nav-link { font-size:1.375rem; font-weight:600; color:var(--s300); text-decoration:none; letter-spacing:-.02em; transition:color .2s; padding:.25rem 0; }
     .mobile-nav-link:hover { color:var(--c500); }
 
-    /* Intermediate breakpoint: nav links shrink for translated long text */
-    @media (max-width:1200px) and (min-width:769px) {
-      .nav-link { font-size:clamp(.68rem,.6vw + .25rem,.875rem); }
-      .nav-links-desktop { gap:clamp(.5rem,.8vw,1.25rem) !important; }
-      .nav-cta { font-size:clamp(.62rem,.6vw + .28rem,.85rem); padding:.45rem .7rem; max-width:200px; }
+    /* Nav links container: never overflow nav, shrink to fit translated text */
+    .nav-links-desktop { overflow:hidden; flex:0 1 auto; min-width:0; }
+    /* Tighter gaps at all desktop sizes for long translations */
+    @media (min-width:769px) {
+      .nav-link { font-size:clamp(.65rem,.55vw + .28rem,.875rem); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:clamp(60px,9vw,140px); }
+      .nav-links-desktop { gap:clamp(.4rem,.7vw,1.25rem) !important; }
     }
     @media (max-width:768px) {
       .ai-section-header { grid-template-columns:1fr !important; gap:1rem !important; }
@@ -555,12 +556,12 @@
   </a>
 
   <div class="nav-links-desktop" style="display:flex;align-items:center;gap:clamp(.75rem,1.2vw,1.75rem);flex-shrink:1;min-width:0;">
-    <a href="#audience" class="nav-link" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
-    <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
-    <a href="#faq" class="nav-link" onclick="event.preventDefault();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
-    <a href="#pricing" class="nav-link" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
-    <a href="#industry-partners" class="nav-link" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
-    <a href="#" class="nav-link">Marketplace</a>
+    <a href="#audience" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
+    <a href="#ai-tools" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+    <a href="#faq" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
+    <a href="#pricing" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
+    <a href="#industry-partners" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
+    <a href="#" class="nav-link notranslate" translate="no">Marketplace</a>
     <!-- Language selector -->
     <div class="lang-selector" id="langSelector">
       <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select language">
