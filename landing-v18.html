@@ -224,6 +224,8 @@
     .tab-btn:not(:last-child) { border-right:1px solid rgba(61,70,83,.35); }
     .tab-btn.active-jobs { background:rgba(224,120,56,.1); color:var(--c500); }
     .tab-btn.active-training { background:rgba(20,174,174,.1); color:var(--t500); }
+    .tab-btn.active-skills { background:rgba(224,120,56,.1); color:var(--c500); }
+    .tab-btn.active-certs { background:rgba(20,174,174,.1); color:var(--t500); }
     .tab-panel { display:none; }
     .tab-panel.active { display:block; }
 
@@ -1212,60 +1214,81 @@
 
     </div>
 
-    <!-- Skills & Certifications — 3-col: skills | certs | CTA -->
-    <div class="skills-cert-grid reveal d3" style="display:grid;grid-template-columns:1fr 1fr 300px;gap:2rem;align-items:start;">
+    <!-- Skills & Certifications — tab-based with scroll + right CTA -->
+    <div class="skills-cert-grid reveal d3" style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;">
 
-      <!-- Skills column -->
-      <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;padding:1.5rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c500);">Skills</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:999px;padding:.15rem .6rem;" id="skillTotalBadge">246</span>
+      <!-- Left: Tab bar + panels -->
+      <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;overflow:hidden;">
+
+        <!-- Tab bar -->
+        <div class="tab-bar" style="margin:0;border-radius:0;border:none;border-bottom:1px solid rgba(61,70,83,.35);width:100%;">
+          <button class="tab-btn active-skills" id="tabSkills" onclick="switchSkillTab('skills')" style="flex:1;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Skills
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;background:rgba(224,120,56,.15);border:1px solid rgba(224,120,56,.25);border-radius:999px;padding:.1rem .45rem;">246</span>
+          </button>
+          <button class="tab-btn" id="tabCerts" onclick="switchSkillTab('certs')" style="flex:1;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            Certifications
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;background:rgba(20,174,174,.15);border:1px solid rgba(20,174,174,.25);border-radius:999px;padding:.1rem .45rem;">196</span>
+          </button>
         </div>
-        <div style="position:relative;margin-bottom:.875rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input id="skillSearch" type="text" placeholder="Search Skills" oninput="filterCards('skillSearch','skillList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--c500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+
+        <!-- Skills Panel -->
+        <div class="tab-panel active" id="panelSkills" style="padding:1.25rem;">
+          <div style="position:relative;margin-bottom:.875rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input id="skillSearch" type="text" placeholder="Search Skills" oninput="filterCards('skillSearch','skillList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--c500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+          </div>
+          <div id="skillList" style="display:flex;flex-direction:column;gap:.375rem;max-height:280px;overflow-y:auto;padding-right:.25rem;scrollbar-width:thin;scrollbar-color:rgba(224,120,56,.3) transparent;">
+            <div class="skill-card"><span class="skill-name">NDT Services</span><span class="skill-count" style="color:var(--c500);">1,240</span></div>
+            <div class="skill-card"><span class="skill-name">Welding Inspection</span><span class="skill-count" style="color:var(--c500);">980</span></div>
+            <div class="skill-card"><span class="skill-name">Ultrasonic Testing (UT)</span><span class="skill-count" style="color:var(--c500);">894</span></div>
+            <div class="skill-card"><span class="skill-name">Radiographic Testing (RT)</span><span class="skill-count" style="color:var(--c500);">756</span></div>
+            <div class="skill-card"><span class="skill-name">Magnetic Particle (MT)</span><span class="skill-count" style="color:var(--c500);">623</span></div>
+            <div class="skill-card"><span class="skill-name">Phased Array UT (PAUT)</span><span class="skill-count" style="color:var(--c500);">412</span></div>
+            <div class="skill-card"><span class="skill-name">Eddy Current Testing (ET)</span><span class="skill-count" style="color:var(--c500);">389</span></div>
+            <div class="skill-card"><span class="skill-name">Liquid Penetrant (PT)</span><span class="skill-count" style="color:var(--c500);">356</span></div>
+          </div>
         </div>
-        <div id="skillList" style="display:flex;flex-direction:column;gap:.375rem;">
-          <div class="skill-card"><span class="skill-name">NDT Services</span><span class="skill-count" style="color:var(--c500);">1,240</span></div>
-          <div class="skill-card"><span class="skill-name">Welding Inspection</span><span class="skill-count" style="color:var(--c500);">980</span></div>
-          <div class="skill-card"><span class="skill-name">Ultrasonic Testing (UT)</span><span class="skill-count" style="color:var(--c500);">894</span></div>
-          <div class="skill-card"><span class="skill-name">Radiographic Testing (RT)</span><span class="skill-count" style="color:var(--c500);">756</span></div>
+
+        <!-- Certifications Panel -->
+        <div class="tab-panel" id="panelCerts" style="padding:1.25rem;">
+          <div style="position:relative;margin-bottom:.875rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input id="certSearch" type="text" placeholder="Search Certification" oninput="filterCards('certSearch','certList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--t500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+          </div>
+          <div id="certList" style="display:flex;flex-direction:column;gap:.375rem;max-height:280px;overflow-y:auto;padding-right:.25rem;scrollbar-width:thin;scrollbar-color:rgba(20,174,174,.3) transparent;">
+            <div class="skill-card"><span class="skill-name">ASNT UT Level 1</span><span class="skill-count" style="color:var(--t500);">512</span></div>
+            <div class="skill-card"><span class="skill-name">ASNT UT Level 2</span><span class="skill-count" style="color:var(--t500);">412</span></div>
+            <div class="skill-card"><span class="skill-name">ASNT UT Level 3</span><span class="skill-count" style="color:var(--t500);">389</span></div>
+            <div class="skill-card"><span class="skill-name">API 570 Pressure Vessel</span><span class="skill-count" style="color:var(--t500);">334</span></div>
+            <div class="skill-card"><span class="skill-name">ISO 9712 Certified</span><span class="skill-count" style="color:var(--t500);">298</span></div>
+            <div class="skill-card"><span class="skill-name">CWI (Welding Inspector)</span><span class="skill-count" style="color:var(--t500);">276</span></div>
+            <div class="skill-card"><span class="skill-name">PCN Certified</span><span class="skill-count" style="color:var(--t500);">241</span></div>
+            <div class="skill-card"><span class="skill-name">BINDT Certified</span><span class="skill-count" style="color:var(--t500);">198</span></div>
+          </div>
         </div>
+
       </div>
 
-      <!-- Certifications column -->
-      <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;padding:1.5rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t500);">Certifications</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--t500);background:rgba(20,174,174,.1);border:1px solid rgba(20,174,174,.2);border-radius:999px;padding:.15rem .6rem;" id="certTotalBadge">196</span>
-        </div>
-        <div style="position:relative;margin-bottom:.875rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input id="certSearch" type="text" placeholder="Search Certification" oninput="filterCards('certSearch','certList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--t500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
-        </div>
-        <div id="certList" style="display:flex;flex-direction:column;gap:.375rem;">
-          <div class="skill-card"><span class="skill-name">ASNT UT Level 1</span><span class="skill-count" style="color:var(--t500);">512</span></div>
-          <div class="skill-card"><span class="skill-name">ASNT UT Level 2</span><span class="skill-count" style="color:var(--t500);">412</span></div>
-          <div class="skill-card"><span class="skill-name">ASNT UT Level 3</span><span class="skill-count" style="color:var(--t500);">389</span></div>
-          <div class="skill-card"><span class="skill-name">API 570 Pressure Vessel</span><span class="skill-count" style="color:var(--t500);">334</span></div>
-        </div>
-      </div>
-
-      <!-- CTA panel -->
+      <!-- Right: CTA panel — switches with tab -->
       <div style="display:flex;flex-direction:column;gap:1rem;">
-        <!-- Engineer CTA -->
-        <div style="background:linear-gradient(135deg,rgba(224,120,56,.08) 0%,rgba(224,120,56,.03) 100%);border:1px solid rgba(224,120,56,.2);border-radius:.875rem;padding:1.5rem;">
+
+        <!-- Engineer CTA — shown when Skills tab active -->
+        <div id="ctaSkills" style="background:linear-gradient(135deg,rgba(224,120,56,.08) 0%,rgba(224,120,56,.03) 100%);border:1px solid rgba(224,120,56,.2);border-radius:.875rem;padding:1.5rem;">
           <div style="width:36px;height:36px;background:rgba(224,120,56,.12);border-radius:.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
-          <p style="font-size:.8125rem;color:var(--s300);line-height:1.6;margin-bottom:1.25rem;">Engineers — <strong style="color:var(--s100);">sign up or sign in</strong> to update your skills and certifications to get visible to recruiters. Take a <strong style="color:var(--c500);">skill assessment</strong> to earn verified badges.</p>
+          <p style="font-size:.8125rem;color:var(--s300);line-height:1.6;margin-bottom:1.25rem;">Engineers — <strong style="color:var(--s100);">sign up or sign in</strong> to update your skills and certifications to get visible to recruiters. What's more, take a <strong style="color:var(--c500);">skill assessment</strong> to earn verified badges.</p>
           <button onclick="openModal()" style="width:100%;padding:.6rem 1rem;background:var(--c600);color:var(--s950);font-size:.8125rem;font-weight:600;border:none;border-radius:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.375rem;transition:background .2s;" onmouseover="this.style.background='var(--c500)'" onmouseout="this.style.background='var(--c600)'">
-            Get Verified
+            Sign Up / Sign In
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
         </div>
-        <!-- Enterprise CTA -->
-        <div style="background:linear-gradient(135deg,rgba(20,174,174,.08) 0%,rgba(20,174,174,.03) 100%);border:1px solid rgba(20,174,174,.2);border-radius:.875rem;padding:1.5rem;">
+
+        <!-- Enterprise CTA — shown when Certs tab active -->
+        <div id="ctaCerts" style="display:none;background:linear-gradient(135deg,rgba(20,174,174,.08) 0%,rgba(20,174,174,.03) 100%);border:1px solid rgba(20,174,174,.2);border-radius:.875rem;padding:1.5rem;">
           <div style="width:36px;height:36px;background:rgba(20,174,174,.12);border-radius:.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           </div>
@@ -1275,6 +1298,7 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
         </div>
+
       </div>
 
     </div>
@@ -1881,6 +1905,26 @@
     document.body.style.overflow = '';
     document.getElementById('menuIconOpen').style.display = '';
     document.getElementById('menuIconClose').style.display = 'none';
+  }
+
+  /* Search filter for skill/cert lists */
+  function filterCards(inputId, listId) {
+    const query = document.getElementById(inputId).value.toLowerCase();
+    document.querySelectorAll('#' + listId + ' .skill-card').forEach(function(card) {
+      const name = card.querySelector('.skill-name').textContent.toLowerCase();
+      card.style.display = name.includes(query) ? '' : 'none';
+    });
+  }
+
+  /* Skills/Certs tab switcher */
+  function switchSkillTab(tab) {
+    const isSkills = tab === 'skills';
+    document.getElementById('panelSkills').classList.toggle('active', isSkills);
+    document.getElementById('panelCerts').classList.toggle('active', !isSkills);
+    document.getElementById('tabSkills').classList.toggle('active-skills', isSkills);
+    document.getElementById('tabCerts').classList.toggle('active-certs', !isSkills);
+    document.getElementById('ctaSkills').style.display = isSkills ? 'block' : 'none';
+    document.getElementById('ctaCerts').style.display = isSkills ? 'none' : 'block';
   }
 
   /* Tab switcher */
