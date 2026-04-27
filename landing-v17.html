@@ -108,7 +108,7 @@
     .nav-link::after { content:''; position:absolute; left:0; bottom:-1px; width:0; height:1px; background:var(--c500); transition:width .25s ease; }
     .nav-link:hover { color:var(--s100); }
     .nav-link:hover::after { width:100%; }
-    .nav-cta { font-size:.875rem; font-weight:600; color:var(--s950); background:var(--c600); padding:.5rem 1.125rem; border-radius:.5rem; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:.375rem; transition:background .2s, transform .15s, box-shadow .2s; box-shadow:0 2px 8px rgba(224,120,56,.3); }
+    .nav-cta { font-size:clamp(.7rem,.8vw + .4rem,.875rem); font-weight:600; color:var(--s950); background:var(--c600); padding:.5rem 1rem; border-radius:.5rem; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:.375rem; transition:background .2s, transform .15s, box-shadow .2s; box-shadow:0 2px 8px rgba(224,120,56,.3); white-space:nowrap; flex-shrink:0; }
     .nav-cta:hover { background:var(--c500); transform:translateY(-1px); box-shadow:0 4px 16px rgba(224,120,56,.4); }
 
     /* Typography */
@@ -400,6 +400,11 @@
     .mobile-nav-link { font-size:1.375rem; font-weight:600; color:var(--s300); text-decoration:none; letter-spacing:-.02em; transition:color .2s; padding:.25rem 0; }
     .mobile-nav-link:hover { color:var(--c500); }
 
+    /* Intermediate breakpoint: nav links shrink for translated long text */
+    @media (max-width:1100px) and (min-width:769px) {
+      .nav-link { font-size:clamp(.72rem,.7vw + .3rem,.875rem); }
+      .nav-cta { font-size:clamp(.68rem,.65vw + .3rem,.875rem); padding:.45rem .75rem; }
+    }
     @media (max-width:768px) {
       .ai-section-header { grid-template-columns:1fr !important; gap:1rem !important; }
       .audience-grid { grid-template-columns:1fr; }
@@ -548,7 +553,7 @@
     <img src="logos/tiq-logo.png" alt="TIQWorld" style="height:28px;width:auto;object-fit:contain;flex-shrink:0;" />
   </a>
 
-  <div class="nav-links-desktop" style="display:flex;align-items:center;gap:1.75rem;">
+  <div class="nav-links-desktop" style="display:flex;align-items:center;gap:clamp(.75rem,1.2vw,1.75rem);flex-shrink:1;min-width:0;">
     <a href="#audience" class="nav-link" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
     <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
     <a href="#faq" class="nav-link" onclick="event.preventDefault();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
@@ -576,7 +581,7 @@
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
-    <button onclick="openModal()" class="nav-cta">
+    <button onclick="openModal()" class="nav-cta notranslate">
       Get Early Access
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
