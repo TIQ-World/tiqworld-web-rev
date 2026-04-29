@@ -159,6 +159,7 @@
     .marquee-item { display:inline-flex; align-items:center; justify-content:center; padding:.5rem 1.25rem; height:52px; flex-shrink:0; transition:opacity .2s; opacity:.7; background:rgba(255,255,255,.07); border-radius:.5rem; margin:0 .625rem; }
     .marquee-item:hover { opacity:1; background:rgba(255,255,255,.12); }
     .marquee-logo { height:40px; width:auto; max-width:120px; object-fit:contain; filter:grayscale(100%) brightness(1.8) contrast(.9); transition:filter .25s; }
+    .marquee-logo-text { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.06em; color:var(--s500); text-transform:uppercase; white-space:nowrap; }
     .marquee-item:hover .marquee-logo { filter:grayscale(0%) brightness(1) contrast(1); }
     .marquee-sep { width:3px; height:3px; border-radius:50%; background:rgba(61,70,83,.6); margin:0 0; flex-shrink:0; }
     body.light-mode .marquee-wrap { background:hsl(30,8%,93%); border-top-color:rgba(0,0,0,.08); border-bottom-color:rgba(0,0,0,.08); }
@@ -197,7 +198,8 @@
     .ai-hcard-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--c500); margin-bottom:.875rem; }
     .ai-hcard-desc { font-size:.8125rem; color:var(--s500); line-height:1.6; }
     .ai-hcard.teal-card .ai-hcard-tag { color:var(--t500); }
-    .ai-hcard-detail { position:absolute; left:0; right:0; bottom:0; background:var(--s850); border-top:1px solid rgba(61,70,83,.3); padding:1.25rem 1.75rem 1.5rem; transform:translateY(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); }
+    .ai-hcard-detail { position:absolute; left:0; right:0; bottom:0; background:var(--s850); border-top:1px solid rgba(61,70,83,.3); padding:1.25rem 1.75rem 1.5rem; transform:translateY(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); overflow:hidden; }
+    .ai-hcard-detail p { white-space:normal; overflow:visible; }
     .ai-hcard:hover .ai-hcard-detail { transform:translateY(0); }
     .ai-hcard-detail p { font-size:.8125rem; color:var(--s400); line-height:1.65; margin-bottom:.875rem; }
     .ai-hcard-detail ul { list-style:none; padding:0; margin:0 0 1rem; display:flex; flex-direction:column; gap:.375rem; }
@@ -211,7 +213,7 @@
     /* Data tables */
     .data-table { width:100%; border-collapse:collapse; }
     .data-table th { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--s600); padding:.75rem 1rem; text-align:left; border-bottom:1px solid rgba(61,70,83,.4); white-space:nowrap; }
-    .data-table td { font-size:.875rem; color:var(--s300); padding:.875rem 1rem; border-bottom:1px solid rgba(61,70,83,.2); }
+    .data-table td { font-size:.875rem; color:var(--s300); padding:.875rem 1rem; border-bottom:1px solid rgba(61,70,83,.2); white-space:nowrap; }
     .data-table tr:hover td { background:rgba(255,255,255,.025); }
     .data-table tr:last-child td { border-bottom:none; }
     .badge { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .5rem; border-radius:.25rem; white-space:nowrap; }
@@ -230,9 +232,9 @@
     .tab-panel.active { display:block; }
 
     /* Table first-column expand */
-    .td-title { max-width:220px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
+    .td-title { max-width:280px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
     .td-title::after { content:'+'; position:absolute; right:.625rem; top:50%; transform:translateY(-50%); font-size:.75rem; font-family:'JetBrains Mono',monospace; color:var(--s700); line-height:1; transition:color .2s; pointer-events:none; }
-    .td-title.td-exp { white-space:normal; overflow:visible; text-overflow:clip; max-width:300px; cursor:default; }
+    .td-title.td-exp { white-space:normal; overflow:visible; text-overflow:clip; max-width:360px; cursor:default; }
     .td-title.td-exp::after { content:'–'; color:var(--c500); }
     /* Venue cells */
     .venue-cell::before { content:''; display:inline-block; width:4px; height:4px; border-radius:50%; background:var(--s700); margin-right:.4rem; vertical-align:middle; position:relative; top:-1px; }
@@ -243,6 +245,37 @@
     /* Vacancy / batch count pills */
     .vac-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--c500); background:rgba(224,120,56,.08); border:1px solid rgba(224,120,56,.18); border-radius:.25rem; padding:.1rem .35rem; margin-left:.375rem; white-space:nowrap; }
     .batch-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--t500); background:rgba(20,174,174,.08); border:1px solid rgba(20,174,174,.18); border-radius:.25rem; padding:.1rem .35rem; margin-left:.375rem; white-space:nowrap; }
+
+    /* Custom scrollbar for tables */
+    .table-scroll-wrap { overflow-x:auto; overflow-y:auto; max-height:320px; }
+    .table-scroll-wrap thead th { position:sticky; top:0; z-index:1; background:var(--s850); }
+    .table-scroll-wrap::-webkit-scrollbar { height:5px; width:5px; }
+    .table-scroll-wrap::-webkit-scrollbar-track { background:rgba(61,70,83,.15); border-radius:999px; }
+    .table-scroll-wrap::-webkit-scrollbar-thumb { background:rgba(224,120,56,.35); border-radius:999px; }
+    .table-scroll-wrap::-webkit-scrollbar-thumb:hover { background:rgba(224,120,56,.6); }
+    .table-scroll-wrap.teal-scroll::-webkit-scrollbar-thumb { background:rgba(20,174,174,.35); }
+    .table-scroll-wrap.teal-scroll::-webkit-scrollbar-thumb:hover { background:rgba(20,174,174,.6); }
+    /* Skill / Cert list vertical scrollbars */
+    #skillList::-webkit-scrollbar { width:4px; }
+    #skillList::-webkit-scrollbar-track { background:rgba(61,70,83,.15); border-radius:999px; }
+    #skillList::-webkit-scrollbar-thumb { background:rgba(224,120,56,.35); border-radius:999px; }
+    #skillList::-webkit-scrollbar-thumb:hover { background:rgba(224,120,56,.6); }
+    #certList::-webkit-scrollbar { width:4px; }
+    #certList::-webkit-scrollbar-track { background:rgba(61,70,83,.15); border-radius:999px; }
+    #certList::-webkit-scrollbar-thumb { background:rgba(20,174,174,.35); border-radius:999px; }
+    #certList::-webkit-scrollbar-thumb:hover { background:rgba(20,174,174,.6); }
+    /* Mobile scroll hint below tables */
+    .table-mobile-hint { display:none; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--s700); text-align:center; padding:.4rem 0; }
+    /* Apply / Enrol buttons in table rows */
+    .apply-btn, .enrol-btn { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; border-radius:.35rem; padding:.25rem .65rem; cursor:pointer; border:1px solid; white-space:nowrap; transition:background .15s,color .15s; }
+    .apply-btn  { color:var(--c500); background:rgba(224,120,56,.08); border-color:rgba(224,120,56,.3); }
+    .apply-btn:hover  { background:rgba(224,120,56,.18); border-color:rgba(224,120,56,.6); }
+    .enrol-btn  { color:var(--t500); background:rgba(20,174,174,.08); border-color:rgba(20,174,174,.3); }
+    .enrol-btn:hover  { background:rgba(20,174,174,.18); border-color:rgba(20,174,174,.6); }
+    /* Closing date — highlight urgent */
+    .close-urgent { color:#f87171 !important; }
+    .close-soon   { color:#fbbf24 !important; }
+    .close-ok     { color:var(--s300) !important; }
 
     /* Table row scroll reveal */
     .tr-reveal td { opacity:0; transform:translateX(-10px); transition:opacity .4s ease, transform .4s ease; }
@@ -277,12 +310,7 @@
     .skill-count.shimmer { animation:none; }
 
     /* FAQ */
-    .faq-scroll { display:flex; flex-direction:column; gap:.625rem; max-height:19rem; overflow-y:auto; padding-right:.3rem; scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:rgba(224,120,56,.5) rgba(61,70,83,.2); }
-    .faq-scroll::-webkit-scrollbar { width:4px; }
-    .faq-scroll::-webkit-scrollbar-track { background:rgba(61,70,83,.2); border-radius:4px; }
-    .faq-scroll::-webkit-scrollbar-thumb { background:rgba(224,120,56,.55); border-radius:4px; }
-    .faq-scroll::-webkit-scrollbar-thumb:hover { background:rgba(240,146,71,.85); }
-    .faq-item { transition:border-color .3s, background .3s, box-shadow .3s; position:relative; overflow:visible; opacity:1; transform:none; }
+    .faq-item { transition:border-color .3s, background .3s, box-shadow .3s; position:relative; overflow:hidden; }
     .faq-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--c600); transform:scaleY(0); transform-origin:bottom; transition:transform .35s cubic-bezier(.4,0,.2,1); border-radius:0 0 0 .75rem; }
     .faq-item[open]::before { transform:scaleY(1); }
     .faq-item summary { cursor:pointer; list-style:none; }
@@ -292,8 +320,8 @@
     .faq-item:hover { border-color:rgba(61,70,83,.65) !important; background:rgba(28,34,48,.7) !important; box-shadow:0 2px 12px rgba(0,0,0,.2); }
     .faq-item[open] { border-color:rgba(224,120,56,.3) !important; background:rgba(28,34,48,.85) !important; box-shadow:0 4px 20px rgba(224,120,56,.06); }
     .faq-item[open] > summary { color:var(--c400); }
-    .faq-body { overflow:visible; }
-    @keyframes faqOpen { from { opacity:0; } to { opacity:1; } }
+    .faq-body { overflow:hidden; }
+    @keyframes faqOpen { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
     .faq-item[open] .faq-body { animation:faqOpen .28s ease-out both; }
 
     /* Day/Night toggle */
@@ -437,8 +465,9 @@
     @media (max-width:560px) {
       /* Reduce section padding on small screens */
       section { padding-top:3.5rem !important; padding-bottom:3.5rem !important; }
-      /* Promo bar */
-      .promo-bar { font-size:9px; flex-wrap:wrap; justify-content:center; gap:.4rem; padding:.5rem 2.5rem .5rem 1rem; }
+      /* Promo bar — single line on mobile, no wrap */
+      .promo-bar { font-size:9px; flex-wrap:nowrap; justify-content:center; gap:.35rem; padding:.45rem 2.5rem .45rem 1rem; overflow:hidden; }
+      .promo-tag { display:none; }
       /* Nav */
       nav { padding:0 1rem; height:52px; }
       .nav-cta { font-size:.75rem !important; padding:.35rem .75rem !important; white-space:nowrap; }
@@ -460,12 +489,19 @@
       /* Audience */
       .audience-card { padding:1.75rem 1.25rem; }
       .audience-grid { gap:1px; }
-      /* AI cards */
-      .ai-hcard, .ai-hcard.teal-card { flex:0 0 88vw; width:88vw; }
-      .ai-hcard-detail { position:static; transform:none; border-top:1px solid rgba(61,70,83,.2); padding:.875rem 0 0; background:transparent; }
+      /* AI cards — full width, no text clipping */
+      .ai-hcard, .ai-hcard.teal-card { flex:0 0 88vw; width:88vw; overflow:visible; }
+      .ai-hcard-desc { overflow:visible; white-space:normal; }
+      .ai-hcard-detail { position:static; transform:none; border-top:1px solid rgba(61,70,83,.2); padding:.875rem 0 0; background:transparent; overflow:visible; white-space:normal; }
+      .ai-hcard-detail p { overflow:visible; white-space:normal; }
       /* Data tables */
       .data-table th { font-size:9px; letter-spacing:.08em; padding:.5rem .625rem; }
       .data-table td { font-size:.8125rem; padding:.625rem .625rem; }
+      /* Apply/Enrol buttons — make them visible and sticky on mobile */
+      .apply-btn, .enrol-btn { font-size:.65rem; padding:.2rem .5rem; }
+      /* Hint text below table on mobile */
+      .table-mobile-hint { display:block; }
+      .table-scroll-wrap { max-height:260px; }
       /* Skills grid already stacked via skills-cert-grid, gap reduce */
       .skills-cert-grid { gap:1.25rem !important; }
       .skills-cta-panel { grid-template-columns:1fr !important; }
@@ -499,6 +535,9 @@
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c500);margin-bottom:.5rem;">Early Access · Limited Seats</div>
       <h3 style="font-size:1.375rem;font-weight:700;color:var(--s50);letter-spacing:-.02em;">Join TIQWorld</h3>
     </div>
+
+    <!-- Context banner: shown when Apply/Enrol is clicked -->
+    <div id="modal-context-banner" style="display:none;background:rgba(20,174,174,.06);border:1px solid rgba(20,174,174,.18);border-radius:.5rem;padding:.6rem 1rem;margin-bottom:1rem;font-size:.8125rem;color:var(--s300);line-height:1.55;"></div>
 
     <div style="display:flex;gap:.5rem;margin-bottom:.75rem;">
       <button class="modal-tab active" id="tab-enterprise" onclick="switchModalTab('enterprise', this)">Enterprise</button>
@@ -719,7 +758,7 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--s700);">Live</span>
         </div>
 
-        <!-- 4 stat tiles -->
+        <!-- 5 stat tiles — 2+2+1 grid -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(61,70,83,.2);">
           <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.background='var(--s900)'">
             <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--c500);letter-spacing:-.02em;">12K+</div>
@@ -733,9 +772,9 @@
             <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">90+</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Industry Partners</div>
           </div>
-          <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--c500);letter-spacing:-.02em;">8</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">NDT Methods</div>
+          <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.background='var(--s900)'">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">888+</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Inspection Reports</div>
           </div>
         </div>
 
@@ -778,20 +817,20 @@
 <!-- Stat Bar -->
 <div class="stat-bar reveal">
   <div class="stat-item">
-    <div class="stat-num">12,000+</div>
-    <div class="stat-label">NDT Professionals</div>
+    <div class="stat-num">208</div>
+    <div class="stat-label">Vacancies</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">340+</div>
-    <div class="stat-label">Training Providers</div>
+    <div class="stat-num">123</div>
+    <div class="stat-label">Placements</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">90+</div>
-    <div class="stat-label">Industry Partners</div>
+    <div class="stat-num">88</div>
+    <div class="stat-label">Trainings</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">8</div>
-    <div class="stat-label">NDT Methods Covered</div>
+    <div class="stat-num">308</div>
+    <div class="stat-label">Micro Certifications</div>
   </div>
 </div>
 
@@ -1042,8 +1081,8 @@
       <div class="tab-panel active" id="panelJobs">
         <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
-          <div style="overflow-x:auto;">
-          <table class="data-table" style="min-width:700px;">
+          <div class="table-scroll-wrap">
+          <table class="data-table" style="min-width:860px;">
             <thead>
               <tr>
                 <th>Position / Vacancy</th>
@@ -1051,60 +1090,73 @@
                 <th>Type</th>
                 <th>From</th>
                 <th>To</th>
+                <th style="white-space:nowrap;">Application Closing Date</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr class="tr-reveal" data-ttype="job" data-course="Welding Inspection" data-venue="Mumbai" data-type="Man-day" data-from="16-Jan-2026" data-to="20-Jan-2026" data-batches="Vacancies: 2 · Mumbai">
+              <!-- Sorted by Application Closing Date: soonest first, TBD last -->
+              <tr class="tr-reveal" data-ttype="job" data-course="Welding Inspection" data-venue="Mumbai" data-type="Man-day" data-from="16-Jan-2026" data-to="20-Jan-2026" data-close="15-Jan-2026" data-vac="2" data-skills="Welding Inspection,Visual Testing (VT),Weld Defect Analysis" data-certs="ISO 9712 Level II,AWS CWI">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="vac-count">×2</span></td>
                 <td class="venue-cell">Mumbai</td>
                 <td><span class="badge badge-copper">Man-day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">16-Jan-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">15-Jan-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer, Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="Permanent" data-batches="Vacancies: 3 · Pune">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer, Pressure Vessels<span class="vac-count">×3</span></td>
-                <td class="venue-cell">Pune</td>
-                <td><span class="badge badge-teal">Full-time</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Permanent</td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-batches="Vacancies: 1 · New Delhi">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II RT Specialist<span class="vac-count">×1</span></td>
-                <td class="venue-cell">New Delhi</td>
-                <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Contract</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jun-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Nov-2026</td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="Asset Integrity ASNT NDT ET 1" data-venue="Bhopal" data-type="Man-month" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 4 · Bhopal">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity ASNT NDT ET 1<span class="vac-count">×4</span></td>
-                <td class="venue-cell">Bhopal</td>
-                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man-month</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="Valves & Piping QA Inspector" data-venue="Chennai" data-type="Part-time" data-from="15-May-2026" data-to="15-Aug-2026" data-batches="Vacancies: 2 · Chennai">
+              <tr class="tr-reveal" data-ttype="job" data-course="Valves &amp; Piping QA Inspector" data-venue="Chennai" data-type="Part-time" data-from="15-May-2026" data-to="15-Aug-2026" data-close="10-May-2026" data-vac="2" data-skills="Piping QA,Valve Testing,NDT Services" data-certs="ASNT Level II,API 570">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Valves &amp; Piping QA Inspector<span class="vac-count">×2</span></td>
                 <td class="venue-cell">Chennai</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.12);border:1px solid rgba(61,70,83,.28);">Part-time</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-May-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-Aug-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">10-May-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Services, TOFD, PAUT Specialist" data-venue="Hubli" data-type="Man-day" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 4 · Hubli">
+              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer, Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="" data-close="25-Apr-2026" data-vac="3" data-skills="Pressure Vessel Inspection,Radiographic Testing (RT),QA/QC" data-certs="ASME Section VIII,API 510">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer, Pressure Vessels<span class="vac-count">×3</span></td>
+                <td class="venue-cell">Pune</td>
+                <td><span class="badge badge-teal">Full-time</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Permanent</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">25-Apr-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-close="20-May-2026" data-vac="1" data-skills="Radiographic Testing (RT),Film Interpretation,NDT Services" data-certs="ASNT RT Level II,ISO 9712 RT">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II RT Specialist<span class="vac-count">×1</span></td>
+                <td class="venue-cell">New Delhi</td>
+                <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Contract</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jun-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Nov-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">20-May-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="Asset Integrity ASNT NDT ET 1" data-venue="Bhopal" data-type="Man-month" data-from="TBD" data-to="TBD" data-close="" data-vac="4" data-skills="Eddy Current Testing (ET),Asset Integrity,NDT Services" data-certs="ASNT ET Level I">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity ASNT NDT ET 1<span class="vac-count">×4</span></td>
+                <td class="venue-cell">Bhopal</td>
+                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man-month</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Services, TOFD, PAUT Specialist" data-venue="Hubli" data-type="Man-day" data-from="TBD" data-to="TBD" data-close="" data-vac="4" data-skills="Phased Array UT (PAUT),TOFD,Ultrasonic Testing (UT)" data-certs="ASNT UT Level II,PCN Level II">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, TOFD, PAUT Specialist<span class="vac-count">×4</span></td>
                 <td class="venue-cell">Hubli</td>
                 <td><span class="badge badge-copper">Man-day</span></td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
-            <div style="display:flex;align-items:center;gap:.75rem;">
-              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">6 shown</span>
-              <span onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:999px;padding:.15rem .55rem;white-space:nowrap;cursor:pointer;">+16 more available →</span>
-            </div>
-            <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">Post a Job →</a>
+          <div class="table-mobile-hint">← scroll to see Apply →</div>
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
+            <a href="#" onclick="openModal('freelancer');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">View All Jobs →</a>
+            <a href="#" onclick="openModal('enterprise');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);text-decoration:none;">Post a Job →</a>
           </div>
         </div>
       </div>
@@ -1114,8 +1166,8 @@
       <div class="tab-panel" id="panelTraining">
         <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
-          <div style="overflow-x:auto;">
-          <table class="data-table" style="min-width:860px;">
+          <div class="table-scroll-wrap teal-scroll">
+          <table class="data-table" style="min-width:1000px;">
             <thead>
               <tr>
                 <th>Training Available For</th>
@@ -1125,39 +1177,33 @@
                 <th>Type</th>
                 <th>From</th>
                 <th>To</th>
+                <th style="white-space:nowrap;">Enrol Before</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
+              <!-- Sorted by Enrol Before date: soonest first, open-enrolment and TBD last -->
               <tr class="tr-reveal"
                 data-course="Welding Inspection"
-                data-venue="Mumbai" data-type="Class Room"
+                data-venue="Mumbai" data-type="Classroom"
                 data-from="13-Jan-2026" data-to="20-Jan-2026"
+                data-close="10-Jan-2026" data-seats="20"
                 data-batches="Batch 1: 13-Jan · 9:00 AM|Batch 2: 16-Jan · 2:00 PM">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="batch-count">×2</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Rajesh Kumar','RK','UT · RT · Welding Inspection','Mumbai','12 years experience','ISO 9712 · ASNT Level III')">Rajesh Kumar</button></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Mumbai</td>
-                <td><span class="badge badge-teal">Class Room</span></td>
+                <td><span class="badge badge-teal">Classroom</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">13-Jan-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="NDT Services UT &amp; ET"
-                data-venue="Online" data-type="Web Based"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services UT &amp; ET<span class="batch-count">×2</span></td>
-                <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Online</td>
-                <td><span class="badge badge-teal">Web Based</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">10-Jan-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
                 data-course="Six Sigma Green Belt"
-                data-venue="New Delhi + Online" data-type="Hybrid"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
+                data-venue="New Delhi" data-type="Hybrid"
+                data-from="TBD" data-to="TBD"
+                data-close="30-Apr-2026" data-seats="15"
                 data-batches="Batch 1: Upcoming · Hybrid mode">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Six Sigma Green Belt<span class="batch-count">×1</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Priya Sharma','PS','Six Sigma · Quality Management','New Delhi','15 years experience','Six Sigma Black Belt · ISO 9001')">Priya Sharma</button></td>
@@ -1166,55 +1212,80 @@
                 <td><span class="badge badge-copper">Hybrid</span></td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">30-Apr-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="ASNT NDT RT Level 1 &amp; 2"
+                data-venue="Chennai" data-type="Classroom"
+                data-from="TBD" data-to="TBD"
+                data-close="15-May-2026" data-seats="12"
+                data-batches="Batch 1: Upcoming · Chennai">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT RT Level 1 &amp; 2<span class="batch-count">×3</span></td>
+                <td><span style="font-size:.875rem;color:var(--s500);">—</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                <td class="venue-cell">Chennai</td>
+                <td><span class="badge badge-teal">Classroom</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">15-May-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="NDT Services UT &amp; ET"
+                data-venue="Online" data-type="Online"
+                data-from="TBD" data-to="TBD"
+                data-close="" data-seats="30"
+                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services UT &amp; ET<span class="batch-count">×2</span></td>
+                <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                <td class="venue-cell">Online</td>
+                <td><span class="badge badge-teal">Online</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="Asset Integrity PAUT &amp; TOFD"
+                data-venue="Online" data-type="Online"
+                data-from="TBD" data-to="TBD"
+                data-close="" data-seats="25"
+                data-batches="Batch 1: Upcoming · Online">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity PAUT &amp; TOFD<span class="batch-count">×4</span></td>
+                <td><span style="font-size:.875rem;color:var(--s500);">—</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                <td class="venue-cell">Online</td>
+                <td><span class="badge badge-teal">Online</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
                 data-course="ASNT NDT ET Level 1 Self-Paced"
-                data-venue="Self-Learning" data-type="Self-Learning"
+                data-venue="Online" data-type="Self-Learning"
                 data-from="Enrol anytime" data-to="Self-paced"
-                data-batches="Available 24/7 · Self-paced online">
+                data-close="open"
+                data-batches="Available 24/7 · Self-paced online|Enrol Before: Open Enrolment">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT ET Level 1 Self-Paced<span class="batch-count">×4</span></td>
-                <td><span style="font-size:.875rem;color:var(--s600);">TIQWorld</span></td>
+                <td><span style="font-size:.875rem;color:var(--s500);">TIQWorld</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Online</td>
                 <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Self-Learning</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Anytime</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Self-paced</td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="ASNT NDT RT Level 1 &amp; 2"
-                data-venue="Chennai" data-type="Class Room"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Chennai">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT RT Level 1 &amp; 2<span class="batch-count">×3</span></td>
-                <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);">TBA</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Chennai</td>
-                <td><span class="badge badge-teal">Class Room</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="Asset Integrity PAUT &amp; TOFD"
-                data-venue="Online" data-type="Web Based"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity PAUT &amp; TOFD<span class="batch-count">×4</span></td>
-                <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);">TBA</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Online</td>
-                <td><span class="badge badge-teal">Web Based</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--t500);">Open</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
-            <div style="display:flex;align-items:center;gap:.75rem;">
-              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">6 shown</span>
-              <span onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--t500);background:rgba(20,174,174,.1);border:1px solid rgba(20,174,174,.2);border-radius:999px;padding:.15rem .55rem;white-space:nowrap;cursor:pointer;">+24 more available →</span>
-            </div>
-            <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">List Your Courses →</a>
+          <div class="table-mobile-hint">← scroll to see Enrol →</div>
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
+            <a href="#" onclick="openModal('freelancer');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">View All Courses →</a>
+            <a href="#" onclick="openModal('enterprise');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);text-decoration:none;">List Your Courses →</a>
           </div>
         </div>
       </div>
@@ -1292,7 +1363,7 @@
           <div style="width:36px;height:36px;background:rgba(224,120,56,.12);border-radius:.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
-          <p style="font-size:.8125rem;color:var(--s300);line-height:1.6;margin-bottom:.625rem;"><strong style="color:var(--s100);">NDT/ QA/QC Professionals/Auditors</strong> — add your skills and certifications to your profile to get discovered by top recruiters.</p>
+          <p style="font-size:.8125rem;color:var(--s300);line-height:1.6;margin-bottom:.625rem;"><strong style="color:var(--s100);">NDT Engineers</strong> — add your skills and certifications to your profile to get discovered by top recruiters.</p>
           <p style="font-size:.75rem;color:var(--s600);line-height:1.55;margin-bottom:1.25rem;">Take a free <strong style="color:var(--c500);">skill assessment</strong> to earn verified badges and stand out.</p>
           <button onclick="openModal()" style="width:100%;padding:.6rem 1rem;background:var(--c600);color:var(--s950);font-size:.8125rem;font-weight:600;border:none;border-radius:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.375rem;transition:background .2s;" onmouseover="this.style.background='var(--c500)'" onmouseout="this.style.background='var(--c600)'">
             Sign Up / Sign In
@@ -1321,15 +1392,15 @@
 
 
 <!-- FAQ -->
-<section id="faq" style="padding:4rem clamp(1.5rem,5vw,5rem);background:var(--s900);border-top:1px solid rgba(61,70,83,.3);">
+<section id="faq" style="padding:6rem clamp(1.5rem,5vw,5rem);background:var(--s900);border-top:1px solid rgba(61,70,83,.3);">
   <div style="max-width:760px;margin:0 auto;">
     <div class="section-label reveal">Common Questions</div>
     <h2 class="section-headline reveal d1" style="margin-bottom:.75rem;">Frequently Asked<br/>Questions</h2>
-    <p class="reveal d2" style="margin-bottom:1.5rem;font-size:.9375rem;color:var(--s600);line-height:1.65;">Everything you need to know about TIQWorld, answered.</p>
+    <p class="reveal d2" style="margin-bottom:3rem;font-size:.9375rem;color:var(--s600);line-height:1.65;">Everything you need to know about TIQWorld, answered.</p>
 
-    <div class="faq-scroll">
+    <div style="display:flex;flex-direction:column;gap:.625rem;">
 
-      <details class="faq-item" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item reveal d1" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">01</span>
@@ -1344,7 +1415,7 @@
         </div>
       </details>
 
-      <details class="faq-item" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item reveal d2" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">02</span>
@@ -1359,7 +1430,7 @@
         </div>
       </details>
 
-      <details class="faq-item" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item reveal d3" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">03</span>
@@ -1374,7 +1445,7 @@
         </div>
       </details>
 
-      <details class="faq-item" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item reveal d4" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">04</span>
@@ -1389,7 +1460,7 @@
         </div>
       </details>
 
-      <details class="faq-item" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item reveal d5" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">05</span>
@@ -1406,7 +1477,7 @@
 
     </div>
 
-    <div class="reveal d5" style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:rgba(224,120,56,.04);border:1px solid rgba(224,120,56,.12);border-radius:.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div class="reveal d5" style="margin-top:2.5rem;padding:1.25rem 1.5rem;background:rgba(224,120,56,.04);border:1px solid rgba(224,120,56,.12);border-radius:.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
       <span style="font-size:.875rem;color:var(--s500);">Still have questions? We'd love to hear from you.</span>
       <button onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:gap .2s;" onmouseover="this.style.gap='.7rem'" onmouseout="this.style.gap='.4rem'">
         Get in Touch <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1442,6 +1513,7 @@
 
     <!-- Pricing table -->
     <div class="reveal d2" style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;overflow:hidden;">
+      <div class="table-mobile-hint" style="border-bottom:1px solid rgba(61,70,83,.2);">← scroll to compare all plans →</div>
       <div style="overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;min-width:780px;">
 
@@ -1859,22 +1931,6 @@
   );
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // FAQ: auto-scroll container so opened answer is always visible
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.addEventListener('toggle', () => {
-      if (item.open) {
-        const scroll = item.closest('.faq-scroll');
-        if (!scroll) return;
-        const itemTop = item.offsetTop - scroll.offsetTop;
-        const itemBottom = itemTop + item.offsetHeight;
-        const visible = scroll.scrollTop + scroll.clientHeight;
-        if (itemBottom > visible) {
-          scroll.scrollTo({ top: itemTop - 8, behavior: 'smooth' });
-        }
-      }
-    });
-  });
-
   function animateCount(el) {
     const raw = el.textContent.replace(/,/g,'');
     const num = parseFloat(raw);
@@ -1899,13 +1955,40 @@
   }), { threshold: 0.5 });
   document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
 
-  function openModal(tab) {
+  function openModal(tab, context) {
     document.getElementById('signupModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Show/hide job-apply context banner
+    const banner = document.getElementById('modal-context-banner');
+    if (context) {
+      banner.innerHTML = context;
+      banner.style.display = 'block';
+    } else {
+      banner.style.display = 'none';
+    }
     if (tab) {
       const btn = document.getElementById('tab-' + tab);
       if (btn) switchModalTab(tab, btn);
     }
+  }
+  function applyJob(btn) {
+    const tr = btn.closest('tr');
+    const title = tr.dataset.course || '';
+    const city  = tr.dataset.venue  || '';
+    const close = tr.dataset.close  || '';
+    const closeStr = close && close !== 'open' ? ` · Apply before <strong style="color:#f87171;">${close}</strong>` : '';
+    const ctx = `Applying for: <strong style="color:var(--s100);">${title}</strong> &nbsp;·&nbsp; ${city}${closeStr}<br><span style="font-size:.75rem;color:var(--s600);">Register or log in to complete your application.</span>`;
+    openModal('freelancer', ctx);
+  }
+  function enrolCourse(btn) {
+    const tr = btn.closest('tr');
+    const title  = tr.dataset.course || '';
+    const venue  = tr.dataset.venue  || '';
+    const close  = tr.dataset.close  || '';
+    const venueStr = (venue && venue.toLowerCase() !== 'online') ? venue : 'Online';
+    const closeStr = close && close !== 'open' ? ` · Enrol before <strong style="color:#f87171;">${close}</strong>` : (close === 'open' ? ' · Open Enrolment' : '');
+    const ctx = `Enrolling in: <strong style="color:var(--s100);">${title}</strong> &nbsp;·&nbsp; ${venueStr}${closeStr}<br><span style="font-size:.75rem;color:var(--s600);">Register or log in to complete your enrolment.</span>`;
+    openModal('freelancer', ctx);
   }
   function closeModal() {
     document.getElementById('signupModal').classList.remove('open');
@@ -2066,23 +2149,68 @@
     const isJob = row.dataset.ttype === 'job';
     document.getElementById('schedTooltipLabel').textContent = isJob ? 'Job Details' : 'Training Schedule';
     tooltip.style.borderColor = isJob ? 'rgba(224,120,56,.35)' : 'rgba(20,174,174,.25)';
-    const course = row.dataset.course;
-    const venue = row.dataset.venue;
-    const type = row.dataset.type;
-    const from = row.dataset.from;
-    const to = row.dataset.to;
-    const batches = (row.dataset.batches || '').split('|');
+    const course  = row.dataset.course || '';
+    const venue   = row.dataset.venue  || '';
+    const type    = row.dataset.type   || '';
+    const from    = row.dataset.from   || '';
+    const to      = row.dataset.to     || '';
+    const close   = row.dataset.close  || '';
+    const vac     = row.dataset.vac    || '';
+    const skills  = row.dataset.skills || '';
+    const certs   = row.dataset.certs  || '';
+    const seats   = row.dataset.seats  || '';
     const accentColor = isJob ? 'var(--c400)' : 'var(--t400)';
-    const titleTrim = course.length > 28 ? course.substring(0,28)+'…' : course;
-    let html = `<div class="sched-row"><span class="sched-key">${isJob ? 'Position' : 'Course'}</span><span class="sched-val">${titleTrim}</span></div>`;
-    html += `<div class="sched-row"><span class="sched-key">${isJob ? 'Location' : 'Venue'}</span><span class="sched-val">${venue}</span></div>`;
-    html += `<div class="sched-row"><span class="sched-key">${isJob ? 'Contract' : 'Mode'}</span><span class="sched-val">${type}</span></div>`;
-    html += `<div class="sched-row"><span class="sched-key">${isJob ? 'Period' : 'Schedule'}</span><span class="sched-val">${from === to ? from : from + ' → ' + to}</span></div>`;
-    if (batches[0]) {
+    const urgentColor = '#f87171';
+    const titleTrim = course.length > 32 ? course.substring(0,32)+'…' : course;
+    // Period: if to is empty or blank → Permanent
+    const periodTo = (to && to !== '' && to !== 'TBD') ? to : (isJob && !to ? 'Permanent' : to);
+    const period = from === periodTo ? from : (from + ' → ' + periodTo);
+    let html = '';
+
+    if (isJob) {
+      // ── JOB CARD ──
+      html += `<div class="sched-row"><span class="sched-key">Position</span><span class="sched-val">${titleTrim}</span></div>`;
+      if (skills) {
+        const skillList = skills.split(',').map(s => `<span style="display:inline-block;background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.1rem .35rem;font-size:.7rem;color:var(--c400);font-family:'JetBrains Mono',monospace;margin:.1rem .1rem 0 0;">${s.trim()}</span>`).join('');
+        html += `<div style="margin:.3rem 0 .2rem;"><span class="sched-key" style="display:block;margin-bottom:.2rem;">Skills Required</span><div>${skillList}</div></div>`;
+      }
+      if (certs) {
+        const certList = certs.split(',').map(c => `<span style="display:inline-block;background:rgba(20,174,174,.1);border:1px solid rgba(20,174,174,.2);border-radius:.25rem;padding:.1rem .35rem;font-size:.7rem;color:var(--t400);font-family:'JetBrains Mono',monospace;margin:.1rem .1rem 0 0;">${c.trim()}</span>`).join('');
+        html += `<div style="margin:.2rem 0;"><span class="sched-key" style="display:block;margin-bottom:.2rem;">Certification Required</span><div>${certList}</div></div>`;
+      }
       html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
-      batches.forEach(b => {
-        html += `<div style="font-size:.75rem;color:${accentColor};font-family:'JetBrains Mono',monospace;padding:.1rem 0;">${b}</div>`;
-      });
+      html += `<div class="sched-row"><span class="sched-key">Location</span><span class="sched-val">${venue}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Contract</span><span class="sched-val">${type}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Period</span><span class="sched-val">${period}</span></div>`;
+      if (vac) html += `<div class="sched-row"><span class="sched-key">Vacancies</span><span class="sched-val" style="color:var(--c400);">${vac}</span></div>`;
+      if (close) {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        html += `<div class="sched-row"><span class="sched-key" style="color:${urgentColor};font-weight:600;">Apply Before</span><span class="sched-val" style="color:${urgentColor};">${close}</span></div>`;
+      }
+    } else {
+      // ── TRAINING CARD ──
+      html += `<div class="sched-row"><span class="sched-key">Course</span><span class="sched-val">${titleTrim}</span></div>`;
+      // Venue: online has no venue
+      const venueDisplay = (venue.toLowerCase() === 'online' || venue.toLowerCase() === 'self-learning') ? '—' : venue;
+      html += `<div class="sched-row"><span class="sched-key">Venue</span><span class="sched-val">${venueDisplay}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Mode</span><span class="sched-val">${type}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Schedule</span><span class="sched-val">${from === to ? from : from + ' → ' + to}</span></div>`;
+      if (seats) html += `<div class="sched-row"><span class="sched-key">Batch</span><span class="sched-val" style="color:var(--t400);">${seats} seats available</span></div>`;
+      if (close && close !== 'open') {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        html += `<div class="sched-row"><span class="sched-key" style="color:${urgentColor};font-weight:600;">Enrol Before</span><span class="sched-val" style="color:${urgentColor};">${close}</span></div>`;
+      } else if (close === 'open') {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        html += `<div class="sched-row"><span class="sched-key" style="color:var(--t400);">Enrolment</span><span class="sched-val" style="color:var(--t400);">Open</span></div>`;
+      }
+      // Batch details from data-batches
+      const batches = (row.dataset.batches || '').split('|').filter(b => b && !b.startsWith('Enrol Before'));
+      if (batches[0]) {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        batches.forEach(b => {
+          html += `<div style="font-size:.75rem;color:${accentColor};font-family:'JetBrains Mono',monospace;padding:.1rem 0;">${b}</div>`;
+        });
+      }
     }
     document.getElementById('schedTooltipContent').innerHTML = html;
     positionTooltip(e);
@@ -2179,6 +2307,16 @@
     }
   }), { threshold: 0.08 });
   audienceCards.forEach(c => cardObs.observe(c));
+
+  /* Broken logo image fallback — show alt text styled */
+  document.querySelectorAll('.marquee-logo').forEach(img => {
+    img.addEventListener('error', function() {
+      const span = document.createElement('span');
+      span.className = 'marquee-logo-text';
+      span.textContent = this.alt;
+      this.parentNode.replaceChild(span, this);
+    });
+  });
 
   /* Skills & Certifications search filter */
   window.filterCards = function(inputId, listId) {
