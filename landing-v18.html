@@ -108,7 +108,7 @@
     .nav-link::after { content:''; position:absolute; left:0; bottom:-1px; width:0; height:1px; background:var(--c500); transition:width .25s ease; }
     .nav-link:hover { color:var(--s100); }
     .nav-link:hover::after { width:100%; }
-    .nav-cta { font-size:.875rem; font-weight:600; color:var(--s950); background:var(--c600); padding:.5rem 1.125rem; border-radius:.5rem; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:.375rem; transition:background .2s, transform .15s, box-shadow .2s; box-shadow:0 2px 8px rgba(224,120,56,.3); }
+    .nav-cta { font-size:clamp(.65rem,.75vw + .35rem,.875rem); font-weight:600; color:var(--s950); background:var(--c600); padding:.5rem 1rem; border-radius:.5rem; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:.375rem; transition:background .2s, transform .15s, box-shadow .2s; box-shadow:0 2px 8px rgba(224,120,56,.3); white-space:nowrap; flex-shrink:0; max-width:220px; overflow:hidden; }
     .nav-cta:hover { background:var(--c500); transform:translateY(-1px); box-shadow:0 4px 16px rgba(224,120,56,.4); }
 
     /* Typography */
@@ -159,6 +159,7 @@
     .marquee-item { display:inline-flex; align-items:center; justify-content:center; padding:.5rem 1.25rem; height:52px; flex-shrink:0; transition:opacity .2s; opacity:.7; background:rgba(255,255,255,.07); border-radius:.5rem; margin:0 .625rem; }
     .marquee-item:hover { opacity:1; background:rgba(255,255,255,.12); }
     .marquee-logo { height:40px; width:auto; max-width:120px; object-fit:contain; filter:grayscale(100%) brightness(1.8) contrast(.9); transition:filter .25s; }
+    .marquee-logo-text { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.06em; color:var(--s500); text-transform:uppercase; white-space:nowrap; }
     .marquee-item:hover .marquee-logo { filter:grayscale(0%) brightness(1) contrast(1); }
     .marquee-sep { width:3px; height:3px; border-radius:50%; background:rgba(61,70,83,.6); margin:0 0; flex-shrink:0; }
     body.light-mode .marquee-wrap { background:hsl(30,8%,93%); border-top-color:rgba(0,0,0,.08); border-bottom-color:rgba(0,0,0,.08); }
@@ -176,7 +177,7 @@
     /* AI Tools */
     .ai-grid-wrap { position:relative; padding:0 22px; }
     .ai-grid-wrap::after { content:''; position:absolute; top:1px; right:22px; bottom:0; width:60px; background:linear-gradient(to right, transparent, var(--s900) 90%); pointer-events:none; z-index:2; }
-    .ai-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; border:1px solid rgba(61,70,83,.3); border-radius:.75rem; }
+    .ai-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none; border:1px solid rgba(61,70,83,.3); border-radius:.75rem; align-items:stretch; }
     .ai-grid::-webkit-scrollbar { display:none; }
     .ai-hcard, .ai-hcard.teal-card { position:relative; background:var(--s900); border-right:1px solid rgba(61,70,83,.3); padding:2rem 1.75rem 1.75rem; min-height:210px; flex:0 0 300px; width:300px; display:flex; flex-direction:column; overflow:hidden; cursor:default; scroll-snap-align:start; transition:background .35s; }
     .ai-hcard:last-child { border-right:none; }
@@ -185,7 +186,7 @@
     .ai-hcard:hover::before { transform:scaleX(1); }
     .ai-hcard:hover { background:var(--s850); }
     /* TIQWiki always-open — inline detail, no slide animation */
-    .ai-hcard--open { background:var(--s850) !important; overflow:visible !important; display:flex; flex-direction:column; height:auto !important; min-height:0 !important; }
+    .ai-hcard--open { background:var(--s850) !important; overflow:hidden !important; display:flex; flex-direction:column; }
     .ai-hcard--open::before { transform:scaleX(1); }
     .ai-hcard--open .ai-hcard-detail { position:static !important; transform:none !important; background:transparent !important; border-top:1px solid rgba(20,174,174,.18) !important; padding:1rem 0 0 !important; margin-top:auto; }
     .ai-hcard--open .ai-hcard-icon { background:rgba(20,174,174,.18) !important; border-color:rgba(20,174,174,.35) !important; }
@@ -197,7 +198,8 @@
     .ai-hcard-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--c500); margin-bottom:.875rem; }
     .ai-hcard-desc { font-size:.8125rem; color:var(--s500); line-height:1.6; }
     .ai-hcard.teal-card .ai-hcard-tag { color:var(--t500); }
-    .ai-hcard-detail { position:absolute; left:0; right:0; bottom:0; background:var(--s850); border-top:1px solid rgba(61,70,83,.3); padding:1.25rem 1.75rem 1.5rem; transform:translateY(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); }
+    .ai-hcard-detail { position:absolute; left:0; right:0; bottom:0; background:var(--s850); border-top:1px solid rgba(61,70,83,.3); padding:1.25rem 1.75rem 1.5rem; transform:translateY(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); overflow:hidden; }
+    .ai-hcard-detail p { white-space:normal; overflow:visible; }
     .ai-hcard:hover .ai-hcard-detail { transform:translateY(0); }
     .ai-hcard-detail p { font-size:.8125rem; color:var(--s400); line-height:1.65; margin-bottom:.875rem; }
     .ai-hcard-detail ul { list-style:none; padding:0; margin:0 0 1rem; display:flex; flex-direction:column; gap:.375rem; }
@@ -211,7 +213,7 @@
     /* Data tables */
     .data-table { width:100%; border-collapse:collapse; }
     .data-table th { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--s600); padding:.75rem 1rem; text-align:left; border-bottom:1px solid rgba(61,70,83,.4); white-space:nowrap; }
-    .data-table td { font-size:.875rem; color:var(--s300); padding:.875rem 1rem; border-bottom:1px solid rgba(61,70,83,.2); }
+    .data-table td { font-size:.875rem; color:var(--s300); padding:.875rem 1rem; border-bottom:1px solid rgba(61,70,83,.2); white-space:nowrap; }
     .data-table tr:hover td { background:rgba(255,255,255,.025); }
     .data-table tr:last-child td { border-bottom:none; }
     .badge { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .5rem; border-radius:.25rem; white-space:nowrap; }
@@ -224,13 +226,15 @@
     .tab-btn:not(:last-child) { border-right:1px solid rgba(61,70,83,.35); }
     .tab-btn.active-jobs { background:rgba(224,120,56,.1); color:var(--c500); }
     .tab-btn.active-training { background:rgba(20,174,174,.1); color:var(--t500); }
+    .tab-btn.active-skills { background:rgba(224,120,56,.1); color:var(--c500); }
+    .tab-btn.active-certs { background:rgba(20,174,174,.1); color:var(--t500); }
     .tab-panel { display:none; }
     .tab-panel.active { display:block; }
 
     /* Table first-column expand */
-    .td-title { max-width:220px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
+    .td-title { max-width:280px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; padding-right:1.75rem !important; position:relative; }
     .td-title::after { content:'+'; position:absolute; right:.625rem; top:50%; transform:translateY(-50%); font-size:.75rem; font-family:'JetBrains Mono',monospace; color:var(--s700); line-height:1; transition:color .2s; pointer-events:none; }
-    .td-title.td-exp { white-space:normal; overflow:visible; text-overflow:clip; max-width:300px; cursor:default; }
+    .td-title.td-exp { white-space:normal; overflow:visible; text-overflow:clip; max-width:360px; cursor:default; }
     .td-title.td-exp::after { content:'–'; color:var(--c500); }
     /* Venue cells */
     .venue-cell::before { content:''; display:inline-block; width:4px; height:4px; border-radius:50%; background:var(--s700); margin-right:.4rem; vertical-align:middle; position:relative; top:-1px; }
@@ -241,6 +245,37 @@
     /* Vacancy / batch count pills */
     .vac-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--c500); background:rgba(224,120,56,.08); border:1px solid rgba(224,120,56,.18); border-radius:.25rem; padding:.1rem .35rem; margin-left:.375rem; white-space:nowrap; }
     .batch-count { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--t500); background:rgba(20,174,174,.08); border:1px solid rgba(20,174,174,.18); border-radius:.25rem; padding:.1rem .35rem; margin-left:.375rem; white-space:nowrap; }
+
+    /* Custom scrollbar for tables */
+    .table-scroll-wrap { overflow-x:auto; overflow-y:auto; max-height:320px; }
+    .table-scroll-wrap thead th { position:sticky; top:0; z-index:1; background:var(--s850); }
+    .table-scroll-wrap::-webkit-scrollbar { height:5px; width:5px; }
+    .table-scroll-wrap::-webkit-scrollbar-track { background:rgba(61,70,83,.15); border-radius:999px; }
+    .table-scroll-wrap::-webkit-scrollbar-thumb { background:rgba(224,120,56,.35); border-radius:999px; }
+    .table-scroll-wrap::-webkit-scrollbar-thumb:hover { background:rgba(224,120,56,.6); }
+    .table-scroll-wrap.teal-scroll::-webkit-scrollbar-thumb { background:rgba(20,174,174,.35); }
+    .table-scroll-wrap.teal-scroll::-webkit-scrollbar-thumb:hover { background:rgba(20,174,174,.6); }
+    /* Skill / Cert list vertical scrollbars */
+    #skillList::-webkit-scrollbar { width:4px; }
+    #skillList::-webkit-scrollbar-track { background:rgba(61,70,83,.15); border-radius:999px; }
+    #skillList::-webkit-scrollbar-thumb { background:rgba(224,120,56,.35); border-radius:999px; }
+    #skillList::-webkit-scrollbar-thumb:hover { background:rgba(224,120,56,.6); }
+    #certList::-webkit-scrollbar { width:4px; }
+    #certList::-webkit-scrollbar-track { background:rgba(61,70,83,.15); border-radius:999px; }
+    #certList::-webkit-scrollbar-thumb { background:rgba(20,174,174,.35); border-radius:999px; }
+    #certList::-webkit-scrollbar-thumb:hover { background:rgba(20,174,174,.6); }
+    /* Mobile scroll hint below tables */
+    .table-mobile-hint { display:none; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--s700); text-align:center; padding:.4rem 0; }
+    /* Apply / Enrol buttons in table rows */
+    .apply-btn, .enrol-btn { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; border-radius:.35rem; padding:.25rem .65rem; cursor:pointer; border:1px solid; white-space:nowrap; transition:background .15s,color .15s; }
+    .apply-btn  { color:var(--c500); background:rgba(224,120,56,.08); border-color:rgba(224,120,56,.3); }
+    .apply-btn:hover  { background:rgba(224,120,56,.18); border-color:rgba(224,120,56,.6); }
+    .enrol-btn  { color:var(--t500); background:rgba(20,174,174,.08); border-color:rgba(20,174,174,.3); }
+    .enrol-btn:hover  { background:rgba(20,174,174,.18); border-color:rgba(20,174,174,.6); }
+    /* Closing date — highlight urgent */
+    .close-urgent { color:#f87171 !important; }
+    .close-soon   { color:#fbbf24 !important; }
+    .close-ok     { color:var(--s300) !important; }
 
     /* Table row scroll reveal */
     .tr-reveal td { opacity:0; transform:translateX(-10px); transition:opacity .4s ease, transform .4s ease; }
@@ -275,7 +310,7 @@
     .skill-count.shimmer { animation:none; }
 
     /* FAQ */
-    .faq-item { transition:border-color .3s, background .3s, box-shadow .3s; position:relative; overflow:visible; }
+    .faq-item { transition:border-color .3s, background .3s, box-shadow .3s; position:relative; overflow:hidden; }
     .faq-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--c600); transform:scaleY(0); transform-origin:bottom; transition:transform .35s cubic-bezier(.4,0,.2,1); border-radius:0 0 0 .75rem; }
     .faq-item[open]::before { transform:scaleY(1); }
     .faq-item summary { cursor:pointer; list-style:none; }
@@ -394,21 +429,33 @@
       .hero-grid { grid-template-columns:1fr; }
       .hero-visual { display:none; }
       .skills-cert-grid { grid-template-columns:1fr !important; }
+      .skills-cta-panel { order:3; display:grid !important; grid-template-columns:1fr 1fr; gap:1rem; }
       .footer-top-grid { grid-template-columns:1fr 1fr !important; }
       .footer-top-grid > div:first-child { grid-column:1/-1; }
     }
     .mobile-nav-link { font-size:1.375rem; font-weight:600; color:var(--s300); text-decoration:none; letter-spacing:-.02em; transition:color .2s; padding:.25rem 0; }
     .mobile-nav-link:hover { color:var(--c500); }
 
-    @media (max-width:768px) {
+    /* Nav links container: shrink to fit translated text */
+    .nav-links-desktop { overflow:hidden; flex:0 1 auto; min-width:0; }
+    /* Desktop nav spacing */
+    @media (min-width:1025px) {
+      .nav-link { font-size:clamp(.8rem,.55vw + .35rem,.875rem); white-space:nowrap; }
+      .nav-links-desktop { gap:clamp(.75rem,.9vw,1.75rem) !important; }
+    }
+    /* Hide desktop-only nav controls on mobile */
+    .nav-desktop-only { display:flex; align-items:center; }
+    @media (max-width:1024px) {
       .ai-section-header { grid-template-columns:1fr !important; gap:1rem !important; }
       .audience-grid { grid-template-columns:1fr; }
-      .stat-bar { flex-direction:column; }
-      .stat-item { border-right:none; border-bottom:1px solid rgba(61,70,83,.4); }
-      .stat-item:last-child { border-bottom:none; }
-      .ai-hcard, .ai-hcard.teal-card { flex:0 0 260px; width:260px; }
+      .stat-bar { display:grid; grid-template-columns:1fr 1fr; }
+      .stat-item { border-right:1px solid rgba(61,70,83,.4); border-bottom:1px solid rgba(61,70,83,.4); }
+      .stat-item:nth-child(2n) { border-right:none; }
+      .stat-item:nth-last-child(-n+2) { border-bottom:none; }
+      .ai-hcard, .ai-hcard.teal-card { flex:0 0 270px; width:270px; }
       /* Nav */
       .nav-links-desktop { display:none !important; }
+      .nav-desktop-only { display:none !important; }
       .nav-mobile-group { display:flex !important; }
       /* Modal full-width on tablet */
       .modal-box { padding:1.75rem 1.25rem; }
@@ -416,8 +463,11 @@
       .data-table th, .data-table td { padding:.625rem .75rem; font-size:.8125rem; }
     }
     @media (max-width:560px) {
-      /* Promo bar */
-      .promo-bar { font-size:9px; flex-wrap:wrap; justify-content:center; gap:.4rem; padding:.5rem 2.5rem .5rem 1rem; }
+      /* Reduce section padding on small screens */
+      section { padding-top:3.5rem !important; padding-bottom:3.5rem !important; }
+      /* Promo bar — single line on mobile, no wrap */
+      .promo-bar { font-size:9px; flex-wrap:nowrap; justify-content:center; gap:.35rem; padding:.45rem 2.5rem .45rem 1rem; overflow:hidden; }
+      .promo-tag { display:none; }
       /* Nav */
       nav { padding:0 1rem; height:52px; }
       .nav-cta { font-size:.75rem !important; padding:.35rem .75rem !important; white-space:nowrap; }
@@ -439,14 +489,22 @@
       /* Audience */
       .audience-card { padding:1.75rem 1.25rem; }
       .audience-grid { gap:1px; }
-      /* AI cards */
-      .ai-hcard, .ai-hcard.teal-card { flex:0 0 82vw; width:82vw; }
-      .ai-hcard-detail { position:static; transform:none; border-top:1px solid rgba(61,70,83,.2); padding:.875rem 0 0; background:transparent; }
+      /* AI cards — full width, no text clipping */
+      .ai-hcard, .ai-hcard.teal-card { flex:0 0 88vw; width:88vw; overflow:visible; }
+      .ai-hcard-desc { overflow:visible; white-space:normal; }
+      .ai-hcard-detail { position:static; transform:none; border-top:1px solid rgba(61,70,83,.2); padding:.875rem 0 0; background:transparent; overflow:visible; white-space:normal; }
+      .ai-hcard-detail p { overflow:visible; white-space:normal; }
       /* Data tables */
       .data-table th { font-size:9px; letter-spacing:.08em; padding:.5rem .625rem; }
       .data-table td { font-size:.8125rem; padding:.625rem .625rem; }
+      /* Apply/Enrol buttons — make them visible and sticky on mobile */
+      .apply-btn, .enrol-btn { font-size:.65rem; padding:.2rem .5rem; }
+      /* Hint text below table on mobile */
+      .table-mobile-hint { display:block; }
+      .table-scroll-wrap { max-height:260px; }
       /* Skills grid already stacked via skills-cert-grid, gap reduce */
-      .skills-cert-grid { gap:2rem !important; }
+      .skills-cert-grid { gap:1.25rem !important; }
+      .skills-cta-panel { grid-template-columns:1fr !important; }
       /* FAQ */
       .faq-item summary { padding:1rem 1.25rem; font-size:.875rem; }
       /* Footer */
@@ -477,6 +535,9 @@
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c500);margin-bottom:.5rem;">Early Access · Limited Seats</div>
       <h3 style="font-size:1.375rem;font-weight:700;color:var(--s50);letter-spacing:-.02em;">Join TIQWorld</h3>
     </div>
+
+    <!-- Context banner: shown when Apply/Enrol is clicked -->
+    <div id="modal-context-banner" style="display:none;background:rgba(20,174,174,.06);border:1px solid rgba(20,174,174,.18);border-radius:.5rem;padding:.6rem 1rem;margin-bottom:1rem;font-size:.8125rem;color:var(--s300);line-height:1.55;"></div>
 
     <div style="display:flex;gap:.5rem;margin-bottom:.75rem;">
       <button class="modal-tab active" id="tab-enterprise" onclick="switchModalTab('enterprise', this)">Enterprise</button>
@@ -548,14 +609,16 @@
     <img src="logos/tiq-logo.png" alt="TIQWorld" style="height:28px;width:auto;object-fit:contain;flex-shrink:0;" />
   </a>
 
-  <div class="nav-links-desktop" style="display:flex;align-items:center;gap:1.75rem;">
-    <a href="#audience" class="nav-link" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
-    <a href="#ai-tools" class="nav-link" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
-    <a href="#faq" class="nav-link" onclick="event.preventDefault();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
-    <a href="#pricing" class="nav-link" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
-    <a href="#industry-partners" class="nav-link" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
-    <a href="#" class="nav-link">Marketplace</a>
-    <!-- Language selector -->
+  <div class="nav-links-desktop" style="display:flex;align-items:center;gap:clamp(.75rem,1.2vw,1.75rem);flex-shrink:1;min-width:0;">
+    <a href="#audience" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('audience').scrollIntoView({behavior:'smooth'})">Who is this for</a>
+    <a href="#ai-tools" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('ai-tools').scrollIntoView({behavior:'smooth'})">How it Works</a>
+    <a href="#faq" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
+    <a href="#pricing" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</a>
+    <a href="#industry-partners" class="nav-link notranslate" translate="no" onclick="event.preventDefault();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
+    <a href="#" class="nav-link notranslate" translate="no">Marketplace</a>
+  </div>
+  <!-- Desktop-only controls: lang + theme + CTA — hidden on mobile via .nav-desktop-only -->
+  <div class="nav-desktop-only" style="gap:.5rem;flex-shrink:0;">
     <div class="lang-selector" id="langSelector">
       <button class="lang-btn" onclick="toggleLangDropdown()" aria-label="Select language">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -563,21 +626,20 @@
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="lang-dropdown" id="langDropdown">
-        <div class="lang-opt active" onclick="selectLang('en','EN')">🇺🇸 English</div>
-        <div class="lang-opt" onclick="selectLang('hi','HI')">🇮🇳 हिन्दी</div>
-        <div class="lang-opt" onclick="selectLang('ar','AR')">🇸🇦 العربية</div>
-        <div class="lang-opt" onclick="selectLang('fr','FR')">🇫🇷 Français</div>
-        <div class="lang-opt" onclick="selectLang('de','DE')">🇩🇪 Deutsch</div>
-        <div class="lang-opt" onclick="selectLang('zh-CN','ZH')">🇨🇳 中文</div>
+        <div class="lang-opt active" onclick="selectLang('en','EN',this)">🇺🇸 English</div>
+        <div class="lang-opt" onclick="selectLang('hi','HI',this)">🇮🇳 हिन्दी</div>
+        <div class="lang-opt" onclick="selectLang('ar','AR',this)">🇸🇦 العربية</div>
+        <div class="lang-opt" onclick="selectLang('fr','FR',this)">🇫🇷 Français</div>
+        <div class="lang-opt" onclick="selectLang('de','DE',this)">🇩🇪 Deutsch</div>
+        <div class="lang-opt" onclick="selectLang('zh-CN','ZH',this)">🇨🇳 中文</div>
       </div>
     </div>
-    <!-- Day/Night toggle -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
-    <button onclick="openModal()" class="nav-cta">
-      Get Early Access
+    <button onclick="openModal()" class="nav-cta notranslate" translate="no">
+      <span translate="no">Get Early Access</span>
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
   </div>
@@ -696,7 +758,7 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--s700);">Live</span>
         </div>
 
-        <!-- 4 stat tiles -->
+        <!-- 5 stat tiles — 2+2+1 grid -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(61,70,83,.2);">
           <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.background='var(--s900)'">
             <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--c500);letter-spacing:-.02em;">12K+</div>
@@ -710,9 +772,9 @@
             <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">90+</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Industry Partners</div>
           </div>
-          <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--c500);letter-spacing:-.02em;">8</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">NDT Methods</div>
+          <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.background='var(--s900)'">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">888+</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Inspection Reports</div>
           </div>
         </div>
 
@@ -755,20 +817,20 @@
 <!-- Stat Bar -->
 <div class="stat-bar reveal">
   <div class="stat-item">
-    <div class="stat-num">12,000+</div>
-    <div class="stat-label">NDT Professionals</div>
+    <div class="stat-num">208</div>
+    <div class="stat-label">Vacancies</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">340+</div>
-    <div class="stat-label">Training Providers</div>
+    <div class="stat-num">123</div>
+    <div class="stat-label">Placements</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">90+</div>
-    <div class="stat-label">Industry Partners</div>
+    <div class="stat-num">88</div>
+    <div class="stat-label">Trainings</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">8</div>
-    <div class="stat-label">NDT Methods Covered</div>
+    <div class="stat-num">308</div>
+    <div class="stat-label">Micro Certifications</div>
   </div>
 </div>
 
@@ -1019,8 +1081,8 @@
       <div class="tab-panel active" id="panelJobs">
         <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
-          <div style="overflow-x:auto;">
-          <table class="data-table" style="min-width:700px;">
+          <div class="table-scroll-wrap">
+          <table class="data-table" style="min-width:860px;">
             <thead>
               <tr>
                 <th>Position / Vacancy</th>
@@ -1028,60 +1090,73 @@
                 <th>Type</th>
                 <th>From</th>
                 <th>To</th>
+                <th style="white-space:nowrap;">Application Closing Date</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr class="tr-reveal" data-ttype="job" data-course="Welding Inspection" data-venue="Mumbai" data-type="Man-day" data-from="16-Jan-2026" data-to="20-Jan-2026" data-batches="Vacancies: 2 · Mumbai">
+              <!-- Sorted by Application Closing Date: soonest first, TBD last -->
+              <tr class="tr-reveal" data-ttype="job" data-course="Welding Inspection" data-venue="Mumbai" data-type="Man-day" data-from="16-Jan-2026" data-to="20-Jan-2026" data-close="15-Jan-2026" data-vac="2" data-skills="Welding Inspection,Visual Testing (VT),Weld Defect Analysis" data-certs="ISO 9712 Level II,AWS CWI">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="vac-count">×2</span></td>
                 <td class="venue-cell">Mumbai</td>
                 <td><span class="badge badge-copper">Man-day</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">16-Jan-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">15-Jan-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer, Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="Permanent" data-batches="Vacancies: 3 · Pune">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer, Pressure Vessels<span class="vac-count">×3</span></td>
-                <td class="venue-cell">Pune</td>
-                <td><span class="badge badge-teal">Full-time</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Permanent</td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-batches="Vacancies: 1 · New Delhi">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II RT Specialist<span class="vac-count">×1</span></td>
-                <td class="venue-cell">New Delhi</td>
-                <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Contract</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jun-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Nov-2026</td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="Asset Integrity ASNT NDT ET 1" data-venue="Bhopal" data-type="Man-month" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 4 · Bhopal">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity ASNT NDT ET 1<span class="vac-count">×4</span></td>
-                <td class="venue-cell">Bhopal</td>
-                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man-month</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="Valves & Piping QA Inspector" data-venue="Chennai" data-type="Part-time" data-from="15-May-2026" data-to="15-Aug-2026" data-batches="Vacancies: 2 · Chennai">
+              <tr class="tr-reveal" data-ttype="job" data-course="Valves &amp; Piping QA Inspector" data-venue="Chennai" data-type="Part-time" data-from="15-May-2026" data-to="15-Aug-2026" data-close="10-May-2026" data-vac="2" data-skills="Piping QA,Valve Testing,NDT Services" data-certs="ASNT Level II,API 570">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Valves &amp; Piping QA Inspector<span class="vac-count">×2</span></td>
                 <td class="venue-cell">Chennai</td>
                 <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.12);border:1px solid rgba(61,70,83,.28);">Part-time</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-May-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-Aug-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">10-May-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Services, TOFD, PAUT Specialist" data-venue="Hubli" data-type="Man-day" data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy" data-batches="Vacancies: 4 · Hubli">
+              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer, Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="" data-close="25-Apr-2026" data-vac="3" data-skills="Pressure Vessel Inspection,Radiographic Testing (RT),QA/QC" data-certs="ASME Section VIII,API 510">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer, Pressure Vessels<span class="vac-count">×3</span></td>
+                <td class="venue-cell">Pune</td>
+                <td><span class="badge badge-teal">Full-time</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Permanent</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">25-Apr-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-close="20-May-2026" data-vac="1" data-skills="Radiographic Testing (RT),Film Interpretation,NDT Services" data-certs="ASNT RT Level II,ISO 9712 RT">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II RT Specialist<span class="vac-count">×1</span></td>
+                <td class="venue-cell">New Delhi</td>
+                <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Contract</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jun-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Nov-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">20-May-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="Asset Integrity ASNT NDT ET 1" data-venue="Bhopal" data-type="Man-month" data-from="TBD" data-to="TBD" data-close="" data-vac="4" data-skills="Eddy Current Testing (ET),Asset Integrity,NDT Services" data-certs="ASNT ET Level I">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity ASNT NDT ET 1<span class="vac-count">×4</span></td>
+                <td class="venue-cell">Bhopal</td>
+                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man-month</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Services, TOFD, PAUT Specialist" data-venue="Hubli" data-type="Man-day" data-from="TBD" data-to="TBD" data-close="" data-vac="4" data-skills="Phased Array UT (PAUT),TOFD,Ultrasonic Testing (UT)" data-certs="ASNT UT Level II,PCN Level II">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, TOFD, PAUT Specialist<span class="vac-count">×4</span></td>
                 <td class="venue-cell">Hubli</td>
                 <td><span class="badge badge-copper">Man-day</span></td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
-            <div style="display:flex;align-items:center;gap:.75rem;">
-              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">6 shown</span>
-              <span onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--c500);background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:999px;padding:.15rem .55rem;white-space:nowrap;cursor:pointer;">+16 more available →</span>
-            </div>
-            <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">Post a Job →</a>
+          <div class="table-mobile-hint">← scroll to see Apply →</div>
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
+            <a href="#" onclick="openModal('freelancer');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c500);text-decoration:none;">View All Jobs →</a>
+            <a href="#" onclick="openModal('enterprise');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);text-decoration:none;">Post a Job →</a>
           </div>
         </div>
       </div>
@@ -1091,8 +1166,8 @@
       <div class="tab-panel" id="panelTraining">
         <div>
         <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.75rem;overflow:hidden;">
-          <div style="overflow-x:auto;">
-          <table class="data-table" style="min-width:860px;">
+          <div class="table-scroll-wrap teal-scroll">
+          <table class="data-table" style="min-width:1000px;">
             <thead>
               <tr>
                 <th>Training Available For</th>
@@ -1102,39 +1177,33 @@
                 <th>Type</th>
                 <th>From</th>
                 <th>To</th>
+                <th style="white-space:nowrap;">Enrol Before</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
+              <!-- Sorted by Enrol Before date: soonest first, open-enrolment and TBD last -->
               <tr class="tr-reveal"
                 data-course="Welding Inspection"
-                data-venue="Mumbai" data-type="Class Room"
+                data-venue="Mumbai" data-type="Classroom"
                 data-from="13-Jan-2026" data-to="20-Jan-2026"
+                data-close="10-Jan-2026" data-seats="20"
                 data-batches="Batch 1: 13-Jan · 9:00 AM|Batch 2: 16-Jan · 2:00 PM">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="batch-count">×2</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Rajesh Kumar','RK','UT · RT · Welding Inspection','Mumbai','12 years experience','ISO 9712 · ASNT Level III')">Rajesh Kumar</button></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Mumbai</td>
-                <td><span class="badge badge-teal">Class Room</span></td>
+                <td><span class="badge badge-teal">Classroom</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">13-Jan-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="NDT Services UT &amp; ET"
-                data-venue="Online" data-type="Web Based"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services UT &amp; ET<span class="batch-count">×2</span></td>
-                <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Online</td>
-                <td><span class="badge badge-teal">Web Based</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">10-Jan-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
                 data-course="Six Sigma Green Belt"
-                data-venue="New Delhi + Online" data-type="Hybrid"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
+                data-venue="New Delhi" data-type="Hybrid"
+                data-from="TBD" data-to="TBD"
+                data-close="30-Apr-2026" data-seats="15"
                 data-batches="Batch 1: Upcoming · Hybrid mode">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Six Sigma Green Belt<span class="batch-count">×1</span></td>
                 <td><button class="trainer-link" onclick="openTrainerModal('Priya Sharma','PS','Six Sigma · Quality Management','New Delhi','15 years experience','Six Sigma Black Belt · ISO 9001')">Priya Sharma</button></td>
@@ -1143,55 +1212,80 @@
                 <td><span class="badge badge-copper">Hybrid</span></td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
                 <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">30-Apr-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="ASNT NDT RT Level 1 &amp; 2"
+                data-venue="Chennai" data-type="Classroom"
+                data-from="TBD" data-to="TBD"
+                data-close="15-May-2026" data-seats="12"
+                data-batches="Batch 1: Upcoming · Chennai">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT RT Level 1 &amp; 2<span class="batch-count">×3</span></td>
+                <td><span style="font-size:.875rem;color:var(--s500);">—</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                <td class="venue-cell">Chennai</td>
+                <td><span class="badge badge-teal">Classroom</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">15-May-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="NDT Services UT &amp; ET"
+                data-venue="Online" data-type="Online"
+                data-from="TBD" data-to="TBD"
+                data-close="" data-seats="30"
+                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services UT &amp; ET<span class="batch-count">×2</span></td>
+                <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                <td class="venue-cell">Online</td>
+                <td><span class="badge badge-teal">Online</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="Asset Integrity PAUT &amp; TOFD"
+                data-venue="Online" data-type="Online"
+                data-from="TBD" data-to="TBD"
+                data-close="" data-seats="25"
+                data-batches="Batch 1: Upcoming · Online">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity PAUT &amp; TOFD<span class="batch-count">×4</span></td>
+                <td><span style="font-size:.875rem;color:var(--s500);">—</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                <td class="venue-cell">Online</td>
+                <td><span class="badge badge-teal">Online</span></td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
                 data-course="ASNT NDT ET Level 1 Self-Paced"
-                data-venue="Self-Learning" data-type="Self-Learning"
+                data-venue="Online" data-type="Self-Learning"
                 data-from="Enrol anytime" data-to="Self-paced"
-                data-batches="Available 24/7 · Self-paced online">
+                data-close="open"
+                data-batches="Available 24/7 · Self-paced online|Enrol Before: Open Enrolment">
                 <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT ET Level 1 Self-Paced<span class="batch-count">×4</span></td>
-                <td><span style="font-size:.875rem;color:var(--s600);">TIQWorld</span></td>
+                <td><span style="font-size:.875rem;color:var(--s500);">TIQWorld</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
                 <td class="venue-cell">Online</td>
                 <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Self-Learning</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Anytime</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Self-paced</td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="ASNT NDT RT Level 1 &amp; 2"
-                data-venue="Chennai" data-type="Class Room"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Chennai">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT RT Level 1 &amp; 2<span class="batch-count">×3</span></td>
-                <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);">TBA</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Chennai</td>
-                <td><span class="badge badge-teal">Class Room</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="Asset Integrity PAUT &amp; TOFD"
-                data-venue="Online" data-type="Web Based"
-                data-from="dd-Mon-yyyy" data-to="dd-Mon-yyyy"
-                data-batches="Batch 1: Upcoming · Online">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity PAUT &amp; TOFD<span class="batch-count">×4</span></td>
-                <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--s700);">TBA</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Online</td>
-                <td><span class="badge badge-teal">Web Based</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--t500);">Open</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
-            <div style="display:flex;align-items:center;gap:.75rem;">
-              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--s700);">6 shown</span>
-              <span onclick="openModal()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--t500);background:rgba(20,174,174,.1);border:1px solid rgba(20,174,174,.2);border-radius:999px;padding:.15rem .55rem;white-space:nowrap;cursor:pointer;">+24 more available →</span>
-            </div>
-            <a href="#" onclick="openModal();return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">List Your Courses →</a>
+          <div class="table-mobile-hint">← scroll to see Enrol →</div>
+          <div style="padding:.875rem 1rem;border-top:1px solid rgba(61,70,83,.2);display:flex;align-items:center;justify-content:space-between;">
+            <a href="#" onclick="openModal('freelancer');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t500);text-decoration:none;">View All Courses →</a>
+            <a href="#" onclick="openModal('enterprise');return false;" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--s600);text-decoration:none;">List Your Courses →</a>
           </div>
         </div>
       </div>
@@ -1199,42 +1293,97 @@
 
     </div>
 
-    <div class="skills-cert-grid reveal d3" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+    <!-- Skills & Certifications — tab-based with scroll + right CTA -->
+    <div style="margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--s700);">Skills &amp; Certifications</span>
+      <span style="flex:1;height:1px;background:rgba(61,70,83,.3);"></span>
+    </div>
+    <div class="skills-cert-grid reveal d3" style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;">
 
-      <div>
-        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--c500);">Skills Available</span>
+      <!-- Left: Tab bar + panels -->
+      <div style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;overflow:hidden;">
+
+        <!-- Tab bar -->
+        <div class="tab-bar" style="margin:0;border-radius:0;border:none;border-bottom:1px solid rgba(61,70,83,.35);width:100%;">
+          <button class="tab-btn active-skills" id="tabSkills" onclick="switchSkillTab('skills')" style="flex:1;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Skills
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;background:rgba(224,120,56,.15);border:1px solid rgba(224,120,56,.25);border-radius:999px;padding:.1rem .45rem;">246</span>
+          </button>
+          <button class="tab-btn" id="tabCerts" onclick="switchSkillTab('certs')" style="flex:1;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            Certifications
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;background:rgba(20,174,174,.15);border:1px solid rgba(20,174,174,.25);border-radius:999px;padding:.1rem .45rem;">196</span>
+          </button>
         </div>
-        <div style="position:relative;margin-bottom:.875rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input id="skillSearch" type="text" placeholder="Search skills…" oninput="filterCards('skillSearch','skillList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--c500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+
+        <!-- Skills Panel -->
+        <div class="tab-panel active" id="panelSkills" style="padding:1.25rem;">
+          <div style="position:relative;margin-bottom:.875rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input id="skillSearch" type="text" placeholder="Search Skills" oninput="filterCards('skillSearch','skillList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--c500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+          </div>
+          <div id="skillList" style="display:flex;flex-direction:column;gap:.375rem;max-height:280px;overflow-y:auto;padding-right:.25rem;scrollbar-width:thin;scrollbar-color:rgba(224,120,56,.3) transparent;">
+            <div class="skill-card"><span class="skill-name">NDT Services</span><span class="skill-count" style="color:var(--c500);">1,240</span></div>
+            <div class="skill-card"><span class="skill-name">Welding Inspection</span><span class="skill-count" style="color:var(--c500);">980</span></div>
+            <div class="skill-card"><span class="skill-name">Ultrasonic Testing (UT)</span><span class="skill-count" style="color:var(--c500);">894</span></div>
+            <div class="skill-card"><span class="skill-name">Radiographic Testing (RT)</span><span class="skill-count" style="color:var(--c500);">756</span></div>
+            <div class="skill-card"><span class="skill-name">Magnetic Particle (MT)</span><span class="skill-count" style="color:var(--c500);">623</span></div>
+            <div class="skill-card"><span class="skill-name">Phased Array UT (PAUT)</span><span class="skill-count" style="color:var(--c500);">412</span></div>
+            <div class="skill-card"><span class="skill-name">Eddy Current Testing (ET)</span><span class="skill-count" style="color:var(--c500);">389</span></div>
+            <div class="skill-card"><span class="skill-name">Liquid Penetrant (PT)</span><span class="skill-count" style="color:var(--c500);">356</span></div>
+          </div>
         </div>
-        <div id="skillList" style="display:flex;flex-direction:column;gap:.5rem;">
-          <div class="skill-card"><span class="skill-name">NDT Services</span><span class="skill-count" style="color:var(--c500);">1,240</span></div>
-          <div class="skill-card"><span class="skill-name">Welding Inspection</span><span class="skill-count" style="color:var(--c500);">980</span></div>
-          <div class="skill-card"><span class="skill-name">Ultrasonic Testing (UT)</span><span class="skill-count" style="color:var(--c500);">894</span></div>
-          <div class="skill-card"><span class="skill-name">Radiographic Testing (RT)</span><span class="skill-count" style="color:var(--c500);">756</span></div>
-          <div class="skill-card"><span class="skill-name">Magnetic Particle (MT)</span><span class="skill-count" style="color:var(--c500);">623</span></div>
-          <div class="skill-card"><span class="skill-name">Phased Array UT (PAUT)</span><span class="skill-count" style="color:var(--c500);">412</span></div>
+
+        <!-- Certifications Panel -->
+        <div class="tab-panel" id="panelCerts" style="padding:1.25rem;">
+          <div style="position:relative;margin-bottom:.875rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input id="certSearch" type="text" placeholder="Search Certification" oninput="filterCards('certSearch','certList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;box-sizing:border-box;" onfocus="this.style.borderColor='var(--t500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+          </div>
+          <div id="certList" style="display:flex;flex-direction:column;gap:.375rem;max-height:280px;overflow-y:auto;padding-right:.25rem;scrollbar-width:thin;scrollbar-color:rgba(20,174,174,.3) transparent;">
+            <div class="skill-card"><span class="skill-name">ASNT UT Level 1</span><span class="skill-count" style="color:var(--t500);">512</span></div>
+            <div class="skill-card"><span class="skill-name">ASNT UT Level 2</span><span class="skill-count" style="color:var(--t500);">412</span></div>
+            <div class="skill-card"><span class="skill-name">ASNT UT Level 3</span><span class="skill-count" style="color:var(--t500);">389</span></div>
+            <div class="skill-card"><span class="skill-name">API 570 Pressure Vessel</span><span class="skill-count" style="color:var(--t500);">334</span></div>
+            <div class="skill-card"><span class="skill-name">ISO 9712 Certified</span><span class="skill-count" style="color:var(--t500);">298</span></div>
+            <div class="skill-card"><span class="skill-name">CWI (Welding Inspector)</span><span class="skill-count" style="color:var(--t500);">276</span></div>
+            <div class="skill-card"><span class="skill-name">PCN Certified</span><span class="skill-count" style="color:var(--t500);">241</span></div>
+            <div class="skill-card"><span class="skill-name">BINDT Certified</span><span class="skill-count" style="color:var(--t500);">198</span></div>
+          </div>
         </div>
+
       </div>
 
-      <div>
-        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t500);">Certifications Available</span>
+      <!-- Right: CTA panel — switches with tab -->
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+
+        <!-- Engineer CTA — shown when Skills tab active -->
+        <div id="ctaSkills" style="background:linear-gradient(135deg,rgba(224,120,56,.08) 0%,rgba(224,120,56,.03) 100%);border:1px solid rgba(224,120,56,.2);border-radius:.875rem;padding:1.5rem;">
+          <div style="width:36px;height:36px;background:rgba(224,120,56,.12);border-radius:.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c500)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <p style="font-size:.8125rem;color:var(--s300);line-height:1.6;margin-bottom:.625rem;"><strong style="color:var(--s100);">NDT Engineers</strong> — add your skills and certifications to your profile to get discovered by top recruiters.</p>
+          <p style="font-size:.75rem;color:var(--s600);line-height:1.55;margin-bottom:1.25rem;">Take a free <strong style="color:var(--c500);">skill assessment</strong> to earn verified badges and stand out.</p>
+          <button onclick="openModal()" style="width:100%;padding:.6rem 1rem;background:var(--c600);color:var(--s950);font-size:.8125rem;font-weight:600;border:none;border-radius:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.375rem;transition:background .2s;" onmouseover="this.style.background='var(--c500)'" onmouseout="this.style.background='var(--c600)'">
+            Sign Up / Sign In
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
-        <div style="position:relative;margin-bottom:.875rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--s600);pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input id="certSearch" type="text" placeholder="Search certifications…" oninput="filterCards('certSearch','certList')" style="width:100%;padding:.55rem .75rem .55rem 2.25rem;background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--s200);outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--t500)'" onblur="this.style.borderColor='rgba(61,70,83,.4)'" />
+
+        <!-- Enterprise CTA — shown when Certs tab active -->
+        <div id="ctaCerts" style="display:none;background:linear-gradient(135deg,rgba(20,174,174,.08) 0%,rgba(20,174,174,.03) 100%);border:1px solid rgba(20,174,174,.2);border-radius:.875rem;padding:1.5rem;">
+          <div style="width:36px;height:36px;background:rgba(20,174,174,.12);border-radius:.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--t500)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <p style="font-size:.8125rem;color:var(--s300);line-height:1.6;margin-bottom:.625rem;"><strong style="color:var(--s100);">Enterprises</strong> — hire professionals with <strong style="color:var(--t500);">verified certifications</strong> and assessment badges.</p>
+          <p style="font-size:.75rem;color:var(--s600);line-height:1.55;margin-bottom:1.25rem;">Every certification on TIQWorld is linked to a real profile — no guesswork, no fake credentials.</p>
+          <button onclick="openModal()" style="width:100%;padding:.6rem 1rem;background:transparent;color:var(--t500);font-size:.8125rem;font-weight:600;border:1px solid rgba(20,174,174,.35);border-radius:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.375rem;transition:background .2s,border-color .2s;" onmouseover="this.style.background='rgba(20,174,174,.08)';this.style.borderColor='var(--t500)'" onmouseout="this.style.background='transparent';this.style.borderColor='rgba(20,174,174,.35)'">
+            Sign Up / Sign In
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
-        <div id="certList" style="display:flex;flex-direction:column;gap:.5rem;">
-          <div class="skill-card"><span class="skill-name">ISO 9712 Certified</span><span class="skill-count" style="color:var(--t500);">512</span></div>
-          <div class="skill-card"><span class="skill-name">ASNT NDT UT Level 2</span><span class="skill-count" style="color:var(--t500);">412</span></div>
-          <div class="skill-card"><span class="skill-name">ASNT NDT PT Level 2</span><span class="skill-count" style="color:var(--t500);">389</span></div>
-          <div class="skill-card"><span class="skill-name">CWI (Welding Inspector)</span><span class="skill-count" style="color:var(--t500);">334</span></div>
-          <div class="skill-card"><span class="skill-name">PCN Certified</span><span class="skill-count" style="color:var(--t500);">298</span></div>
-          <div class="skill-card"><span class="skill-name">BINDT Certified</span><span class="skill-count" style="color:var(--t500);">241</span></div>
-        </div>
+
       </div>
 
     </div>
@@ -1364,6 +1513,7 @@
 
     <!-- Pricing table -->
     <div class="reveal d2" style="background:var(--s900);border:1px solid rgba(61,70,83,.3);border-radius:.875rem;overflow:hidden;">
+      <div class="table-mobile-hint" style="border-bottom:1px solid rgba(61,70,83,.2);">← scroll to compare all plans →</div>
       <div style="overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;min-width:780px;">
 
@@ -1805,13 +1955,40 @@
   }), { threshold: 0.5 });
   document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
 
-  function openModal(tab) {
+  function openModal(tab, context) {
     document.getElementById('signupModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Show/hide job-apply context banner
+    const banner = document.getElementById('modal-context-banner');
+    if (context) {
+      banner.innerHTML = context;
+      banner.style.display = 'block';
+    } else {
+      banner.style.display = 'none';
+    }
     if (tab) {
       const btn = document.getElementById('tab-' + tab);
       if (btn) switchModalTab(tab, btn);
     }
+  }
+  function applyJob(btn) {
+    const tr = btn.closest('tr');
+    const title = tr.dataset.course || '';
+    const city  = tr.dataset.venue  || '';
+    const close = tr.dataset.close  || '';
+    const closeStr = close && close !== 'open' ? ` · Apply before <strong style="color:#f87171;">${close}</strong>` : '';
+    const ctx = `Applying for: <strong style="color:var(--s100);">${title}</strong> &nbsp;·&nbsp; ${city}${closeStr}<br><span style="font-size:.75rem;color:var(--s600);">Register or log in to complete your application.</span>`;
+    openModal('freelancer', ctx);
+  }
+  function enrolCourse(btn) {
+    const tr = btn.closest('tr');
+    const title  = tr.dataset.course || '';
+    const venue  = tr.dataset.venue  || '';
+    const close  = tr.dataset.close  || '';
+    const venueStr = (venue && venue.toLowerCase() !== 'online') ? venue : 'Online';
+    const closeStr = close && close !== 'open' ? ` · Enrol before <strong style="color:#f87171;">${close}</strong>` : (close === 'open' ? ' · Open Enrolment' : '');
+    const ctx = `Enrolling in: <strong style="color:var(--s100);">${title}</strong> &nbsp;·&nbsp; ${venueStr}${closeStr}<br><span style="font-size:.75rem;color:var(--s600);">Register or log in to complete your enrolment.</span>`;
+    openModal('freelancer', ctx);
   }
   function closeModal() {
     document.getElementById('signupModal').classList.remove('open');
@@ -1841,6 +2018,26 @@
     document.body.style.overflow = '';
     document.getElementById('menuIconOpen').style.display = '';
     document.getElementById('menuIconClose').style.display = 'none';
+  }
+
+  /* Search filter for skill/cert lists */
+  function filterCards(inputId, listId) {
+    const query = document.getElementById(inputId).value.toLowerCase();
+    document.querySelectorAll('#' + listId + ' .skill-card').forEach(function(card) {
+      const name = card.querySelector('.skill-name').textContent.toLowerCase();
+      card.style.display = name.includes(query) ? '' : 'none';
+    });
+  }
+
+  /* Skills/Certs tab switcher */
+  function switchSkillTab(tab) {
+    const isSkills = tab === 'skills';
+    document.getElementById('panelSkills').classList.toggle('active', isSkills);
+    document.getElementById('panelCerts').classList.toggle('active', !isSkills);
+    document.getElementById('tabSkills').classList.toggle('active-skills', isSkills);
+    document.getElementById('tabCerts').classList.toggle('active-certs', !isSkills);
+    document.getElementById('ctaSkills').style.display = isSkills ? 'block' : 'none';
+    document.getElementById('ctaCerts').style.display = isSkills ? 'none' : 'block';
   }
 
   /* Tab switcher */
@@ -1952,23 +2149,68 @@
     const isJob = row.dataset.ttype === 'job';
     document.getElementById('schedTooltipLabel').textContent = isJob ? 'Job Details' : 'Training Schedule';
     tooltip.style.borderColor = isJob ? 'rgba(224,120,56,.35)' : 'rgba(20,174,174,.25)';
-    const course = row.dataset.course;
-    const venue = row.dataset.venue;
-    const type = row.dataset.type;
-    const from = row.dataset.from;
-    const to = row.dataset.to;
-    const batches = (row.dataset.batches || '').split('|');
+    const course  = row.dataset.course || '';
+    const venue   = row.dataset.venue  || '';
+    const type    = row.dataset.type   || '';
+    const from    = row.dataset.from   || '';
+    const to      = row.dataset.to     || '';
+    const close   = row.dataset.close  || '';
+    const vac     = row.dataset.vac    || '';
+    const skills  = row.dataset.skills || '';
+    const certs   = row.dataset.certs  || '';
+    const seats   = row.dataset.seats  || '';
     const accentColor = isJob ? 'var(--c400)' : 'var(--t400)';
-    const titleTrim = course.length > 28 ? course.substring(0,28)+'…' : course;
-    let html = `<div class="sched-row"><span class="sched-key">${isJob ? 'Position' : 'Course'}</span><span class="sched-val">${titleTrim}</span></div>`;
-    html += `<div class="sched-row"><span class="sched-key">${isJob ? 'Location' : 'Venue'}</span><span class="sched-val">${venue}</span></div>`;
-    html += `<div class="sched-row"><span class="sched-key">${isJob ? 'Contract' : 'Mode'}</span><span class="sched-val">${type}</span></div>`;
-    html += `<div class="sched-row"><span class="sched-key">${isJob ? 'Period' : 'Schedule'}</span><span class="sched-val">${from === to ? from : from + ' → ' + to}</span></div>`;
-    if (batches[0]) {
+    const urgentColor = '#f87171';
+    const titleTrim = course.length > 32 ? course.substring(0,32)+'…' : course;
+    // Period: if to is empty or blank → Permanent
+    const periodTo = (to && to !== '' && to !== 'TBD') ? to : (isJob && !to ? 'Permanent' : to);
+    const period = from === periodTo ? from : (from + ' → ' + periodTo);
+    let html = '';
+
+    if (isJob) {
+      // ── JOB CARD ──
+      html += `<div class="sched-row"><span class="sched-key">Position</span><span class="sched-val">${titleTrim}</span></div>`;
+      if (skills) {
+        const skillList = skills.split(',').map(s => `<span style="display:inline-block;background:rgba(224,120,56,.1);border:1px solid rgba(224,120,56,.2);border-radius:.25rem;padding:.1rem .35rem;font-size:.7rem;color:var(--c400);font-family:'JetBrains Mono',monospace;margin:.1rem .1rem 0 0;">${s.trim()}</span>`).join('');
+        html += `<div style="margin:.3rem 0 .2rem;"><span class="sched-key" style="display:block;margin-bottom:.2rem;">Skills Required</span><div>${skillList}</div></div>`;
+      }
+      if (certs) {
+        const certList = certs.split(',').map(c => `<span style="display:inline-block;background:rgba(20,174,174,.1);border:1px solid rgba(20,174,174,.2);border-radius:.25rem;padding:.1rem .35rem;font-size:.7rem;color:var(--t400);font-family:'JetBrains Mono',monospace;margin:.1rem .1rem 0 0;">${c.trim()}</span>`).join('');
+        html += `<div style="margin:.2rem 0;"><span class="sched-key" style="display:block;margin-bottom:.2rem;">Certification Required</span><div>${certList}</div></div>`;
+      }
       html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
-      batches.forEach(b => {
-        html += `<div style="font-size:.75rem;color:${accentColor};font-family:'JetBrains Mono',monospace;padding:.1rem 0;">${b}</div>`;
-      });
+      html += `<div class="sched-row"><span class="sched-key">Location</span><span class="sched-val">${venue}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Contract</span><span class="sched-val">${type}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Period</span><span class="sched-val">${period}</span></div>`;
+      if (vac) html += `<div class="sched-row"><span class="sched-key">Vacancies</span><span class="sched-val" style="color:var(--c400);">${vac}</span></div>`;
+      if (close) {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        html += `<div class="sched-row"><span class="sched-key" style="color:${urgentColor};font-weight:600;">Apply Before</span><span class="sched-val" style="color:${urgentColor};">${close}</span></div>`;
+      }
+    } else {
+      // ── TRAINING CARD ──
+      html += `<div class="sched-row"><span class="sched-key">Course</span><span class="sched-val">${titleTrim}</span></div>`;
+      // Venue: online has no venue
+      const venueDisplay = (venue.toLowerCase() === 'online' || venue.toLowerCase() === 'self-learning') ? '—' : venue;
+      html += `<div class="sched-row"><span class="sched-key">Venue</span><span class="sched-val">${venueDisplay}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Mode</span><span class="sched-val">${type}</span></div>`;
+      html += `<div class="sched-row"><span class="sched-key">Schedule</span><span class="sched-val">${from === to ? from : from + ' → ' + to}</span></div>`;
+      if (seats) html += `<div class="sched-row"><span class="sched-key">Batch</span><span class="sched-val" style="color:var(--t400);">${seats} seats available</span></div>`;
+      if (close && close !== 'open') {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        html += `<div class="sched-row"><span class="sched-key" style="color:${urgentColor};font-weight:600;">Enrol Before</span><span class="sched-val" style="color:${urgentColor};">${close}</span></div>`;
+      } else if (close === 'open') {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        html += `<div class="sched-row"><span class="sched-key" style="color:var(--t400);">Enrolment</span><span class="sched-val" style="color:var(--t400);">Open</span></div>`;
+      }
+      // Batch details from data-batches
+      const batches = (row.dataset.batches || '').split('|').filter(b => b && !b.startsWith('Enrol Before'));
+      if (batches[0]) {
+        html += `<div style="height:1px;background:rgba(61,70,83,.3);margin:.4rem 0;"></div>`;
+        batches.forEach(b => {
+          html += `<div style="font-size:.75rem;color:${accentColor};font-family:'JetBrains Mono',monospace;padding:.1rem 0;">${b}</div>`;
+        });
+      }
     }
     document.getElementById('schedTooltipContent').innerHTML = html;
     positionTooltip(e);
@@ -2019,18 +2261,32 @@
       'google_translate_element'
     );
   }
-  function selectLang(code, label) {
+  function selectLang(code, label, el) {
     document.getElementById('langLabel').textContent = label;
     document.querySelectorAll('.lang-opt').forEach(o => o.classList.remove('active'));
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
     closeLangDropdown();
     if (code === 'en') {
-      const sel = document.querySelector('.goog-te-combo');
-      if (sel) { sel.value = 'en'; sel.dispatchEvent(new Event('change')); }
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+      location.reload();
       return;
     }
+    const tryTranslate = function() {
+      const sel = document.querySelector('.goog-te-combo');
+      if (sel) {
+        sel.value = code;
+        sel.dispatchEvent(new Event('change'));
+      } else if (typeof doGTranslate === 'function') {
+        doGTranslate('en|' + code);
+      }
+    };
     const sel = document.querySelector('.goog-te-combo');
-    if (sel) { sel.value = code; sel.dispatchEvent(new Event('change')); }
+    if (sel) {
+      tryTranslate();
+    } else {
+      setTimeout(tryTranslate, 800);
+    }
   }
   function toggleLangDropdown() {
     document.getElementById('langDropdown').classList.toggle('open');
@@ -2051,6 +2307,16 @@
     }
   }), { threshold: 0.08 });
   audienceCards.forEach(c => cardObs.observe(c));
+
+  /* Broken logo image fallback — show alt text styled */
+  document.querySelectorAll('.marquee-logo').forEach(img => {
+    img.addEventListener('error', function() {
+      const span = document.createElement('span');
+      span.className = 'marquee-logo-text';
+      span.textContent = this.alt;
+      this.parentNode.replaceChild(span, this);
+    });
+  });
 
   /* Skills & Certifications search filter */
   window.filterCards = function(inputId, listId) {
