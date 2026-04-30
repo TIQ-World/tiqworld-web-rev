@@ -310,7 +310,12 @@
     .skill-count.shimmer { animation:none; }
 
     /* FAQ */
-    .faq-item { transition:border-color .3s, background .3s, box-shadow .3s; position:relative; overflow:hidden; }
+    .faq-scroll { display:flex; flex-direction:column; gap:.625rem; max-height:19rem; overflow-y:auto; padding-right:.25rem; scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:rgba(224,120,56,.5) rgba(61,70,83,.2); }
+    .faq-scroll::-webkit-scrollbar { width:4px; }
+    .faq-scroll::-webkit-scrollbar-track { background:rgba(61,70,83,.2); border-radius:4px; }
+    .faq-scroll::-webkit-scrollbar-thumb { background:rgba(224,120,56,.55); border-radius:4px; }
+    .faq-scroll::-webkit-scrollbar-thumb:hover { background:rgba(240,146,71,.85); }
+    .faq-item { transition:border-color .3s, background .3s, box-shadow .3s; position:relative; overflow:visible; opacity:1; transform:none; }
     .faq-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--c600); transform:scaleY(0); transform-origin:bottom; transition:transform .35s cubic-bezier(.4,0,.2,1); border-radius:0 0 0 .75rem; }
     .faq-item[open]::before { transform:scaleY(1); }
     .faq-item summary { cursor:pointer; list-style:none; }
@@ -1398,9 +1403,9 @@
     <h2 class="section-headline reveal d1" style="margin-bottom:.75rem;">Frequently Asked<br/>Questions</h2>
     <p class="reveal d2" style="margin-bottom:3rem;font-size:.9375rem;color:var(--s600);line-height:1.65;">Everything you need to know about TIQWorld, answered.</p>
 
-    <div style="display:flex;flex-direction:column;gap:.625rem;">
+    <div class="faq-scroll">
 
-      <details class="faq-item reveal d1" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item d1" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">01</span>
@@ -1415,7 +1420,7 @@
         </div>
       </details>
 
-      <details class="faq-item reveal d2" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item d2" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">02</span>
@@ -1430,7 +1435,7 @@
         </div>
       </details>
 
-      <details class="faq-item reveal d3" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item d3" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">03</span>
@@ -1445,7 +1450,7 @@
         </div>
       </details>
 
-      <details class="faq-item reveal d4" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item d4" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">04</span>
@@ -1460,7 +1465,7 @@
         </div>
       </details>
 
-      <details class="faq-item reveal d5" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
+      <details class="faq-item d5" style="background:var(--s850);border:1px solid rgba(61,70,83,.4);border-radius:.75rem;">
         <summary style="display:flex;align-items:center;justify-content:space-between;padding:1.375rem 1.5rem;font-weight:600;color:var(--s100);font-size:.9375rem;user-select:none;">
           <span style="display:flex;align-items:center;gap:.875rem;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--c600);opacity:.6;flex-shrink:0;">05</span>
