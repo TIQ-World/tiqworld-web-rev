@@ -807,20 +807,20 @@
         <!-- 5 stat tiles — 2+2+1 grid -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(61,70,83,.2);">
           <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(224,120,56,.04)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--c500);letter-spacing:-.02em;">12K+</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--c500);letter-spacing:-.02em;">442</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Professionals</div>
           </div>
           <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">340+</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Training Providers</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">59</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Enterprises</div>
           </div>
           <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">90+</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Industry Partners</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">263</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Skills Tracked</div>
           </div>
           <div style="background:var(--s900);padding:1.25rem 1rem;transition:background .2s;" onmouseover="this.style.background='rgba(20,174,174,.04)'" onmouseout="this.style.background='var(--s900)'">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">888+</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Inspection Reports</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--t500);letter-spacing:-.02em;">196</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--s600);margin-top:.25rem;">Certifications</div>
           </div>
         </div>
 
@@ -863,20 +863,20 @@
 <!-- Stat Bar -->
 <div class="stat-bar reveal">
   <div class="stat-item">
-    <div class="stat-num">208</div>
-    <div class="stat-label">Vacancies</div>
+    <div class="stat-num">17</div>
+    <div class="stat-label">Job Posts</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">123</div>
-    <div class="stat-label">Placements</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">88</div>
+    <div class="stat-num">10</div>
     <div class="stat-label">Trainings</div>
   </div>
   <div class="stat-item">
-    <div class="stat-num">308</div>
-    <div class="stat-label">Micro Certifications</div>
+    <div class="stat-num">80</div>
+    <div class="stat-label">Assessments</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">196</div>
+    <div class="stat-label">Certifications</div>
   </div>
 </div>
 
@@ -1141,59 +1141,40 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Sorted by Application Closing Date: soonest first, TBD last -->
-              <tr class="tr-reveal" data-ttype="job" data-course="Welding Inspection" data-venue="Mumbai" data-type="Man-day" data-from="16-Jan-2026" data-to="20-Jan-2026" data-close="15-Jan-2026" data-vac="2" data-skills="Welding Inspection,Visual Testing (VT),Weld Defect Analysis" data-certs="ISO 9712 Level II,AWS CWI">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="vac-count">×2</span></td>
-                <td class="venue-cell">Mumbai</td>
-                <td><span class="badge badge-copper">Man-day</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">16-Jan-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">15-Jan-2026</td>
-                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="Valves &amp; Piping QA Inspector" data-venue="Chennai" data-type="Part-time" data-from="15-May-2026" data-to="15-Aug-2026" data-close="10-May-2026" data-vac="2" data-skills="Piping QA,Valve Testing,NDT Services" data-certs="ASNT Level II,API 570">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Valves &amp; Piping QA Inspector<span class="vac-count">×2</span></td>
-                <td class="venue-cell">Chennai</td>
-                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.12);border:1px solid rgba(61,70,83,.28);">Part-time</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-May-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-Aug-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">10-May-2026</td>
-                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="QC Engineer, Pressure Vessels" data-venue="Pune" data-type="Full-time" data-from="01-May-2026" data-to="" data-close="25-Apr-2026" data-vac="3" data-skills="Pressure Vessel Inspection,Radiographic Testing (RT),QA/QC" data-certs="ASME Section VIII,API 510">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">QC Engineer, Pressure Vessels<span class="vac-count">×3</span></td>
-                <td class="venue-cell">Pune</td>
-                <td><span class="badge badge-teal">Full-time</span></td>
+              <tr class="tr-reveal" data-ttype="job" data-course="Senior Welding Inspector" data-venue="Ranipet" data-type="Man-month" data-from="01-May-2026" data-to="30-Sep-2026" data-close="25-Apr-2026" data-vac="1" data-skills="NDT Services,Welder Training,Welding Inspection as per ISO 14731,Welding Inspection as per ISO 3834,Welding Inspection - General" data-certs="ASNT NDT UT 3,AWS CSWIP 3.2">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Senior Welding Inspector<span class="vac-count">×1</span></td>
+                <td class="venue-cell">Ranipet</td>
+                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man-month</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Permanent</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Sep-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">25-Apr-2026</td>
                 <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Level II RT Specialist" data-venue="New Delhi" data-type="Contract" data-from="01-Jun-2026" data-to="30-Nov-2026" data-close="20-May-2026" data-vac="1" data-skills="Radiographic Testing (RT),Film Interpretation,NDT Services" data-certs="ASNT RT Level II,ISO 9712 RT">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Level II RT Specialist<span class="vac-count">×1</span></td>
-                <td class="venue-cell">New Delhi</td>
-                <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Contract</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jun-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Nov-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">20-May-2026</td>
-                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="Asset Integrity ASNT NDT ET 1" data-venue="Bhopal" data-type="Man-month" data-from="TBD" data-to="TBD" data-close="" data-vac="4" data-skills="Eddy Current Testing (ET),Asset Integrity,NDT Services" data-certs="ASNT ET Level I">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity ASNT NDT ET 1<span class="vac-count">×4</span></td>
-                <td class="venue-cell">Bhopal</td>
-                <td><span class="badge" style="color:var(--s400);background:rgba(61,70,83,.15);border:1px solid rgba(61,70,83,.3);">Man-month</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
-              </tr>
-              <tr class="tr-reveal" data-ttype="job" data-course="NDT Services, TOFD, PAUT Specialist" data-venue="Hubli" data-type="Man-day" data-from="TBD" data-to="TBD" data-close="" data-vac="4" data-skills="Phased Array UT (PAUT),TOFD,Ultrasonic Testing (UT)" data-certs="ASNT UT Level II,PCN Level II">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services, TOFD, PAUT Specialist<span class="vac-count">×4</span></td>
-                <td class="venue-cell">Hubli</td>
+              <tr class="tr-reveal" data-ttype="job" data-course="Ultrasonic Testing (UT) Inspector" data-venue="Coimbatore" data-type="Man-day" data-from="27-Apr-2026" data-to="30-Apr-2026" data-close="25-Apr-2026" data-vac="1" data-skills="Mechanical-General,NDT Services,Ultrasonic Flaw Detection (UT)" data-certs="ASNT NDT UT 3">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Ultrasonic Testing (UT) Inspector<span class="vac-count">×1</span></td>
+                <td class="venue-cell">Coimbatore</td>
                 <td><span class="badge badge-copper">Man-day</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">27-Apr-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Apr-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">25-Apr-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Technician / NDT Engineer" data-venue="Chennai" data-type="Full-time" data-from="01-May-2026" data-to="31-May-2026" data-close="30-Apr-2026" data-vac="1" data-skills="Liquid Dye Penetration Inspection (PT),Magnetic Particle Inspection (MPI, MT),Radiographic Testing (RT),Ultrasonic Testing (UT),Visual Inspection (VT),Welding Inspection - General" data-certs="ASNT NDT ET 1">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Technician / NDT Engineer<span class="vac-count">×1</span></td>
+                <td class="venue-cell">Chennai</td>
+                <td><span class="badge badge-teal">Full-time</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">31-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">30-Apr-2026</td>
+                <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
+              </tr>
+              <tr class="tr-reveal" data-ttype="job" data-course="NDT Technician" data-venue="Chennai" data-type="Full-time" data-from="01-Jul-2026" data-to="30-Jun-2027" data-close="15-Jun-2026" data-vac="1" data-skills="Liquid Dye Penetration Inspection (PT),Magnetic Particle Inspection (MPI, MT),Radiographic Testing (RT),Ultrasonic Flaw Detection (UT)" data-certs="API 510 - Pressure Vessel Inspector,API 570 - Piping Inspector,API 571 - Corrosion and Materials Professional">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Technician<span class="vac-count">×1</span></td>
+                <td class="venue-cell">Chennai</td>
+                <td><span class="badge badge-teal">Full-time</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jul-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-Jun-2027</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">15-Jun-2026</td>
                 <td><button class="apply-btn" onclick="applyJob(this)">Apply</button></td>
               </tr>
             </tbody>
@@ -1228,101 +1209,109 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Sorted by Enrol Before date: soonest first, open-enrolment and TBD last -->
               <tr class="tr-reveal"
-                data-course="Welding Inspection"
-                data-venue="Mumbai" data-type="Classroom"
-                data-from="13-Jan-2026" data-to="20-Jan-2026"
-                data-close="10-Jan-2026" data-seats="20"
-                data-batches="Batch 1: 13-Jan · 9:00 AM|Batch 2: 16-Jan · 2:00 PM">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection<span class="batch-count">×2</span></td>
-                <td><button class="trainer-link" onclick="openTrainerModal('Rajesh Kumar','RK','UT · RT · Welding Inspection','Mumbai','12 years experience','ISO 9712 · ASNT Level III')">Rajesh Kumar</button></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Mumbai</td>
-                <td><span class="badge badge-teal">Classroom</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">13-Jan-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-Jan-2026</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">10-Jan-2026</td>
+                data-course="UT Level II — Advanced Ultrasonic Testing Techniques"
+                data-venue="Online" data-type="Online"
+                data-from="01-May-2026" data-to="11-May-2026"
+                data-close="26-Apr-2026" data-seats="30">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">UT Level II — Advanced Ultrasonic Testing</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">REC – NDT Division</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">₹15,000</td>
+                <td class="venue-cell">Online</td>
+                <td><span class="badge badge-teal">Online</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">11-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-urgent">26-Apr-2026</td>
                 <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
-                data-course="Six Sigma Green Belt"
-                data-venue="New Delhi" data-type="Hybrid"
-                data-from="TBD" data-to="TBD"
-                data-close="30-Apr-2026" data-seats="15"
-                data-batches="Batch 1: Upcoming · Hybrid mode">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Six Sigma Green Belt<span class="batch-count">×1</span></td>
-                <td><button class="trainer-link" onclick="openTrainerModal('Priya Sharma','PS','Six Sigma · Quality Management','New Delhi','15 years experience','Six Sigma Black Belt · ISO 9001')">Priya Sharma</button></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">New Delhi</td>
-                <td><span class="badge badge-copper">Hybrid</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
+                data-course="Phased Array Ultrasonic Testing (PAUT), FMC &amp; TFM"
+                data-venue="Offline" data-type="Classroom"
+                data-from="04-May-2026" data-to="08-May-2026"
+                data-close="" data-seats="20">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">PAUT, FMC &amp; TFM</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">SteelCore Industries</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">₹45,000</td>
+                <td class="venue-cell">Offline</td>
+                <td><span class="badge badge-teal">Classroom</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">04-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">08-May-2026</td>
+                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Open</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="Welding Inspection &amp; CSWIP 3.1 Preparation"
+                data-venue="Online" data-type="Online"
+                data-from="05-May-2026" data-to="20-May-2026"
+                data-close="30-Apr-2026" data-seats="30">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Welding Inspection &amp; CSWIP 3.1 Prep</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">REC – NDT Division</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">₹20</td>
+                <td class="venue-cell">Online</td>
+                <td><span class="badge badge-teal">Online</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">05-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">20-May-2026</td>
                 <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-soon">30-Apr-2026</td>
                 <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
-                data-course="ASNT NDT RT Level 1 &amp; 2"
+                data-course="MT Yoke — Magnetic Particle Testing Practical Workshop"
                 data-venue="Chennai" data-type="Classroom"
-                data-from="TBD" data-to="TBD"
-                data-close="15-May-2026" data-seats="12"
-                data-batches="Batch 1: Upcoming · Chennai">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT RT Level 1 &amp; 2<span class="batch-count">×3</span></td>
-                <td><span style="font-size:.875rem;color:var(--s500);">—</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                data-from="15-May-2026" data-to="17-May-2026"
+                data-close="10-May-2026" data-seats="15">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">MT Yoke — Magnetic Particle Testing</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">REC – NDT Division</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">₹8,500</td>
                 <td class="venue-cell">Chennai</td>
                 <td><span class="badge badge-teal">Classroom</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">15-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">17-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">10-May-2026</td>
                 <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
               <tr class="tr-reveal"
-                data-course="NDT Services UT &amp; ET"
+                data-course="RT Film Interpretation — Radiographic Testing Intermediate"
+                data-venue="Chennai" data-type="Hybrid"
+                data-from="21-May-2026" data-to="29-May-2026"
+                data-close="16-May-2026" data-seats="20">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">RT Film Interpretation — Intermediate</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">REC – NDT Division</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">₹12,000</td>
+                <td class="venue-cell">Chennai</td>
+                <td><span class="badge badge-copper">Hybrid</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">21-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">29-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">16-May-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="MT Yoke — Magnetic Particle Testing Practical Workshop"
+                data-venue="Chennai" data-type="Classroom"
+                data-from="28-May-2026" data-to="30-May-2026"
+                data-close="22-May-2026" data-seats="15">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">MT Yoke — Magnetic Particle Testing</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">BridgeTech Consultants</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">₹8,500</td>
+                <td class="venue-cell">Chennai</td>
+                <td><span class="badge badge-teal">Classroom</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">28-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">30-May-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">22-May-2026</td>
+                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
+              </tr>
+              <tr class="tr-reveal"
+                data-course="Inspection Trainee Training Program"
                 data-venue="Online" data-type="Online"
-                data-from="TBD" data-to="TBD"
-                data-close="" data-seats="30"
-                data-batches="Batch 1: Upcoming · Online|Batch 2: TBD">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">NDT Services UT &amp; ET<span class="batch-count">×2</span></td>
-                <td><button class="trainer-link" onclick="openTrainerModal('Suresh Nair','SN','NDT Services · UT · ET','Pune','9 years experience','PCN Level II · BINDT')">Suresh Nair</button></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
+                data-from="01-Jul-2026" data-to="15-Aug-2026"
+                data-close="15-Jun-2026" data-seats="20">
+                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Inspection Trainee Training Program</td>
+                <td><span style="font-size:.875rem;color:var(--s500);">MOON</span></td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Free</td>
                 <td class="venue-cell">Online</td>
                 <td><span class="badge badge-teal">Online</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="Asset Integrity PAUT &amp; TOFD"
-                data-venue="Online" data-type="Online"
-                data-from="TBD" data-to="TBD"
-                data-close="" data-seats="25"
-                data-batches="Batch 1: Upcoming · Online">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">Asset Integrity PAUT &amp; TOFD<span class="batch-count">×4</span></td>
-                <td><span style="font-size:.875rem;color:var(--s500);">—</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Online</td>
-                <td><span class="badge badge-teal">Online</span></td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td class="date-ph" style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">TBD</td>
-                <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
-              </tr>
-              <tr class="tr-reveal"
-                data-course="ASNT NDT ET Level 1 Self-Paced"
-                data-venue="Online" data-type="Self-Learning"
-                data-from="Enrol anytime" data-to="Self-paced"
-                data-close="open"
-                data-batches="Available 24/7 · Self-paced online|Enrol Before: Open Enrolment">
-                <td class="td-title has-tooltip" onclick="toggleTdTitle(this)" onmouseenter="showSchedule(event,this.closest('tr'))" onmouseleave="hideSchedule()">ASNT NDT ET Level 1 Self-Paced<span class="batch-count">×4</span></td>
-                <td><span style="font-size:.875rem;color:var(--s500);">TIQWorld</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">INR 000.00</td>
-                <td class="venue-cell">Online</td>
-                <td><span class="badge" style="color:var(--s300);background:rgba(61,70,83,.18);border:1px solid rgba(61,70,83,.4);">Self-Learning</span></td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Anytime</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">Self-paced</td>
-                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;color:var(--t500);">Open</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">01-Jul-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;">15-Aug-2026</td>
+                <td style="font-family:'JetBrains Mono',monospace;font-size:.8125rem;" class="close-ok">15-Jun-2026</td>
                 <td><button class="enrol-btn" onclick="enrolCourse(this)">Enrol</button></td>
               </tr>
             </tbody>
@@ -1950,7 +1939,7 @@
         <div style="display:flex;align-items:center;gap:1.25rem;">
           <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Privacy Policy</a>
           <a href="#" style="font-size:.8125rem;color:var(--s700);text-decoration:none;" onmouseover="this.style.color='var(--s400)'" onmouseout="this.style.color='var(--s700)'">Terms of Use</a>
-          <a href="https://linkedin.com/company/tiqworld" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.375rem;font-size:.8125rem;color:var(--s600);text-decoration:none;border:1px solid rgba(61,70,83,.3);border-radius:.375rem;padding:.3rem .6rem;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='rgba(224,120,56,.4)';this.style.color='var(--s300)'" onmouseout="this.style.borderColor='rgba(61,70,83,.3)';this.style.color='var(--s600)'">
+          <a href="https://www.linkedin.com/company/tiqworld-pvt-ltd/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.375rem;font-size:.8125rem;color:var(--s600);text-decoration:none;border:1px solid rgba(61,70,83,.3);border-radius:.375rem;padding:.3rem .6rem;transition:border-color .2s,color .2s;" onmouseover="this.style.borderColor='rgba(224,120,56,.4)';this.style.color='var(--s300)'" onmouseout="this.style.borderColor='rgba(61,70,83,.3)';this.style.color='var(--s600)'">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452H17.21v-5.569c0-1.327-.025-3.036-1.849-3.036-1.851 0-2.135 1.445-2.135 2.939v5.666H9.989V9h3.099v1.562h.044c.43-.815 1.48-1.674 3.048-1.674 3.261 0 3.863 2.146 3.863 4.938v6.626zM5.337 7.433a1.796 1.796 0 1 1 0-3.591 1.796 1.796 0 0 1 0 3.591zm1.553 13.019H3.782V9h3.108v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
@@ -1995,34 +1984,13 @@
   }), { threshold: 0.5 });
   document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
 
+  const APP_URL = 'https://staging.tiqworld.com';
   function openSignInModal() {
-    document.getElementById('signinModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    window.location.href = APP_URL + '/auth/sign-in';
   }
-  function closeSignInModal() {
-    document.getElementById('signinModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('signinModal').addEventListener('click', function(e) {
-      if (e.target === this) closeSignInModal();
-    });
-  });
+  function closeSignInModal() {}
   function openModal(tab, context) {
-    document.getElementById('signupModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    // Show/hide job-apply context banner
-    const banner = document.getElementById('modal-context-banner');
-    if (context) {
-      banner.innerHTML = context;
-      banner.style.display = 'block';
-    } else {
-      banner.style.display = 'none';
-    }
-    if (tab) {
-      const btn = document.getElementById('tab-' + tab);
-      if (btn) switchModalTab(tab, btn);
-    }
+    window.location.href = APP_URL + '/auth/sign-up';
   }
   function applyJob(btn) {
     const tr = btn.closest('tr');
