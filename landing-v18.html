@@ -110,6 +110,8 @@
     .nav-link:hover::after { width:100%; }
     .nav-cta { font-size:clamp(.65rem,.75vw + .35rem,.875rem); font-weight:600; color:var(--s950); background:var(--c600); padding:.5rem 1rem; border-radius:.5rem; border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:.375rem; transition:background .2s, transform .15s, box-shadow .2s; box-shadow:0 2px 8px rgba(224,120,56,.3); white-space:nowrap; flex-shrink:0; max-width:220px; overflow:hidden; }
     .nav-cta:hover { background:var(--c500); transform:translateY(-1px); box-shadow:0 4px 16px rgba(224,120,56,.4); }
+    .nav-signin { font-size:clamp(.65rem,.75vw + .35rem,.875rem); font-weight:600; color:var(--s200); background:transparent; padding:.5rem 1rem; border-radius:.5rem; border:1px solid rgba(61,70,83,.5); cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:.375rem; transition:background .2s, border-color .2s, color .2s; white-space:nowrap; flex-shrink:0; }
+    .nav-signin:hover { background:rgba(61,70,83,.2); border-color:var(--s500); color:var(--s50); }
 
     /* Typography */
     .hero-headline { font-size:clamp(3rem, 5.5vw + 1rem, 7rem); font-weight:700; line-height:.93; letter-spacing:-.04em; text-transform:uppercase; }
@@ -547,6 +549,7 @@
     <div style="display:flex;gap:.5rem;margin-bottom:.75rem;">
       <button class="modal-tab active" id="tab-enterprise" onclick="switchModalTab('enterprise', this)">Enterprise</button>
       <button class="modal-tab" id="tab-freelancer" onclick="switchModalTab('freelancer', this)">Freelancer</button>
+      <button class="modal-tab" id="tab-signin" onclick="switchModalTab('signin', this)">Sign In</button>
     </div>
 
     <!-- Enterprise -->
@@ -591,6 +594,20 @@
         Representing an organisation?
         <button onclick="switchModalTab('enterprise', document.getElementById('tab-enterprise'))" style="background:none;border:none;cursor:pointer;color:var(--c500);font-size:.8125rem;padding:0;text-decoration:underline;">Register as Enterprise →</button>
       </p>
+    </div>
+
+    <!-- Sign In Panel -->
+    <div class="modal-panel" id="modal-signin">
+      <div style="background:rgba(61,70,83,.1);border:1px solid rgba(61,70,83,.25);border-radius:.5rem;padding:.75rem 1rem;margin-bottom:1.25rem;">
+        <p style="font-size:.8125rem;color:var(--s400);line-height:1.65;">Welcome back. Sign in to your <strong style="color:var(--s200);">TIQWorld</strong> account to access your dashboard, jobs, and tools.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.875rem;">
+        <input class="form-input" type="email" placeholder="Email Address" />
+        <input class="form-input" type="password" placeholder="Password" />
+        <button class="btn-primary" style="width:100%;justify-content:center;">Sign In <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg></button>
+      </div>
+      <p style="margin-top:.75rem;font-size:.8125rem;color:var(--s700);text-align:center;"><button style="background:none;border:none;cursor:pointer;color:var(--s500);font-size:.8125rem;padding:0;text-decoration:underline;">Forgot password?</button></p>
+      <p style="margin-top:.5rem;font-size:.8125rem;color:var(--s700);text-align:center;">No account? <button onclick="switchModalTab('enterprise', document.getElementById('tab-enterprise'))" style="background:none;border:none;cursor:pointer;color:var(--c500);font-size:.8125rem;padding:0;text-decoration:underline;">Register here</button></p>
     </div>
   </div>
 </div>
@@ -643,6 +660,10 @@
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
+    <button onclick="openSignInModal()" class="nav-signin notranslate" translate="no">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+      <span translate="no">Sign In</span>
+    </button>
     <button onclick="openModal()" class="nav-cta notranslate" translate="no">
       <span translate="no">Get Early Access</span>
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -674,6 +695,10 @@
   <a href="#industry-partners" class="mobile-nav-link" onclick="closeMobileMenu();document.getElementById('industry-partners').scrollIntoView({behavior:'smooth'})">Industry Partners</a>
   <a href="#" class="mobile-nav-link" onclick="closeMobileMenu()">Marketplace</a>
   <div style="height:1px;background:rgba(61,70,83,.3);margin:.5rem 0;"></div>
+  <button onclick="openSignInModal();closeMobileMenu();" style="background:transparent;border:1px solid rgba(61,70,83,.5);border-radius:.625rem;color:var(--s200);font-size:1rem;font-weight:600;padding:1rem 2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .2s,border-color .2s;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+    Sign In
+  </button>
   <button onclick="openModal();closeMobileMenu();" class="btn-primary" style="justify-content:center;font-size:1rem;padding:1rem 2rem;">
     Get Early Access
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1960,6 +1985,10 @@
   }), { threshold: 0.5 });
   document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
 
+  function openSignInModal() {
+    openModal();
+    switchModalTab('signin', document.getElementById('tab-signin'));
+  }
   function openModal(tab, context) {
     document.getElementById('signupModal').classList.add('open');
     document.body.style.overflow = 'hidden';
